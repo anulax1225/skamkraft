@@ -44,11 +44,11 @@ export async function getSystem(systemSymbol){
     return system;
 }
 
-export async function listWaypointsInSystem(limit, pages){
+export async function listWaypointsInSystem(limit, pages, systemSymbol){
     let waypoints = [];
 
     for(let page = 1; page <= pages; page++){
-        await $.ajax('https://api.spacetraders.io/v2/systems/systemSymbol/waypoints', {
+        await $.ajax(`https://api.spacetraders.io/v2/systems/${systemSymbol}/waypoints`, {
             method: 'GET',
             headers: {
                 Accept: 'application/json',
@@ -58,8 +58,8 @@ export async function listWaypointsInSystem(limit, pages){
                 page: page
             },
             success: function(response){
-                response.data.forEach(sytem => {
-                    systems.push(sytem);
+                response.data.forEach(waypoint => {
+                    waypoints.push(waypoint);
                 });
             },
             error: function(error){
