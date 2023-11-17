@@ -82,32 +82,4 @@ function getSystem(system) {
     });
 }
 
-function drawSystem(wayPoints) {
-    const canvas = document.getElementById("canvas");
-    let w = canvas.width;
-    let h = canvas.height; 
-    const ctx = canvas.getContext("2d");
-    wayPoints.forEach(wayPoint => {
-        switch (wayPoint.type) {
-            case "PLANET": 
-                drawWaypoint(wayPoint, ctx, w/2, h/2, 'green');
-                break;
-            case "ASTEROID": 
-                drawWaypoint(wayPoint, ctx, w/2, h/2, 'blue');
-                break;
-            case "GAS_GIANT": 
-                drawWaypoint(wayPoint, ctx, w/2, h/2, 'red');
-                break;    
-        }
-       
-    });
-}
-
-function drawWaypoint(wayPoint, ctx, w, h, color) {
-    ctx.beginPath();
-    ctx.fillStyle = color;
-    ctx.arc(wayPoint.x/offset.x + w, wayPoint.y/offset.y + h, 1, 0, 2 * Math.PI);
-    ctx.fill()
-}
-
 getAgent();
