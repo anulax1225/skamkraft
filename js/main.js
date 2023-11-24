@@ -1,4 +1,11 @@
-let token = "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZGVudGlmaWVyIjoiQU5OTk5VTEFYMTIyNSIsInZlcnNpb24iOiJ2Mi4xLjEiLCJyZXNldF9kYXRlIjoiMjAyMy0xMS0wNCIsImlhdCI6MTcwMDIyNDU5MSwic3ViIjoiYWdlbnQtdG9rZW4ifQ.r05mWtD5FjC4s6Td-ycmHdzL7C2s75lz3q7OBmWeCqUUZ1ejPsRGQRWJDPmIh1kAqO4D9FFs3GCTPZUn1KsnQ-xmDvsIi_mqC1gJV-Q0irI7gwfsGXbfLaVCXo-Q98C_QWRh-O_xkrbhJkCcvnwdEhZm7FnZ3PL4XXKrG0XNa98JrnmG0qlz0cv8V9Q0sSIwXZbvA9BrhuV8PK7_YzPc6LZuNqgPeKiX_B-tSIHHl6Sr1EzuydnczmuS-xKQnbhmcqnpaCXzQmJr7tA8KLgu70KqpPCvA8AI6PLmBlvPWtZ20RdzezqlBh6S9SrBzQ9R0zr_9RyJxq28ws2jnHpVPw";
+'use strict'
+import { createAgent, getAgent } from "./agents.js";
+import { listSystems, getSystem, listWaypointsInSystem } from "./system.js"
+import {getFaction, listFactions} from "./faction.js"
+import {getContrat, listContrats} from "./contrat.js";
+
+
+let token = "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZGVudGlmaWVyIjoiUlVCRU4xMjMiLCJ2ZXJzaW9uIjoidjIuMS4yIiwicmVzZXRfZGF0ZSI6IjIwMjMtMTEtMTgiLCJpYXQiOjE3MDA4MzM2NTgsInN1YiI6ImFnZW50LXRva2VuIn0.SQSgewmJhhOlnk3wst9ND61D6JoAXSW6tZAJhS8c0IxyegVVe7ZkCBCU3tBraxWwEwR6wAnc8iCWzaS5Ir6mHbLhDR5UAaJwBasTMHQN1dXeQGJE83CjhciAyxWUV3iej4M1OD0kzG2uHFicLt9emOlCEbVcroXn2_F4K9kQDRjpoy3KEzGJxJbvWqug9mo5Ejb0WupB0Sim-mWwBmmpbkCx-MbakzZ5tUfUC5h-dAVsUIqnfrr7QCOq3zPrdt7zZzsOXFcwPwE6hbag62J5ROQtPfx1r9w-6pf7-mOOmEYSWHbArbls9f71o9Wf6A1qv3yPWGVjr5qQ1EFo_H-x_g";
 let offset = {
     x: 10,
     y: 10
@@ -15,7 +22,7 @@ function initGame() {
           Accept: 'application/json'
         },
         processData: false,
-        data: '{\n  "faction": "COSMIC",\n  "symbol": "ANNNNulax1225",\n  "email": ""\n}'
+        data: '{\n  "faction": "COSMIC",\n  "symbol": "",\n  "email": ""\n}'
     };
     
     $.ajax(settings).done(function (response) {
@@ -23,32 +30,7 @@ function initGame() {
     });
 }
 
-function getAgent() {
-    const settings = {
-        async: true,
-        crossDomain: true,
-        url: 'https://api.spacetraders.io/v2/my/agent',
-        method: 'GET',
-        headers: {
-        Accept: 'application/json',
-        Authorization: `Bearer ${token}`
-        }
-    };
-    $.ajax(settings).done(function (reponse) {
-        $('.main-window').prepend(`
-        <article class="agent-card">
-            <p class="account">${reponse.data.accountId}</p>
-            <p class="symbol">${reponse.data.symbol}</p>
-            <p class="headquarters">${reponse.data.headquarters}</p>
-            <p class="credits">${reponse.data.credits}</p>
-            <p class="startingFaction">${reponse.data.startingFaction}</p>
-            <p class="shipCount">${reponse.data.shipCount}</p>
-        </article>
-        `);
-        let metaSystem = reponse.data.headquarters.split("-");
-        getSystem(metaSystem[0] + "-" + metaSystem[1]);
-    });
-}
+getAgent()
 
 function getWayPoint(wayPoint) {
     const settings = {
@@ -66,20 +48,21 @@ function getWayPoint(wayPoint) {
     });
 };
 
-function getSystem(system) {
-    const settings = {
-        async: true,
-        crossDomain: true,
-        url: `https://api.spacetraders.io/v2/systems/${system}`,
-        method: 'GET',
-        headers: {
-            Accept: 'application/json'
-        }
-    };
-      
-    $.ajax(settings).done(function (response) {
-        drawSystem(response.data.waypoints);
-    });
-}
+// const factions = await listFactions(20,1)
+// console.log(factions)
 
-getAgent();
+const faction = await getFaction("COSMIC")
+console.log(faction)
+
+
+// const system = await listSystems(20,1)
+// console.log(system)
+
+// const systems = await getSystem("X1-TF11")
+// console.log(systems)
+
+let contrats = await listContrats()
+console.log(contrats)
+
+let contrat = await getContrat("clpcog26n2i66s60calh08olg")
+// console.log(contrat)
