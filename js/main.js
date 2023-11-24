@@ -25,10 +25,39 @@ function createAgent(faction, symbol){
 
 
 $(document).ready(function() {
-let agent = createAgent("COSMIC","Fewsgereb55");
+//Let agent = createAgent("COSMIC","agent_bryte");
 })
   
 
 // ------------------- Get Agent -------------------
 
 
+// ------------------- List Agent (Leaderboard) -------------------
+
+
+
+
+function listAgent(page, limit){
+  const settings = {
+    async: true,
+    crossDomain: true,
+    url: 'https://api.spacetraders.io/v2/agents',
+    method: 'GET',
+    headers: {
+      Accept: 'application/json'
+    },
+    data : {
+      page: page,
+      limit: limit
+    }
+  };
+  
+  $.ajax(settings).done(function (response) {
+    console.log(response);
+  });
+}
+
+$(document).ready(function() {
+  let leaderboard = listAgent("374", "1");
+})
+    
