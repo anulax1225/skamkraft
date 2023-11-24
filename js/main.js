@@ -1,4 +1,7 @@
 'use strict'
+
+// ------------------- Create Agent -------------------
+
 function createAgent(faction, symbol){
   const data = {faction: faction, symbol: symbol}
   const settings = {
@@ -11,20 +14,21 @@ function createAgent(faction, symbol){
      'Accept': 'application/json'
    },
    processData: false,
-   data: data
+   data: JSON.stringify(data)
  };
   
  $.ajax(settings).done(function (response) {
   console.log(response.data);
    return response.data;
  });
-
 }
 
-$(document).ready(function() {
-   let agent = createAgent("COSMIC","Fewsgereb5");
-  
-})
 
+$(document).ready(function() {
+let agent = createAgent("COSMIC","Fewsgereb55");
+})
+  
+
+// ------------------- Get Agent -------------------
 
 
