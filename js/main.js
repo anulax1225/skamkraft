@@ -1,4 +1,4 @@
-let token = "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZGVudGlmaWVyIjoiQU5OTk5VTEFYMTIyNSIsInZlcnNpb24iOiJ2Mi4xLjEiLCJyZXNldF9kYXRlIjoiMjAyMy0xMS0wNCIsImlhdCI6MTcwMDIyNDU5MSwic3ViIjoiYWdlbnQtdG9rZW4ifQ.r05mWtD5FjC4s6Td-ycmHdzL7C2s75lz3q7OBmWeCqUUZ1ejPsRGQRWJDPmIh1kAqO4D9FFs3GCTPZUn1KsnQ-xmDvsIi_mqC1gJV-Q0irI7gwfsGXbfLaVCXo-Q98C_QWRh-O_xkrbhJkCcvnwdEhZm7FnZ3PL4XXKrG0XNa98JrnmG0qlz0cv8V9Q0sSIwXZbvA9BrhuV8PK7_YzPc6LZuNqgPeKiX_B-tSIHHl6Sr1EzuydnczmuS-xKQnbhmcqnpaCXzQmJr7tA8KLgu70KqpPCvA8AI6PLmBlvPWtZ20RdzezqlBh6S9SrBzQ9R0zr_9RyJxq28ws2jnHpVPw";
+let token = "Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZGVudGlmaWVyIjoiQU5OTk5VTEFYMTIyNSIsInZlcnNpb24iOiJ2Mi4xLjEiLCJyZXNldF9kYXRlIjoiMjAyMy0xMS0wNCIsImlhdCI6MTcwMDIyNDU5MSwic3ViIjoiYWdlbnQtdG9rZW4ifQ.r05mWtD5FjC4s6Td-ycmHdzL7C2s75lz3q7OBmWeCqUUZ1ejPsRGQRWJDPmIh1kAqO4D9FFs3GCTPZUn1KsnQ-xmDvsIi_mqC1gJV-Q0irI7gwfsGXbfLaVCXo-Q98C_QWRh-O_xkrbhJkCcvnwdEhZm7FnZ3PL4XXKrG0XNa98JrnmG0qlz0cv8V9Q0sSIwXZbvA9BrhuV8PK7_YzPc6LZuNqgPeKiX_B-tSIHHl6Sr1EzuydnczmuS-xKQnbhmcqnpaCXzQmJr7tA8KLgu70KqpPCvA8AI6PLmBlvPWtZ20RdzezqlBh6S9SrBzQ9R0zr_9RyJxq28ws2jnHpVPw";
 let offset = {
     x: 10,
     y: 10
@@ -15,7 +15,7 @@ function initGame() {
           Accept: 'application/json'
         },
         processData: false,
-        data: '{\n  "faction": "COSMIC",\n  "symbol": "ANNNNulax1225",\n  "email": ""\n}'
+        data: '{\n  "faction": "COSMIC",\n  "symbol": "Daniel123",\n  "email": ""\n}'
     };
     
     $.ajax(settings).done(function (response) {
@@ -31,7 +31,7 @@ function getAgent() {
         method: 'GET',
         headers: {
         Accept: 'application/json',
-        Authorization: `Bearer ${token}`
+        Authorization:token
         }
     };
     $.ajax(settings).done(function (reponse) {
@@ -82,32 +82,5 @@ function getSystem(system) {
     });
 }
 
-function drawSystem(wayPoints) {
-    const canvas = document.getElementById("canvas");
-    let w = canvas.width;
-    let h = canvas.height; 
-    const ctx = canvas.getContext("2d");
-    wayPoints.forEach(wayPoint => {
-        switch (wayPoint.type) {
-            case "PLANET": 
-                drawWaypoint(wayPoint, ctx, w/2, h/2, 'green');
-                break;
-            case "ASTEROID": 
-                drawWaypoint(wayPoint, ctx, w/2, h/2, 'blue');
-                break;
-            case "GAS_GIANT": 
-                drawWaypoint(wayPoint, ctx, w/2, h/2, 'red');
-                break;    
-        }
-       
-    });
-}
-
-function drawWaypoint(wayPoint, ctx, w, h, color) {
-    ctx.beginPath();
-    ctx.fillStyle = color;
-    ctx.arc(wayPoint.x/offset.x + w, wayPoint.y/offset.y + h, 1, 0, 2 * Math.PI);
-    ctx.fill()
-}
 
 getAgent();
