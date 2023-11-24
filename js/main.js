@@ -37,7 +37,7 @@ $(document).ready(function() {
 
 
 
-function listAgent(page, limit){
+function listAgent(page = 1, limit = 20, agents = []){
   const settings = {
     async: true,
     crossDomain: true,
@@ -51,13 +51,29 @@ function listAgent(page, limit){
       limit: limit
     }
   };
-  
+
+
   $.ajax(settings).done(function (response) {
-    console.log(response);
-  });
+    const agents = response.data
+    console.log(response.meta)
+    agents.sort((a1, a2) => {
+      if(a1.credits < a2.credits)
+        return -1
+      if(a1.credits > a2.credits)
+        return 1
+      return 0  
+    })
+    agents.reverse()
+    console.log(agents);
+    let nbTour = agents.Length;
+    for(i = 0; i < nbTour; i++)
+    {
+      let agents = listAgent(i, 20, false)
+    }
+  })
 }
 
 $(document).ready(function() {
-  let leaderboard = listAgent("374", "1");
+
 })
     
