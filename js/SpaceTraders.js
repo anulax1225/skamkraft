@@ -1,3 +1,4 @@
+//© 2023 spacetardes
 function listSystem(page, limit){
   const settings = {
     async: true,
