@@ -5,6 +5,7 @@ import { register } from './auth.js'
 import { isLogin } from './auth.js';
 
 $(document).ready(async function () {
+
     if (document.URL.includes('login.html')) {
         $('#btn-login').on('click', () => {
             login();
