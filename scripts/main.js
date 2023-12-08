@@ -1,3 +1,5 @@
+// Copyright © 2023 Entreprise SpaceTarders 
+
 "use strict";
 
 import { login } from './auth.js'

@@ -1,3 +1,5 @@
+/* Copyright © 2023 Entreprise SpaceTarders */
+
 * {
   font-family: "Inter", sans-serif;
   box-sizing: border-box;
@@ -31,19 +33,21 @@ html {
   max-height: 50px;
 }
 
-.page-change-button {
+.page-change-link {
   padding-right: 10px;
 }
 
-.page-change-button button {
+.page-change-link a {
   margin: 2px;
   color: black;
   background-color: white;
-  border: 1px solid white;
+  border: 2px solid white;
   border-radius: 10px;
+
+  text-decoration: none;
 }
 
-.page-change-button button:hover {
+.page-change-link a:hover {
   border-color: #eab308;
   background-color: #eab308;
   transition: all 1s;
