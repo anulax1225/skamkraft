@@ -1,3 +1,5 @@
+"use strict";
+
 export async function listSystems(limit, page) {
   let systems;
 

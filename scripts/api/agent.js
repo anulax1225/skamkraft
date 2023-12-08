@@ -1,3 +1,5 @@
+"use strict";
+
 export async function createAgent(symbol, faction) {
   let agent;
 
@@ -14,7 +16,7 @@ export async function createAgent(symbol, faction) {
       agent = response.data;
     },
     error: function (error) {
-      console.log(error);
+      return error;
     },
   });
 
@@ -34,7 +36,7 @@ export async function getAgent(token) {
       agent = response.data;
     },
     error: function (error) {
-      console.log(error);
+      return error;
     },
   });
 
