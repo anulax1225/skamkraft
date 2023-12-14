@@ -1,8 +1,0 @@
-#title{
-    text-align: center;
-    margin-bottom: 100px;
-}
-.card{
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-}

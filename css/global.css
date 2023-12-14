@@ -1,3 +1,5 @@
+/* Copyright © 2023 Entreprise SkamCraft */
+
 * {
   font-family: "Inter", sans-serif;
   box-sizing: border-box;
@@ -10,14 +12,6 @@ html {
   height: 100%;
   display: flex;
   flex-direction: column;
-}
-
-.modal-header,
-.modal-title,
-.modal-body,
-#contratID{
-  color: black;
-  background-color: white;
 }
 
 /* Menu */
@@ -39,21 +33,19 @@ html {
   max-height: 50px;
 }
 
-.page-change-a {
-  padding-right: 10px;
+.page-change-button {
+  padding-left: 10px;
 }
 
-.page-change-button a {
+button {
   margin: 2px;
   color: black;
   background-color: white;
   border: 2px solid white;
   border-radius: 10px;
-
-  text-decoration: none;
 }
 
-.page-change-button a:hover {
+button:hover {
   border-color: #eab308;
   background-color: #eab308;
   transition: all 1s;
@@ -61,6 +53,13 @@ html {
 
 main {
   flex: 1;
+}
+
+#credits {
+  background-color: white;
+  border: 2px solid white;
+  border-radius: 10px;
+  color: black;
 }
 
 /* Footer */
@@ -72,43 +71,4 @@ footer p {
   display: flex;
   justify-content: center;
   margin-bottom: 0px;
-}
-
-h5{
-  color: red;
-}
-
-/* Canvas system
-#canvas-system {
-  border: 1px solid white;
-}
-
-/* Login modal */
-/* #loginModal {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 0 10px black;
-  z-index: 1000;
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-} */
-
-/* #loginModal p {
-  margin-top: -10px;
-}
-
-#loginModal input {
-  margin-bottom: 10px;
-} */
-
-
-.card-title{
-  color: white;
 }
