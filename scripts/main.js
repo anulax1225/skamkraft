@@ -81,7 +81,7 @@ async function contract() {
       img = "/img/shuttle.png"
     }
     if (contrat.accepted) {
-      status = "accepté"
+      status = "accepted"
       card =
         `                            
         <div class="card" style="width: 20rem;">
@@ -96,7 +96,7 @@ async function contract() {
       `
     }
     else {
-      status = "en attente"
+      status = "on hold"
       card =
         `                            
         <div class="card" style="width: 20rem;">
@@ -104,7 +104,8 @@ async function contract() {
             <div class="card-body">
               <h5 style="color:white" class="card-title">${contrat.factionSymbol}</h5>
               <p style="color:white" class="card-text">${contrat.deadlineToAccept}</p>
-              <p style="color:white" id="status" class="card-text">Status : ${status}</p>
+              <p id="status" class="card-text">Status : ${status}</p>
+              <p  id="revenu" class="card-text">Revenu : ${contrat.terms.payment.onAccepted} $</p>
               <button id="btn-infos" contratID="${contrat.id}" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Infos</button>
               <button id="btn-accept" contratID="${contrat.id}" class="btn-modify btn btn-primary" data-toggle="modal" data-target="#Modify" >Accepter</button>                       
             </div>
@@ -125,10 +126,11 @@ async function contract() {
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-              <h1 class="modal-title fs-5" id="title-modal">${contrat.id}</h1>
+              <h1 class="modal-title fs-5" id="title-modal">Informations</h1>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
+              Contrat ID : ${contrat.id} <br>
               Type : ${contrat.type} <br>
               Faction : ${contrat.factionSymbol} <br>
               DeadLine : ${contrat.deadlineToAccept}

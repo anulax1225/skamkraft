@@ -86,3 +86,11 @@ footer p {
 #modal-footer {
   background-color: #272727;
 }
+
+#status {
+  color: orange;
+}
+
+#revenu {
+  color: white
+}
