@@ -1,4 +1,13 @@
 import {UIRenderer} from "./ui/templeting_engine.js";
+import { Agent, AgentBuilder } from "./api/agent/agent.js";
+
+AgentBuilder.listAll((agents) => {
+    console.log(agents);
+});
+
+AgentBuilder.create("ZEUslkdjlka", "COSMIC", (agent) => {
+    console.log(agent);
+});
 
 let UI = new UIRenderer("html");
 
