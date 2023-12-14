@@ -40,7 +40,7 @@ function sortAgentByCredits(a1, a2) {
 }
 
 var meta = null
-function listAgent(page, limit = 20){
+function listAgent(page, limit = 20, totalPg = 1){
   const settings = {
     async: true,
     crossDomain: true,
@@ -56,16 +56,26 @@ function listAgent(page, limit = 20){
     success: function(response) {
       meta = response.meta
       agents = agents.concat(response.data);
+      console.log(agents)
       console.log("Actioni")
-      if (response.meta.page == page) drawAgents();
-      else setTimeout(10000, listAgent(page, limit));
+      console.log(meta)
+      
+      if (response.meta.page == totalPg) drawAgents();
+      else {  
+      page++
+      sleep(10000, page);
+      }
+    },
+    error: function(response) {
+      drawAgents();
     }
   };
   $.ajax(settings);
 }
 
-function sleep(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms));
+function sleep(ms, page) {
+  console.log(page, "Page Sleep :")
+  return new Promise(() => setTimeout(listAgent(page), ms));
 }
 
 async function getAllAgents() {
@@ -83,9 +93,8 @@ async function getAllAgents() {
       limit: limit
     },
     success: function(response) {
-      meta = response.meta
-      const total = Math.ceil(meta.total / limit);
-      listAgent(1, limit)
+      const totalPg = Math.ceil(response.meta.total / limit);
+      listAgent(1, limit, totalPg)
     }
   };
   $.ajax(settings);
@@ -95,14 +104,19 @@ function drawAgents() {
   $(".leaderboard").html("");
   agents.sort(sortAgentByCredits);
   agents.reverse();
+  let i = 1;
   agents.forEach(agent => {
     $(".leaderboard").append(`
-    <p>${agent.credits}</p>
-    <p>${agent.symbol}</p>
-    <p>${agent.headquarters}</p>
-    <p>${agent.startingFaction}</p>
-    <p>${agent.shipCount}</p>
+    <article>
+      <p class="elem num">${i}.</p>
+      <p class="elem symbol">${agent.symbol} : </p>
+      <p class="elem credits">${agent.credits}</p>
+      <p class="elem headquarters">${agent.headquarters}</p>
+      <p class="elem faction">${agent.startingFaction}</p>
+      <p class="elem ships>${agent.shipCount}</p>
+    </article>
     `);
+    i++
   });
 }
 
