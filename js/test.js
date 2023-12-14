@@ -5,21 +5,26 @@
 const canvas = document.getElementById("canvas");
 let w = canvas.width = canvas.offsetWidth;
 let h = canvas.height = canvas.offsetHeight;
+const widhtRect = 6;
+const heightRect = 6;
 const ctx = canvas.getContext("2d"); 
 let planets = [];
 let ships=[];
-
+let focusShips;
 //lister vaisseau
 const token="Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZGVudGlmaWVyIjoiREFOSUVMIiwidmVyc2lvbiI6InYyLjEuNCIsInJlc2V0X2RhdGUiOiIyMDIzLTEyLTAyIiwiaWF0IjoxNzAyMDM4NTcwLCJzdWIiOiJhZ2VudC10b2tlbiJ9.cSeOMFA6by3J3mElGL1xKg0p--C7Dcir6VARIs27QmHqTy2hM-pkJosADSLuo-bXHhXSESLlCcmSzS3BIa4T4v6HI0PH4QFpVNjHBSg7-lt1Hjhm4KkRUnmXdBEAeAXq18cbd6xScfRq0rpRNFzJZg5dRit3fjBZ3MSdmlRVroUs4hJaeSu0HLxD3GGRxXRFtvvHgMuFu6vqE1rq0PxTYQksuhu-GGpheCcIuQHNNIGnd0E2z-xzRAJYrRBjdctMDMv_u-RUeM4A6OwAFEczMYM3yDkZJP4qpVKAtriRUxJVkRsqHFLfEzWx7VikwLijN72gbhVzoIJzKh75-1kcyg"
 // Fonction pour obtenir la position de la souris par rapport au centre du canvas
 function getMousePosition(e, canvas) {
   let rect = canvas.offset();
   return {
-    x: e.clientX - rect.left - canvas.width() / 2,
-    y: e.clientY - rect.top - canvas.height() / 2
+    x: e.clientX - rect.left,
+    y: e.clientY - rect.top
   };
 }
-
+$('#ships').on('click',".btn",function(e){
+  focusShips = $(e.target).attr("data-id");
+  getShipPosition();
+})
 
 const ListMyShips = {
     async: true,
@@ -33,6 +38,10 @@ const ListMyShips = {
   };
   $.ajax(ListMyShips).done(function (response) {
     ships.push(response);
+    response.data.forEach(data =>{
+      const card=`<button type="button" class="btn btn-primary btn-lg btn-block" data-id="${data.symbol}">${data.symbol}</button>`
+      $("#ships").append(card)
+    })
   });
 
 //recuperer le systeme ou on est
@@ -40,7 +49,7 @@ function getShipPosition(){
   const settings = {
     async: true,
     crossDomain: true,
-    url: 'https://api.spacetraders.io/v2/my/ships/DANIEL-1/nav',
+    url: `https://api.spacetraders.io/v2/my/ships/${focusShips}/nav`,
     method: 'GET',
     headers: {
       Accept: 'application/json',
@@ -49,9 +58,7 @@ function getShipPosition(){
   };
   
  $.ajax(settings).done(function (response) {
-  console.log(response);
-  console.log(planets);
-
+  console.log(ships)
     planets.forEach(planet => {
       if(planet.symbol == response.data.waypointSymbol)
       {
@@ -89,7 +96,7 @@ function getListWaypoint(system, page) {
 
       waypoints.forEach(waypoint => {
         ctx.fillStyle = "rgb(0,0,0)";
-        ctx.fillRect(waypoint.x / 3 + w / 2, waypoint.y / 3 + h / 2, 6, 6);
+        ctx.fillRect(waypoint.x / 3 + w / 2, waypoint.y / 3 + h / 2, widhtRect, heightRect);
       });
 
       resolve(waypoints);
@@ -105,7 +112,6 @@ function getAllWaypoints(system) {
   for (let i = 1; i < 5; i++) {
     promises.push(getListWaypoint(system, i));
   }
-
   return Promise.all(promises);
 }
 
@@ -127,7 +133,7 @@ function getSystem() {
       .then(waypointsArray => {
         planets = [].concat(...waypointsArray);
         console.log('Planets:', planets);
-        getShipPosition();
+        
       })
       .catch(error => {
         console.error(error);
@@ -143,7 +149,7 @@ function travelToPlanet(planet) {
   const travelShip = {
     async: true,
     crossDomain: true,
-    url: `https://api.spacetraders.io/v2/my/ships/shipSymbol/navigate`,
+    url: `https://api.spacetraders.io/v2/my/ships/${focusShips}/navigate`,
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -152,16 +158,14 @@ function travelToPlanet(planet) {
     },
     processData: false,
     data: JSON.stringify({
-      destination: planet.symbol
+      waypointSymbol: planet.symbol
     })
   };
 
   $.ajax(travelShip).done(function (response) {
-    console.log(`Voyage vers ${planet.name} en cours...`);
-    console.log(response);
+    alert(`Voyage vers ${planet.symbol} en cours...`);
   }).fail(function (error) {
-    console.error(`Erreur lors du voyage vers ${planet.name}`);
-    console.error(error);
+    alert(error.responseJSON.error.message);
   });
 }
 
@@ -173,36 +177,24 @@ $('#canvas').on('click', function (e) {
 
  // Fonction pour vérifier si une planète a été cliquée
 function checkClickedPlanet(mousePosition) {
-  console.log('Clicked position:', mousePosition.x, mousePosition.y);
-
+  console.log(mousePosition.x)
   planets.forEach(waypoint => {
-    console.log('Planet position:', waypoint.x / 3 + w / 2, waypoint.y / 3 + h / 2);
-
     // Vérifier si la position de la souris est à l'intérieur de la zone de la planète
     if (
       mousePosition.x >= waypoint.x / 3 + w / 2 &&
-      mousePosition.x <= waypoint.x / 3 + w / 2 + 6 &&
+      mousePosition.x <= waypoint.x / 3 + w / 2 + widhtRect &&
       mousePosition.y >= waypoint.y / 3 + h / 2 &&
-      mousePosition.y <= waypoint.y / 3 + h / 2 + 6
-    ) {
-      const confirmation = confirm(`Voulez-vous voyager vers ${waypoint.name}?`);
+      mousePosition.y <= waypoint.y / 3 + h / 2 + heightRect
 
+    ) {
+      const confirmation = confirm(`Voulez-vous voyager vers ${waypoint.symbol}?`);
       if (confirmation) {
-        // Vérifier les conditions de voyage 
-        if (conditionsVoyageRemplies(waypoint)) {
           travelToPlanet(waypoint);
-        } else {
-          alert('Vous ne pouvez pas voyager vers cette planète. Conditions non remplies.');
-        }
       } else {
-        console.log('Voyage annulé.');
+        alert('Voyage annulé.');
       }
     }
   });
-}
-
-function conditionsVoyageRemplies(waypoint) {
-  return 0;
 }
 
 
