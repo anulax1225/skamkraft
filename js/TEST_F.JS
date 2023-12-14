@@ -1,14 +1,13 @@
-let token = "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZGVudGlmaWVyIjoiUFJSUk9VVCIsInZlcnNpb24iOiJ2Mi4xLjQiLCJyZXNldF9kYXRlIjoiMjAyMy0xMi0wMiIsImlhdCI6MTcwMjAzODIwOCwic3ViIjoiYWdlbnQtdG9rZW4ifQ.iCm_0x9shooAE7028tBHw-p8NAXf8_EWBZl-wnqIpMIIRCe8A6rzEkaKnX-1OORBh31YQTekSOLdP5_FnA0AEP2KP00YzGEZWQBxSTndkpivtcS6X-arc4F6yJGvcLfT1m3ZD47LGylTELR3I-sXomX2Va8_13oN6kdDJyXpVWFe5OIC01bP_cwHpjztUTO-8ASPJ_8cLZH6GTSAzy5ozF1teTEdfq93s2i9oTPhynQKogdzaXAUIkAXv7hYv5XUbevorRaCfTl52CU7WK5__3org5ardHuITmbl0QyHYIWtkbpcZLcawfEGG0EK66iqwefdXIkTeWC3T1b_ERShMw";
+let token = "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZGVudGlmaWVyIjoiUEVVU0RPU0FDSEEiLCJ2ZXJzaW9uIjoidjIuMS40IiwicmVzZXRfZGF0ZSI6IjIwMjMtMTItMDIiLCJpYXQiOjE3MDI1Mzk4NjUsInN1YiI6ImFnZW50LXRva2VuIn0.QL4rSruHd8pjNczeZQ3S7gof7TRnwZKqQBvkojUXgmzRrWiDZVw65kt1UBns0zHAhZF-m-bvxfUBik01uIzc-_jSO63ZndquPFmv_UY3HBkVK7UKoSaxAp_NveJsE1TOpTotUChlMd1Sv7RuyeR9fso2eN3-mBEoE5ukWmGVDfnOYefuWORhisqIkh4ti3QpaV-obycZ4XGV2ukqkiNdHqR3MQJR99e2nCEZEsarNKTgm6mgn-qCCNv4xQUGwhNbD5_p-jPqQ088vuFCeZi8j6kf7-fmT5sysBxEA5nvNPDIEL1XMuzs7N66WpiP1uc7I1Ph164m2epV9vmEvzthCw";
 //décalage
 let offset = {
     x: 2,
     y: 2
 };
-
 let max = 40;
 let min = 35;
 let w = 1260;
-let h = 850;
+let h = 870;
 const canvas = new fabric.Canvas("canvas",{
     width: w,
     height: h,
@@ -65,31 +64,25 @@ function offsetOrbits(waypoints){
         }
     });
 }
-
 function drawSystem(wayPoints) {
     if(wayPoints) {
         wayPoints.forEach(wayPoint => {
-            drawWaypointCircle(wayPoint);
+            drawWaypoint(wayPoint);
         });
     }
 }
-
-function drawWaypointCircle(wayPoint) {
-    let rect = new fabric.Rect({
-        left: wayPoint.x/offset.x + w/2,
-        top: wayPoint.y/offset.y + h/2,
-        fill: 'white',
-        width: 2,
-        height: 2,
-    });
-    wayPoint.rect = rect;
+function drawWaypoint(wayPoint) {
+    fabric.Image.fromURL('http://127.0.0.1:5500/img/planets/planetproto.png', function(planet) {
+        planet.set({left: wayPoint.x/offset.x + w/2});
+        planet.set({top: wayPoint.y/offset.y+ h/2});
+        planet.set({selectable: false});
+        canvas.add(planet);
+      });
     planets.push(wayPoint);
-    canvas.add(rect);
 }
 function movePlanets() {
     planets.forEach(waypoint => {
         if(waypoint.rotation != 0){
-
         }
     });
 }

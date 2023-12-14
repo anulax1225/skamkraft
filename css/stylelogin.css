@@ -1,0 +1,50 @@
+/* Copyright © 2023 Entreprise SpaceTarders */
+html{
+    background-color: rgb(7, 18, 41);
+}
+img{
+    width: 10%;
+    margin-right: 30px;
+}
+.text{
+    font-size:8px;
+    font-family: M42;
+    color: white;
+}
+header p{
+    display: flex;
+    justify-content: center;
+}
+#title{
+    font-family: M42;
+    font-size:20px;
+    margin-left: 10px;
+    margin-top: 50px;
+    color: white;
+    display: flex;
+    justify-content: center;
+}
+#menu {
+    display: flex;
+    justify-content: center;
+    justify-content: space-between;
+}
+#menu button{
+    margin-top: 15px;
+    font-family: M42;
+    color: white;
+    font-size: 15px;
+    background-color: rgb(20, 20, 32); 
+}
+footer p{
+    position: fixed;
+    bottom: 0;
+}
+canvas {
+    border: 2px solid rgb(7, 18, 41);
+    border-radius: 5px;
+}
+@font-face {
+    font-family: M42;
+    src: url(/fonts/m42.TTF);
+  }
