@@ -1,60 +1,83 @@
-// Copyright © 2023 Entreprise SpaceTarders 
+// Copyright © 2023 Entreprise SkamCraft
 
 "use strict";
 
-import { getAgent } from "./api/agent.js";
-import { createAgent } from "./api/agent.js";
+import SpaceTraders from "./api.js";
 
-export async function login() {
-  let token = $('#input-token').val();
+const $inputToken = $("#input-token");
+const $inputSymbol = $("#input-symbol");
+const $inputFaction = $("#input-faction");
+const $alert = document.querySelector("#box-alert");
+const $error = $("#error-message");
 
-  if (!token) {
-    $('#error').text('Token manquant');
-    return;
-  }
+const showError = (message) => {
+  $alert.removeAttribute("hidden");
+  $error.text(message);
+};
 
-  try {
-    await getAgent(token);
-    localStorage.setItem('token', token);
-    window.location.href = '/index.html';
-  } catch (error) {
-    $('#error').text('Token invalide');
-  }
-}
+const redirectToIndex = () => {
+  window.location.href = "/index.html";
+};
 
+export default {
+  login: async () => {
+    const token = $inputToken.val();
 
-export async function register() {
+    if (!token) {
+      showError("Token manquant");
+      return;
+    }
 
-  let symbol = $('#input-symbol').val();
-  if (!symbol) {
-    $('#error').text('Symbol manquant');
-    return;
-  }
+    try {
+      await SpaceTraders.Agent.get(token);
+      localStorage.setItem("token", token);
+      redirectToIndex();
+    } catch {
+      showError("Token invalide");
+    }
+  },
 
-  let faction = $('#input-faction').val();
-  if (!faction) {
-    $('#error').text('Faction manquante');
-    return;
-  }
+  register: async () => {
+    const symbol = $inputSymbol.val();
 
-  try {
-    await createAgent(symbol, faction);
-    localStorage.setItem('token', token);
-    window.location.href = '/index.html';
-  } catch {
-    $('#error').text('Symbol ou faction invalide');
-  }
-}
+    if (!symbol) {
+      showError("Symbol manquant");
+      return;
+    }
 
-export async function isLogin() {
-  let token = localStorage.getItem('token');
+    const faction = $inputFaction.val();
 
-  if (!token) return false;
+    console.log(faction);
 
-  try {
-    await getAgent(token);
-    return true;
-  } catch {
-    return false;
-  }
-}
+    if (!faction) {
+      showError("Faction manquante");
+      return;
+    }
+
+    try {
+      const agent = await SpaceTraders.Agent.create(symbol, faction);
+
+      if (agent.token !== undefined) {
+        localStorage.setItem("token", agent.token);
+        redirectToIndex();
+      } else {
+        showError("Symbol ou faction invalide");
+      }
+    } catch {
+      showError("Erreur lors de l'inscription");
+    }
+  },
+
+  isLogin: async () => {
+    const token = localStorage.getItem("token");
+
+    if (!token) return false;
+
+    try {
+      await SpaceTraders.Agent.get(token);
+      return true;
+    } catch {
+      return false;
+    }
+  },
+};
