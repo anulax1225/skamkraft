@@ -63,7 +63,8 @@ export default {
       } else {
         showError("Symbol ou faction invalide");
       }
-    } catch {
+    } catch (error) {
+      console.log(error)
       showError("Erreur lors de l'inscription");
     }
   },

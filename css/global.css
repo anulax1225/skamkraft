@@ -72,3 +72,17 @@ footer p {
   justify-content: center;
   margin-bottom: 0px;
 }
+
+/* Modal */
+.modal-content {
+  color: white;
+}
+
+#exampleModal {
+  color: white;
+  background-color: rgba(255, 255, 255, 0.1)
+}
+
+#modal-footer {
+  background-color: #272727;
+}

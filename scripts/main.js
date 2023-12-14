@@ -67,21 +67,56 @@ async function contract() {
   $('main').empty()
 
   contracts.forEach(contrat => {
-    console.log(contrat);
-    const card =
-      `                            
+    let img
+    let status
+    let card
+    console.log(contrat)
+    if (contrat.type = "PROCUREMENT") {
+      img = "/img/procurement.png"
+    }
+    else if (contrat.type = "TRANSPORT") {
+      img = "/img/transportation.png"
+    }
+    else {
+      img = "/img/shuttle.png"
+    }
+    if (contrat.accepted) {
+      status = "accepté"
+      card =
+        `                            
         <div class="card" style="width: 20rem;">
-              <img src="/img/contrat.jpg" class="card-img-top" alt="">
-              <div class="card-body">
-                  <h5 style="color:white" class="card-title">${contrat.factionSymbol}</h5>
-                  <p style="color:white" class="card-text">${contrat.accepted}</p>
-                  <button id="btn-infos" contratID="${contrat.id}" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Infos</button>
-                  <button id="btn-accepter" class="btn-modify btn btn-primary" data-toggle="modal" data-target="#Modify" >Accepter</button>                       
-              </div>
-          </div>
+          <img src="${img}" class="card-img-top" alt="">
+            <div class="card-body">
+              <h5 style="color:white" class="card-title">${contrat.factionSymbol}</h5>
+              <p style="color:white" class="card-text">${contrat.deadlineToAccept}</p>
+              <p style="color:white" id="status" class="card-text">Status : ${status}</p>
+              <button id="btn-infos" contratID="${contrat.id}" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Infos</button>                      
+            </div>
+        </div>
       `
+    }
+    else {
+      status = "en attente"
+      card =
+        `                            
+        <div class="card" style="width: 20rem;">
+          <img src="${img}" class="card-img-top" alt="">
+            <div class="card-body">
+              <h5 style="color:white" class="card-title">${contrat.factionSymbol}</h5>
+              <p style="color:white" class="card-text">${contrat.deadlineToAccept}</p>
+              <p style="color:white" id="status" class="card-text">Status : ${status}</p>
+              <button id="btn-infos" contratID="${contrat.id}" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Infos</button>
+              <button id="btn-accept" contratID="${contrat.id}" class="btn-modify btn btn-primary" data-toggle="modal" data-target="#Modify" >Accepter</button>                       
+            </div>
+        </div>
+      `
+    }
+
+
 
     $('main').append(card)
+
+
     $('#btn-infos').on('click', async function () {
       const token = localStorage.getItem("token");
       const contrat = await SpaceTraders.Contract.get($(this).attr('contratID'), token);
@@ -90,20 +125,30 @@ async function contract() {
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-              <h1 class="modal-title fs-5" id="exampleModalLabel">${contrat.id}</h1>
+              <h1 class="modal-title fs-5" id="title-modal">${contrat.id}</h1>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-          <div class="modal-body">
-            ...
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Save changes</button>
+            <div class="modal-body">
+              Type : ${contrat.type} <br>
+              Faction : ${contrat.factionSymbol} <br>
+              DeadLine : ${contrat.deadlineToAccept}
+            </div>
+            <div class="modal-footer" id="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
           </div>
         </div>
-      </div>
-    </div>`
+      </div>`
       $('main').append(modal)
     })
+
+    $('#btn-accept').on('click', async function () {
+      console.log("test")
+      const token = localStorage.getItem("token");
+      await SpaceTraders.Contract.accept($(this).attr('contratID'), token);
+      $("#status").html("Status : accepté");
+      this.remove();
+    })
+
   })
 }
