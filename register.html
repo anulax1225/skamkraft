@@ -1,0 +1,68 @@
+<!-- Copyright © 2023 Entreprise SkamKraft -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Skamkraft</title>
+    <link rel="icon" type="image/png" href="/img/Skamkraft.png" />
+
+    <link rel="stylesheet" href="/css/auth.css" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;500&display=swap"
+      rel="stylesheet"
+    />
+    <script
+      src="https://code.jquery.com/jquery-3.7.1.min.js"
+      integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+      crossorigin="anonymous"
+    ></script>
+    <script type="module" src="js/main.js" defer></script>
+  </head>
+  <body>
+    <div class="logo">
+      <img src="/img/Skamkraft.png" />
+      <h4>Skamkraft</h4>
+    </div>
+
+    <div class="form" aria-setsize="19">
+      <div class="title">
+        Bienvenue sur Skamkraft,<br />
+        <span>Entrez votre symbol pour continuer</span>
+      </div>
+      <input id="input-symbol" class="input" placeholder="Symbol" type="text" />
+      <select id="input-faction" class="input select">
+        <option value="" disabled selected>Faction</option>
+        <optgroup id="group-faction" label="---------"></optgroup>
+      </select>
+      <button id="btn-register" class="button-confirm">Continuer →</button>
+      <div class="link-connection">
+        <a class="animation-underline" href="login.html">Login</a>
+      </div>
+    </div>
+
+    <div id="box-alert" class="alert" hidden>
+      <div class="alert-inner">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          class="icon"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M9.401 3.003c1.155-2 4.043-2 5.197 0l7.355 12.748c1.154 2-.29 4.5-2.599 4.5H4.645c-2.309 0-3.752-2.5-2.598-4.5L9.4 3.003zM12 8.25a.75.75 0 01.75.75v3.75a.75.75 0 01-1.5 0V9a.75.75 0 01.75-.75zm0 8.25a.75.75 0 100-1.5.75.75 0 000 1.5z"
+            clip-rule="evenodd"
+          ></path>
+        </svg>
+
+        <strong class="message"> Quelque chose s'est mal passé</strong>
+      </div>
+
+      <p id="error-message" class="content"></p>
+    </div>
+  </body>
+</html>
