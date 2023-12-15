@@ -58,7 +58,7 @@ export class Auth {
     }
 
     async relog() {
-        if(this.is_login()) await AgentBuilder.get(localStorage.getItem("token"), this.validated, this.error_handler); 
+        if(this.#is_login()) await AgentBuilder.get(localStorage.getItem("token"), this.validated, this.error_handler); 
         else return false;
     }
 

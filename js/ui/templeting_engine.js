@@ -9,7 +9,7 @@ export class UIRenderer {
     this.#get_template((reponse) => {
       $('body').html(reponse);
       this.#get_template((reponse) => {
-        $("block-content").html(reponse);
+        $("#block-content").html(reponse);
       }, template)
     });
   }
