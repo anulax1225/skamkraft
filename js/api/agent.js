@@ -1,5 +1,5 @@
 'use strict';
-import { SpaceTraders } from "../config.js"
+import { SpaceTraders } from "./config.js"
 
 export class Agent {
   constructor(agent, token = "") {
@@ -49,7 +49,7 @@ export class AgentBuilder {
     });
   }
 
-  static async getPublic(symbol, callback) {
+  static async get_public(symbol, callback) {
     const url = `${SpaceTraders.host}agents/${symbol}`;
     const headers = { Accept: "application/json" };
     await $.ajax({
@@ -81,7 +81,7 @@ export class AgentBuilder {
     });
   }
 
-  static async listAll(callback) {
+  static async list_all(callback) {
     await this.list(1,1, (agents, meta) => {
       let maxPage = meta.total / 20;
       this.r_listing(1, maxPage, [], callback);

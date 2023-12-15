@@ -1,0 +1,75 @@
+:root {
+    --main-back-color: rgb(143, 143, 143);
+    --second-back-color: black;
+}
+
+@font-face {
+    font-family: M42;
+    src: url("/assets/fonts/m42.TTF");
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--main-back-color);
+    font-family: 'M42';
+    font-size: 7px;
+    margin: 0px;
+    padding: 0px;
+}
+
+/*footer*/
+footer {
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    background-color: var(--second-back-color);
+    color: white;
+}
+
+/*nav bar*/
+.nav-nav {
+    --nav-img-width: 100px;
+    background-color: var(--second-back-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.nav-nav .nav-brand {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.nav-nav .nav-brand img {
+    width: var(--nav-img-width);
+}
+
+.nav-nav .nav-links {
+    --links-color: rgb(0,0,0);
+    --links-backcolor: rgb(255, 123, 71);
+    --links-border-color: rgb(255, 173, 118);
+    height: 70%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.smooth {
+    padding: 5px;
+    border-radius: 10px;
+}
+
+.nav-link {
+    margin-right: 10px;
+    background-color: var(--links-backcolor);
+    color: var(--links-color);
+    border: 4px solid var(--links-border-color); 
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 3px 2px white;
+}
