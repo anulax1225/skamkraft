@@ -7,7 +7,7 @@ let offset = {
 let max = 40;
 let min = 35;
 let w = 1260;
-let h = 870;
+let h = 830;
 const canvas = new fabric.Canvas("canvas",{
     width: w,
     height: h,
@@ -68,14 +68,27 @@ function drawSystem(wayPoints) {
     if(wayPoints) {
         wayPoints.forEach(wayPoint => {
             drawWaypoint(wayPoint);
+            //TestPlanetClicked(wayPoint);
         });
     }
 }
 function drawWaypoint(wayPoint) {
+    let shadow = new fabric.Shadow({
+        color: "white",
+        blur: 5,
+        offsetX: 0,
+        offsetY: 0,
+      });
+
     fabric.Image.fromURL('http://127.0.0.1:5500/img/planets/planetproto.png', function(planet) {
+        //FABRICJS
+        planet.set({selectable: false});
+        planet.set({shadow: shadow});
+        //AJOUT DES PROPRIÉTÉS DES WAYPOINT SUR LES PLANETES
         planet.set({left: wayPoint.x/offset.x + w/2});
         planet.set({top: wayPoint.y/offset.y+ h/2});
-        planet.set({selectable: false});
+        planet.set({name: wayPoint.symbol});
+        planet.set({type: wayPoint.type});
         canvas.add(planet);
       });
     planets.push(wayPoint);
@@ -92,3 +105,13 @@ setTimeout(function animate() {
     canvas.renderAll();
     setTimeout(animate, 1000);
 }, 10);
+
+canvas.on('mouse:up', function (e) {
+    console.log(e.target)
+    if(e.target.shadow.color == "red"){
+        e.target.shadow.color = "white"
+    }
+    else{
+        e.target.shadow.color = "red"
+    }
+})
