@@ -2,11 +2,11 @@ export class UIRenderer {
   constructor(path) {
     this.templatePath = path;
   }
-  render(template) {
+  render(template, tag = "#block-content") {
     this.get_template((reponse) => {
       $('body').html(reponse);
       this.get_template((reponse) => {
-        $('#block-content').html(reponse);
+        $(tag).html(reponse);
       }, template)
     });
   }
