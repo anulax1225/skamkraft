@@ -63,7 +63,7 @@ async function contract() {
 
   const token = localStorage.getItem("token");
   const contracts = await SpaceTraders.Contract.list(token);
-
+  
   $('main').empty()
 
   contracts.forEach(contrat => {
@@ -82,14 +82,14 @@ async function contract() {
     }
     if (contrat.accepted) {
       status = "accepted"
-      card =
+      card = 
         `                            
-        <div class="card" style="width: 20rem;">
+        <div class="card spacer" style="width: 20rem;">
           <img src="${img}" class="card-img-top" alt="">
             <div class="card-body">
               <h5 style="color:white" class="card-title">${contrat.factionSymbol}</h5>
               <p style="color:white" class="card-text">${contrat.deadlineToAccept}</p>
-              <p style="color:white" id="status" class="card-text">Status : ${status}</p>
+              <p id="status-accepted" class="card-text">Status : ${status}</p>
               <button id="btn-infos" contratID="${contrat.id}" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Infos</button>                      
             </div>
         </div>
@@ -99,12 +99,12 @@ async function contract() {
       status = "on hold"
       card =
         `                            
-        <div class="card" style="width: 20rem;">
+        <div class="card spacer" style="width: 20rem;">
           <img src="${img}" class="card-img-top" alt="">
             <div class="card-body">
               <h5 style="color:white" class="card-title">${contrat.factionSymbol}</h5>
               <p style="color:white" class="card-text">${contrat.deadlineToAccept}</p>
-              <p id="status" class="card-text">Status : ${status}</p>
+              <p id="status-onhold" class="card-text">Status : ${status}</p>
               <p  id="revenu" class="card-text">Revenu : ${contrat.terms.payment.onAccepted} $</p>
               <button id="btn-infos" contratID="${contrat.id}" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Infos</button>
               <button id="btn-accept" contratID="${contrat.id}" class="btn-modify btn btn-primary" data-toggle="modal" data-target="#Modify" >Accepter</button>                       
@@ -116,6 +116,15 @@ async function contract() {
 
 
     $('main').append(card)
+    $('main').append(card)
+    $('main').append(card)
+    $('main').append(card)
+    $('main').append(card)
+    $('main').append(card)
+    $('main').append(card)
+
+
+    
 
 
     $('#btn-infos').on('click', async function () {
@@ -145,10 +154,11 @@ async function contract() {
     })
 
     $('#btn-accept').on('click', async function () {
-      console.log("test")
       const token = localStorage.getItem("token");
       await SpaceTraders.Contract.accept($(this).attr('contratID'), token);
-      $("#status").html("Status : accepté");
+      $("#status-onhold").html("Status : accepté");
+      document.getElementById("status-onhold").id = "status-accepted";
+      agent();
       this.remove();
     })
 

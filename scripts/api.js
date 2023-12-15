@@ -131,6 +131,27 @@ export default {
       };
 
       return REQUEST(url, "POST", headers);
+    },
+
+    deliver : async(contratId, token)=>{
+      const url = `${spacetradersApiUrl}my/contracts/${contratId}/deliver`;
+      const headers = {
+        'Content-Type': 'application/json',
+        Accept: "application/json",
+        Authorization: `Bearer ${token}`,
+      };
+
+      return REQUEST(url, "POST", headers);
+    },
+    fulfill: async (contratId, token) =>{
+      const url = `${spacetradersApiUrl}my/contracts/${contratId}/fulfill`;
+      const headers = {
+        'Content-Type': 'application/json',
+        Accept: "application/json",
+        Authorization: `Bearer ${token}`,
+      };
+
+      return REQUEST(url, "POST", headers);
     }
   },
 };

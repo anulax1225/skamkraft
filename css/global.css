@@ -52,7 +52,20 @@ button:hover {
 }
 
 main {
+
   flex: 1;
+  overflow-y: scroll;
+  display: flex;
+  justify-content: left;
+  flex-wrap: wrap;
+  padding-left: 30px;
+}
+
+
+.spacer {
+  margin-bottom: 35px;
+  margin-left: 100px;
+  margin-right: 100px;
 }
 
 #credits {
@@ -87,10 +100,16 @@ footer p {
   background-color: #272727;
 }
 
-#status {
+#status-onhold {
   color: orange;
 }
 
+#status-accepted{
+  color: greenyellow;
+}
 #revenu {
   color: white
 }
+
+
+
