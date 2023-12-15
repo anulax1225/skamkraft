@@ -8,13 +8,15 @@ let max = 40;
 let min = 35;
 let w = 1260;
 let h = 830;
+
 const canvas = new fabric.Canvas("canvas",{
     width: w,
     height: h,
     backgroundColor:"rgb(7, 18, 41)",
-    renderOnAddRemove: false 
+    renderOnAddRemove: false,
+    defaultCursor :'crosshair',
+    hoverCursor :'pointer'
 });
-
 canvas.renderAll();
 let planets = [];
 
@@ -107,7 +109,6 @@ setTimeout(function animate() {
 }, 10);
 
 canvas.on('mouse:up', function (e) {
-    console.log(e.target)
     if(e.target.shadow.color == "red"){
         e.target.shadow.color = "white"
     }
