@@ -11,7 +11,7 @@
     margin:auto;
     justify-content: space-between;
     flex-direction: row;
-    width: 50%;
+    width: 70%;
     border: 2px solid black;
     border-bottom-color: white;
     border-bottom-width: 1px;
@@ -28,9 +28,10 @@
     margin: auto;
     align-items: center;
     flex-direction: column;
-    width: 50%;
+    width: 70%;
     height: 50vh;
     overflow-y: scroll;
+    overflow-x:visible;
     border: 2px solid black;
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
@@ -38,7 +39,11 @@
     border-top-right-radius: 0px;
     background-color: black;
     scrollbar-width: none;  /* Firefox */
+    -ms-overflow-style: none; 
 }
+.leaderboard::-webkit-scrollbar { 
+    width: 0 !important 
+}  
 article{
     width: 99.9%;
     display: flex;
@@ -65,4 +70,33 @@ p{
 }
 .credits{
     color: rgb(250, 204, 88);
+}
+.ships{
+    color: rgb(146, 146, 146);
+}
+.buttons button{
+    position: absolute; /* Position them relative to the browser window */
+    left: 200px; /* Position them outside of the screen */
+    transition: 0.3s; /* Add transition on hover */
+    padding: 15px; /* 15px padding */
+    width: 300px; /* Set a specific width */
+    text-decoration: none; /* Remove underline */
+    font-size: 20px; /* Increase font size */
+    color: white; /* White text color */
+    border-radius: 0 5px 5px 0; /* Rounded corners on the top right and bottom right side */
+}
+  
+.buttons button:hover{
+    left: 400px; /* On mouse-over, make the elements appear as they should */
+}
+  
+  /* The about link: 20px from the top with a green background */
+.btn-test{
+    top: 80px;
+    background-color: #04AA6D;
+}
+  
+.btn-test2{
+    top: 180px;
+    background-color: #2196F3; /* Blue */
 }
