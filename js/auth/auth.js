@@ -1,36 +1,40 @@
+// Copyright © 2023 Entreprise SkamKraft
+'use strict';
 import { AgentBuilder } from '../api/agent.js'
 import Strategie from '../commun/strategie.js';
+
+let strategies = {
+    register: [
+        {
+            name: "symbol",
+            validations: [
+                "required",
+                "max_length|14"
+            ]
+        },
+        {
+            name: "faction",
+            validations: [
+                "required"
+            ]
+        }
+    ],
+    login: [
+        {
+            name: "token",
+            validations: [
+                "required"
+            ]
+        }
+    ]
+}
 
 export class Auth {
     constructor(store = false) {
         this.store = store;
         this.validated = () => {};
         this.error_handler = () => {};
-        this.strategies = {
-            register: [
-                {
-                    name: "symbol",
-                    validations: [
-                        "required",
-                        "max_lenght|14"
-                    ]
-                },
-                {
-                    name: "faction",
-                    validations: [
-                        "required"
-                    ]
-                }
-            ],
-            login: [
-                {
-                    name: "token",
-                    validations: [
-                        "required"
-                    ]
-                }
-            ]
-        }
+        this.strategies = strategies;
     }
 
     done(validated) {
@@ -43,24 +47,38 @@ export class Auth {
         return this;
     }
 
-    login(token) {
+    async login(token) {
         let validateur = new Strategie(this.strategies.login);
         validateur.validate("token", token);
-        if (validateur.errors) this.error_handler(validateur.errors);
+        if (validateur.errors.length > 0) this.error_handler(validateur.errors);
         else {
-            if (store) localStorage.setItem("token", token);
-            AgentBuilder.get(token, this.validated);
+            if (this.store) localStorage.setItem("token", token);
+            await AgentBuilder.get(token, this.validated, this.error_handler);
         }
     }
 
-    register(new_agent) {
+    async relog() {
+        if(this.is_login()) await AgentBuilder.get(localStorage.getItem("token"), this.validated, this.error_handler); 
+        else return false;
+    }
+
+    async register(new_agent) {
         let validateur = new Strategie(this.strategies.register);
         validateur.validate("symbol", new_agent.symbol);
         validateur.validate("faction", new_agent.faction);
-        if (validateur.errors) this.error_handler(validateur.errors);
-        else {
-            if (store) localStorage.setItem("token", token);
-            AgentBuilder.create(new_agent.symbol, new_agent.faction, this.validated);
+        if (validateur.errors.length > 0) this.error_handler(validateur.errors);
+        else {            
+            await AgentBuilder.create(new_agent.symbol, new_agent.faction, (agent) => {
+                if (this.store) localStorage.setItem("token", agent.token);
+                this.validated(agent);
+            }, this.error_handler);
         }
+    }
+
+    #is_login() {
+        if (this.store && localStorage.getItem("token")) {
+            return true
+        }
+        return false
     }
 }

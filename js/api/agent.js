@@ -1,3 +1,4 @@
+// Copyright © 2023 Entreprise SkamKraft
 'use strict';
 import { SpaceTraders } from "./config.js"
 
@@ -18,7 +19,7 @@ export class Agent {
 }
 
 export class AgentBuilder {
-  static async create(symbol, faction, callback, email = "") {
+  static async create(symbol, faction, callback, error_handler, email = "") {
       const url = `${SpaceTraders.host}register`;
       await $.ajax({
         url: url,
@@ -30,10 +31,13 @@ export class AgentBuilder {
           let agent = new Agent(reponse.data.agent, reponse.data.token)
           callback(agent);
         },
+        error: (err) => {
+          error_handler(["Symbol is invalid."])
+        }
       });
   }
 
-  static async get(token, callback){
+  static async get(token, callback, error_handler){
     const url = `${SpaceTraders.host}my/agent`;
     await $.ajax({
         url: url,
@@ -46,16 +50,20 @@ export class AgentBuilder {
           let agent = new Agent(reponse.data, token);
           callback(agent);
         },
+        error: (err) => {
+          error_handler(["Token invalide."]);
+        }
     });
   }
 
   static async get_public(symbol, callback) {
     const url = `${SpaceTraders.host}agents/${symbol}`;
-    const headers = { Accept: "application/json" };
     await $.ajax({
       url: url,
       method: "GET",
-      headers: headers,
+      headers: {
+        Accept: "application/json" 
+      },
       success: (reponse) => {
         let agent = new Agent(reponse.data);
         callback(agent);
@@ -65,12 +73,13 @@ export class AgentBuilder {
 
   static async list(limit, page, callback, agents = []) {
     const url = `${SpaceTraders.host}agents`;
-    const headers = { Accept: "application/json" };
     const data = { limit, page };
     await $.ajax({
       url: url,
       method: "GET",
-      headers: headers,
+      headers: {
+        Accept: "application/json" 
+      },
       data: data,
       success: (reponse) => {
         reponse.data.forEach(agent => {
@@ -84,15 +93,16 @@ export class AgentBuilder {
   static async list_all(callback) {
     await this.list(1,1, (agents, meta) => {
       let maxPage = meta.total / 20;
-      this.r_listing(1, maxPage, [], callback);
+      this.#r_listing(1, maxPage, [], callback);
     });
   }
 
-  static async r_listing(page, maxPage, agents, callback) {
+  static async #r_listing(page, maxPage, agents, callback) {
     if (page < maxPage) {
       this.list(20, page++,() => {
         setTimeout(() => {
-          this.r_listing(page++, maxPage, agents, callback); 
+          callback(agents);
+          this.#r_listing(page++, maxPage, agents, callback); 
         }, 1000);
       }, agents);
     } else {
