@@ -79,17 +79,18 @@ async function contract() {
 async function ship() {
   const token = localStorage.getItem("token");
   const ships = await SpaceTraders.Ships.list(token);
+  console.log(ships)
   $("main").empty();
   ships.forEach((ship) => {
     let img = "/img/Skamkraft.png";
     const card = `                            
-    <div class="card" style="width: 20rem;">
+    <div class="card spacer" style="width: 20rem;">
       <img src="${img}" class="card-img-top" alt="">
         <div class="card-body">
-          <h5 style="color:white" class="card-title">${ship}</h5>
+          <h5 style="color:white" class="card-title">${ship.symbol}</h5>
           <p style="color:white" class="card-text">Location : ${ship.nav.waypointSymbol}</p>
           <p style="color:white" id="status" class="card-text">Status : ${ship.nav.status}</p>
-          <button id="btn-infos" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Infos</button>                      
+          <button id="btn-infos" type="button" data-ships-id="${ship.symbol}" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Infos</button>                      
         </div>
     </div>
   `;
@@ -97,29 +98,32 @@ async function ship() {
 
     $("#btn-infos").on("click", async function () {
       const token = localStorage.getItem("token");
-      const contrat = await SpaceTraders.Contract.get(
-        $(this).attr("contratID"),
-        token
-      );
+      const ships = await SpaceTraders.Ships.get(token,$(this).attr('data-ships-id'));
+    console.log("info")
       const modal = `
-      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal fade" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-              <h1 class="modal-title fs-5" id="title-modal">${contrat.id}</h1>
+              <h1 class="modal-title fs-5">${ships.symbol}</h1>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-              Type : ${contrat.type} <br>
-              Faction : ${contrat.factionSymbol} <br>
-              DeadLine : ${contrat.deadlineToAccept}
+              fuel current ammount : ${ships.fuel.current} <br>
+              fuel capacity : ${ships.fuel.capacity} <br>
+              crew current ammount : ${ships.crew.current} <br>
+              crew capacity : ${ships.crew.capacity} <br>
+              crew moral : ${ships.crew.morale}/100 <br>
+              frame : ${ships.frame.description} <br>
+              reactor : ${ships.reactor.description} <br>
+              engine : ${ships.engine.description} 
             </div>
-            <div class="modal-footer" id="modal-footer">
+            <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
             </div>
           </div>
         </div>
-      </div>`;
+      </div>`
       $("main").append(modal);
     });
   });
