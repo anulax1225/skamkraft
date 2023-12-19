@@ -1,5 +1,11 @@
 # Skamcraft
 
+## Norm
+* ``` ; ``` at the end of each line.
+* snack_case for functions and variables.
+* UpperCamelCase for Classes.
+* all in english.
+
 ## DONE
 [BETA] = not tested yet = can crash 
 * template engine :
