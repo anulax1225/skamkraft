@@ -1,0 +1,10 @@
+export class Position {
+    constructor(x, y) {
+        this.x = x;
+        this.y = y;
+    }
+
+    get_canvas_pos(w, h) {
+        return new Position(x - w/2, y - h/2)
+    }
+}

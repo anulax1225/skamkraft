@@ -1,32 +1,32 @@
 // Copyright © 2023 Entreprise SkamKraft
 'use strict';
-export class UIRenderer {
+export class TemplateEngine {
   constructor(path) {
     this.templatePath = path;
   }
   
   render(template) {
-    this.#get_template((reponse) => {
+    this.get_template((reponse) => {
       $('body').html(reponse);
-      this.#get_template((reponse) => {
+      this.get_template((reponse) => {
         $("#block-content").html(reponse);
       }, template)
     });
   }
 
   frag_load(tag, template) {
-    this.#get_template((reponse) => {
+    this.get_template((reponse) => {
       $(tag).html(reponse);
     }, template);
   }
 
-  #get_template(callback, template = "") {
+  get_template(callback, template = "") {
     let url = template === "" ? `${this.templatePath}/template.html`: `${this.templatePath}/${template}`;
-    let data = $.ajax(url,{
+    $.ajax(url,{
       async: false,
       method: "GET",
       success: callback,
-      fail: (err) => {
+      error: (err) => {
         console.log(err);
       }
     });

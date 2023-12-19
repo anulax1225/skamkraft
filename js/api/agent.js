@@ -19,9 +19,9 @@ export class Agent {
 }
 
 export class AgentBuilder {
-  static async create(symbol, faction, callback, error_handler, email = "") {
-      const url = `${SpaceTraders.host}register`;
-      await $.ajax({
+  static create(symbol, faction, callback, error_handler, email = "") {
+      const url = `${SpaceTraders.host}/register`;
+      $.ajax({
         url: url,
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -37,9 +37,9 @@ export class AgentBuilder {
       });
   }
 
-  static async get(token, callback, error_handler){
-    const url = `${SpaceTraders.host}my/agent`;
-    await $.ajax({
+  static get(token, callback, error_handler){
+    const url = `${SpaceTraders.host}/my/agent`;
+    $.ajax({
         url: url,
         method: "GET",
         headers: {
@@ -56,9 +56,9 @@ export class AgentBuilder {
     });
   }
 
-  static async get_public(symbol, callback) {
-    const url = `${SpaceTraders.host}agents/${symbol}`;
-    await $.ajax({
+  static get_public(symbol, callback) {
+    const url = `${SpaceTraders.host}/agents/${symbol}`;
+    $.ajax({
       url: url,
       method: "GET",
       headers: {
@@ -71,10 +71,10 @@ export class AgentBuilder {
     });
   }
 
-  static async list(limit, page, callback, agents = []) {
+  static list(limit, page, callback, agents = []) {
     const url = `${SpaceTraders.host}agents`;
     const data = { limit, page };
-    await $.ajax({
+    $.ajax({
       url: url,
       method: "GET",
       headers: {
@@ -90,14 +90,14 @@ export class AgentBuilder {
     });
   }
 
-  static async list_all(callback) {
-    await this.list(1,1, (agents, meta) => {
+  static list_all(callback) {
+    this.list(1,1, (agents, meta) => {
       let maxPage = meta.total / 20;
       this.#r_listing(1, maxPage, [], callback);
     });
   }
 
-  static async #r_listing(page, maxPage, agents, callback) {
+  static #r_listing(page, maxPage, agents, callback) {
     if (page < maxPage) {
       this.list(20, page++,() => {
         setTimeout(() => {
