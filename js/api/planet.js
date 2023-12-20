@@ -43,7 +43,7 @@ export class Planet {
         this.is_under_construction = waypoint.isUnderConstruction;
     }
 
-    get_market() {
+    get_market(callback, error_handler) {
         const url = `${SpaceTraders.host}/systems/${this.system}/waypoints/${this.name}/market`;
         $.ajax({
             url: url,
@@ -53,7 +53,7 @@ export class Planet {
                 callback(market);
             },
             error: (err) => {
-                error_handler("Planet not found");
+                error_handler("Market not found");
             }
         });  
     }
@@ -68,7 +68,12 @@ export class Planet {
 }
 
 export class PlanetBuilder {
-    static get(system, name, callback, error_handler) {
+    static parse_system_name(name) {
+        return name.split("-").slice(0, 2).join("-");
+    }
+
+    static get(name, callback, error_handler) {
+        let system = PlanetBuilder.parse_system_name(name);
         const url = `${SpaceTraders.host}/systems/${system}/waypoints/${name}`;
         $.ajax({
             url: url,
@@ -83,21 +88,41 @@ export class PlanetBuilder {
         });
     } 
 
-    static list(system, limit, page, planets = []) {
+    static list(system, limit, page, callback, planets = []) {
         const url = `${SpaceTraders.host}/systems/${system}/waypoints`
         $.ajax({
             url: url,
             method: "GET",
-            
+            data: {
+                limit: limit,
+                page: page
+            },
+            success: (reponse) => {
+                reponse.data.forEach(planet => {
+                    planets.push(new Planet(planet));
+                });
+                callback(planets, reponse.meta);
+            } 
         });
     }
 
-    static list_all(system, callback, error_handler) {
-        const url = `${SpaceTraders.host}/systems/${system}/waypoints`;
-
+    static list_all(system, callback) {
+        this.list(system, 20, 1, (planets, meta) => {
+            let maxPage = meta.total / 20;
+            this.#r_listing(system, 2, maxPage, planets, callback);
+        });
     }
 
-    static #r_listing() {
-
+    static #r_listing(system, page, maxPage, planets, callback) {
+        if (page < maxPage) {
+            this.list(20, page++,() => {
+                setTimeout(() => {
+                    callback(planets);
+                    this.#r_listing(system, page++, maxPage, planets, callback); 
+                }, 1000);
+            }, planets);
+        } else {
+            callback(planets);
+        }
     }
 }

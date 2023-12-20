@@ -1,3 +1,3 @@
 import tests from "./test/tests.js";
 
-tests.modal();
+tests.get_planet();

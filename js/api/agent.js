@@ -72,7 +72,7 @@ export class AgentBuilder {
   }
 
   static list(limit, page, callback, agents = []) {
-    const url = `${SpaceTraders.host}agents`;
+    const url = `${SpaceTraders.host}/agents`;
     const data = { limit, page };
     $.ajax({
       url: url,
@@ -83,7 +83,7 @@ export class AgentBuilder {
       data: data,
       success: (reponse) => {
         reponse.data.forEach(agent => {
-          agents.push(agent);
+          agents.push(new Agent(agent));
         });
         callback(agents, reponse.meta);
       },
@@ -91,9 +91,9 @@ export class AgentBuilder {
   }
 
   static list_all(callback) {
-    this.list(1,1, (agents, meta) => {
+    this.list(20, 1, (agents, meta) => {
       let maxPage = meta.total / 20;
-      this.#r_listing(1, maxPage, [], callback);
+      this.#r_listing(2, maxPage, agents, callback);
     });
   }
 

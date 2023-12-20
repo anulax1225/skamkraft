@@ -9,7 +9,7 @@ import { PlanetBuilder } from "../api/planet.js";
 let temp_path = "html";
 let token = "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZGVudGlmaWVyIjoiSEFSRElDSyIsInZlcnNpb24iOiJ2Mi4xLjQiLCJyZXNldF9kYXRlIjoiMjAyMy0xMi0wMiIsImlhdCI6MTcwMjY2Mjc2Mywic3ViIjoiYWdlbnQtdG9rZW4ifQ.PrvaOz3W79acq6RoxryMW53PRRz824_AM0VGLwfXCOsGCOCAIY-rn6-bZTOnLAtp4xPSDqEk4c38oWYAWW59p0iMDDLpur6ONnjT0RjjsQS9zr5BByfBpP36CT23IZSSzk3XxGrFolHJAyU3K1liYfNbsPuNTXlkHGNHq6yMqH4ZQUPFsXEsCkg9cUynkdLw3C39SvWhtJ89oblj_8tQp2k8dxhZemepuXtiI51eFMpv8A0WRAi7pVYo_ajJujY9QDLYn_m5hDZWTlQMIstjPaDl99p2IMweIMO2Q2G-0lKiWQ4sl6VW5tuVrz1HLYU6kyMjFQWNn6kFDE7LWMTrfw";
 
-let tests  = {
+let tests = {
     timer: function() {
         let timer = new Timer(1, 0.1666, "m");
         timer.on("step", (time) => {
@@ -66,7 +66,7 @@ let tests  = {
         template_engine.render("templates/login.html");
 
         let modal = new Modal("test-modal", template_engine);
-        modal.add_class("my-modal")
+        modal.add_class("ext-modal")
 
         modal.render("templates/test_modal.html");
 
@@ -81,13 +81,22 @@ let tests  = {
         });
     },
     get_planet: function() {
-        PlanetBuilder.get("X1-TT23", "X1-TT23-FF1E", (planet) => {
+        PlanetBuilder.get("X1-TT23-FF1E", (planet) => {
             console.log(planet);
         }, (err) => {
             console.log(err);
         });
     },
-
+    get_all_planets: function() {
+        PlanetBuilder.list_all("X1-AG10", (planets) => {
+            console.log(planets);
+        });
+    },
+    get_all_agents: function() {
+        AgentBuilder.list_all((agents) => {
+            console.log(agents);
+        });
+    }
 }
 
 export default tests;
