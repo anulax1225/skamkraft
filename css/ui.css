@@ -1,3 +1,5 @@
+/* Copyright © 2023 Entreprise SkamKraft */
+
 .modal-disable::backdrop {
     background-color: rgba(0, 0, 0, 0.493);
 }

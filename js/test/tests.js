@@ -1,10 +1,13 @@
-import { Timer } from "../ui/timer.js";
-import { Modal } from "../ui/modal.js";
-import { TemplateEngine } from "../ui/templeting_engine.js";
-import { Initialzer } from "../commun/initialzer.js ";
-import { AgentBuilder } from "../api/agent.js";
-import { Auth } from "../auth/auth.js";
-import { PlanetBuilder } from "../api/planet.js";
+// Copyright © 2023 Entreprise SkamKraft
+'use strict';
+
+import { Timer } from "../skama_code/ui/timer.js";
+import { Modal } from "../skama_code/ui/modal.js";
+import { TemplateEngine } from "../skama_code/ui/templeting_engine.js";
+import { Initialzer } from "../skama_code/commun/initialzer.js ";
+import { AgentBuilder } from "../skama_code/api/agent.js";
+import { Auth } from "../skama_code/auth/auth.js";
+import { PlanetBuilder } from "../skama_code/api/planet.js";
 
 let temp_path = "html";
 let token = "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZGVudGlmaWVyIjoiSEFSRElDSyIsInZlcnNpb24iOiJ2Mi4xLjQiLCJyZXNldF9kYXRlIjoiMjAyMy0xMi0wMiIsImlhdCI6MTcwMjY2Mjc2Mywic3ViIjoiYWdlbnQtdG9rZW4ifQ.PrvaOz3W79acq6RoxryMW53PRRz824_AM0VGLwfXCOsGCOCAIY-rn6-bZTOnLAtp4xPSDqEk4c38oWYAWW59p0iMDDLpur6ONnjT0RjjsQS9zr5BByfBpP36CT23IZSSzk3XxGrFolHJAyU3K1liYfNbsPuNTXlkHGNHq6yMqH4ZQUPFsXEsCkg9cUynkdLw3C39SvWhtJ89oblj_8tQp2k8dxhZemepuXtiI51eFMpv8A0WRAi7pVYo_ajJujY9QDLYn_m5hDZWTlQMIstjPaDl99p2IMweIMO2Q2G-0lKiWQ4sl6VW5tuVrz1HLYU6kyMjFQWNn6kFDE7LWMTrfw";

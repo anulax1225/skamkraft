@@ -1,3 +1,6 @@
+// Copyright © 2023 Entreprise SkamKraft
+'use strict';
+
 export class Modal {
     constructor(name, template_engine, tag = "#block-content") {
         this.name = name;

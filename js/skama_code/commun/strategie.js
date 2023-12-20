@@ -1,4 +1,6 @@
 // Copyright © 2023 Entreprise SkamKraft
+'use strict';
+
 export default class Strategie {
     constructor(strategie) {
         this.strategie = strategie;

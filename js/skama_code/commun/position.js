@@ -1,3 +1,6 @@
+// Copyright © 2023 Entreprise SkamKraft
+'use strict';
+
 export class Position {
     constructor(x, y) {
         this.x = x;

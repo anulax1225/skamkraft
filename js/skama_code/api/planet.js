@@ -1,3 +1,6 @@
+// Copyright © 2023 Entreprise SkamKraft
+'use strict';
+
 import { SpaceTraders } from "./config.js";
 import { Position } from "../commun/position.js";
 

@@ -1,5 +1,6 @@
 // Copyright © 2023 Entreprise SkamKraft
 'use strict';
+
 export class Initialzer {
     constructor(UI) {
         this.UI = UI;

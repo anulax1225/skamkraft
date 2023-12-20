@@ -1,3 +1,6 @@
+// Copyright © 2023 Entreprise SkamKraft
+'use strict';
+
 export class Timer {
     constructor(time, step, unit = "s") {
         this.passed_time = 0;
