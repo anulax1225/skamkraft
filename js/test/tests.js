@@ -1,7 +1,7 @@
 import { Timer } from "../ui/timer.js";
 import { Modal } from "../ui/modal.js";
 import { TemplateEngine } from "../ui/templeting_engine.js";
-import { Initialzer } from "../commun/commun.js";
+import { Initialzer } from "../commun/initialzer.js ";
 import { AgentBuilder } from "../api/agent.js";
 import { Auth } from "../auth/auth.js";
 import { PlanetBuilder } from "../api/planet.js";
@@ -54,6 +54,7 @@ let tests  = {
         //});
     },
     modal: function() {
+
         let template_engine = new TemplateEngine(temp_path);
         
         let timer = new Timer(60, 1, "s");
@@ -62,11 +63,10 @@ let tests  = {
                 <p>${time}</p>
             `);
         });
-
         template_engine.render("templates/login.html");
 
-        let modal = new Modal("test-modal",template_engine);
-        modal.enable = false;
+        let modal = new Modal("test-modal", template_engine);
+        modal.add_class("my-modal")
 
         modal.render("templates/test_modal.html");
 

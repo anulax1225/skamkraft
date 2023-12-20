@@ -8,12 +8,16 @@ export class Modal {
 
     render(template) {
         this.template_engine.get_template((reponse) => {
-            $(this.tag).html(`
+            $(this.tag).prepend(`
                 <dialog id="${this.name}" class="${this.modal_class} modal-disable">
                     ${reponse}
                 </dialog>
             `);
         }, template);
+    }
+
+    on_close(callback) {
+        document.querySelector(`#${this.name}`).addEventListener("close", callback);
     }
 
     add_class(modal_class) {

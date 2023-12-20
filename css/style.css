@@ -90,3 +90,15 @@ footer {
     padding: 5px;
     border-radius: 10px;
 }
+
+/* Modal */
+.my-modal {
+    background-color: rgba(255, 255, 255, 0.767);
+    border-radius: 10px;
+    padding: 50px;
+}
+
+.modal-title {
+    font-size: 15px;
+    margin-bottom: 40px;
+}
