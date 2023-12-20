@@ -21,6 +21,8 @@ export class Modal {
     }
 
     add_class(modal_class) {
+        let modal;
+        if(modal = $(`#${this.name}`)) modal.addClass(modal_class);
         this.modal_class = `${this.modal_class} ${modal_class}`;
     }
 

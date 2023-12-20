@@ -92,13 +92,37 @@ footer {
 }
 
 /* Modal */
-.my-modal {
+.ext-modal {
     background-color: rgba(255, 255, 255, 0.767);
     border-radius: 10px;
     padding: 50px;
 }
 
+.my-modal {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .modal-title {
     font-size: 15px;
     margin-bottom: 40px;
+}
+
+.my-modal #timer {
+    text-align: center;
+    border: 1px solid black;
+    border-radius: 10px;
+    width: 10%;
+    padding: 5px;
+    margin-bottom: 10px;
+}
+
+.my-modal button {
+    background-color: rgba(0, 0, 0, 0.308);
+    justify-self: center;
+    border: none;
+    border-radius: 5px;
+    width: fit-content;
+    padding: 10px;
 }
