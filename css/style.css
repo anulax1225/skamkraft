@@ -36,6 +36,23 @@ body {
     border-bottom: 2px solid black;
 }
 
+.btn {
+    padding: 10px;
+    font-size: 8px;
+    font-family: 'M42';
+    color: white;
+    border: none;
+    border-radius: 10px;
+}
+
+.btn-val {
+    background-color: rgba(0, 0, 255, 0.637);
+}
+
+.btn-cancel {
+    background-color: rgba(255, 0, 0, 0.699);
+}
+
 /*footer*/
 footer {
     position: fixed;
@@ -93,6 +110,25 @@ footer {
     border-radius: 10px;
 }
 
+.in-big {
+    font-family: 'M42';
+    font-size: 6px;
+    padding: 5px;
+    width: 20%;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border: none;
+}
+
+.errors p {
+    background-color: rgba(255, 56, 56, 0.733);
+    border: 3px solid rgb(255, 111, 111);
+    padding: 10px;
+    color: white;
+    border-radius: 5px;
+    text-align: center;
+}
+
 /* Modal */
 .ext-modal {
     background-color: rgba(255, 255, 255, 0.767);
@@ -120,11 +156,3 @@ footer {
     margin-bottom: 10px;
 }
 
-.my-modal button {
-    background-color: rgba(0, 0, 0, 0.308);
-    justify-self: center;
-    border: none;
-    border-radius: 5px;
-    width: fit-content;
-    padding: 10px;
-}
