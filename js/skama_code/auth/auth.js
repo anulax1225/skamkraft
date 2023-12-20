@@ -47,38 +47,43 @@ export class Auth {
         return this;
     }
 
-    async login(token) {
+    login(token) {
         let validateur = new Strategie(this.strategies.login);
         validateur.validate("token", token);
         if (validateur.errors.length > 0) this.error_handler(validateur.errors);
         else {
             if (this.store) localStorage.setItem("token", token);
-            await AgentBuilder.get(token, this.validated, this.error_handler);
+            AgentBuilder.get(token, this.validated, this.error_handler);
         }
     }
 
-    async relog() {
-        if(this.#is_login()) await AgentBuilder.get(localStorage.getItem("token"), this.validated, this.error_handler); 
-        else return false;
+    relog() {
+        if(this.#is_login()) {
+            AgentBuilder.get(localStorage.getItem("token"), this.validated, this.error_handler); 
+            return true;
+        }
+        return false;
     }
 
-    async register(new_agent) {
+    register(new_agent) {
         let validateur = new Strategie(this.strategies.register);
         validateur.validate("symbol", new_agent.symbol);
         validateur.validate("faction", new_agent.faction);
         if (validateur.errors.length > 0) this.error_handler(validateur.errors);
         else {            
-            await AgentBuilder.create(new_agent.symbol, new_agent.faction, (agent) => {
+            AgentBuilder.create(new_agent.symbol, new_agent.faction, (agent) => {
                 if (this.store) localStorage.setItem("token", agent.token);
                 this.validated(agent);
             }, this.error_handler);
         }
     }
 
+    unload_token() {
+        if(this.#is_login()) localStorage.removeItem("token");
+    }
+
     #is_login() {
-        if (this.store && localStorage.getItem("token")) {
-            return true
-        }
+        if (localStorage.getItem("token")) return true
         return false
     }
 }
