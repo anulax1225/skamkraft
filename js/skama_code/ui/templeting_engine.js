@@ -10,6 +10,7 @@ export class TemplateEngine {
       $('body').html(reponse);
       this.get_template((reponse) => {
         $("#block-content").html(reponse);
+        if (this.after_render_callback) this.after_render_callback();
       }, template)
     });
   }
@@ -36,7 +37,7 @@ export class TemplateEngine {
     $("body").on(action, tag, callback);
   }
 
-  after_temp_load() {
-    
+  after_render(callback) {
+    this.after_render_callback  = callback;
   }
 }
