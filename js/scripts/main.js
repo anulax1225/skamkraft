@@ -3,27 +3,38 @@ import { Auth } from "../skama_code/auth/auth.js";
 
 let my_agent = null;
 
+function home(temp_engine) {
+    temp_engine.render("templates/home.html");
+}
+
+
 function menu_mod() {
     if(my_agent && my_agent.name) $(".pseudo").text(`Agent name : ${my_agent.name}`);
 }
 
-export function init_login(temp_engine) {
+export function login(temp_engine) {
     let auth = new Auth(true);
     let modal = new Modal("login-modal", temp_engine);
 
-    temp_engine.render("templates/login.html");
-    menu_mod();
+    function render_login() {
+        temp_engine.render(`templates/login.html`);
+        modal.load("templates/login_modal.html")
+    }
+
+    modal.add_class("ext-modal");
+    temp_engine.after_render(menu_mod);
+
+    render_login();
 
     temp_engine.add_event("#ok", "click", () => {
-        temp_engine.render("templates/home.html");
-        menu_mod();
+        home(temp_engine);
     });
 
     temp_engine.add_event("#forget", "click", () => {
         my_agent = null;
         auth.unload_token();
         modal.close();
-        temp_engine.render("templates/login.html");
+        render_login();
     });
 
     temp_engine.add_event("#val", "click", () => {
@@ -34,9 +45,6 @@ export function init_login(temp_engine) {
     temp_engine.add_event("#cancel", "click", () => {
         $("#in-token").val("");
     });
-
-    modal.add_class("ext-modal");
-    modal.load("templates/login_modal.html");
 
     auth.done((agent) => {
         modal.show();
