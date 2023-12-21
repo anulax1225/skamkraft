@@ -6,7 +6,7 @@ import Strategie from '../commun/strategie.js';
 let strategies = {
     register: [
         {
-            name: "symbol",
+            name: "name",
             validations: [
                 "required",
                 "max_length|14"
@@ -67,11 +67,11 @@ export class Auth {
 
     register(new_agent) {
         let validateur = new Strategie(this.strategies.register);
-        validateur.validate("symbol", new_agent.symbol);
+        validateur.validate("name", new_agent.name);
         validateur.validate("faction", new_agent.faction);
         if (validateur.errors.length > 0) this.error_handler(validateur.errors);
         else {            
-            AgentBuilder.create(new_agent.symbol, new_agent.faction, (agent) => {
+            AgentBuilder.create(new_agent.name, new_agent.faction, (agent) => {
                 if (this.store) localStorage.setItem("token", agent.token);
                 this.validated(agent);
             }, this.error_handler);

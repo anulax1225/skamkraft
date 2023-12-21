@@ -19,20 +19,20 @@ export class Agent {
 }
 
 export class AgentBuilder {
-  static create(symbol, faction, callback, error_handler, email = "") {
+  static create(symbol, faction, callback, error_handler) {
       const url = `${SpaceTraders.host}/register`;
       $.ajax({
         url: url,
         method: "POST",
         headers: { "Content-Type": "application/json" },
         processData: false,
-        data: `{\n  "faction": "${faction}",\n  "symbol": "${symbol}",\n  "email": "${email}"\n}`,
+        data: `{\n  "faction": "${faction}",\n  "symbol": "${symbol}"}`,
         success: (reponse) => {
           let agent = new Agent(reponse.data.agent, reponse.data.token)
           callback(agent);
         },
         error: (err) => {
-          error_handler(["Symbol is invalid."])
+          error_handler(["Name already took."])
         }
       });
   }

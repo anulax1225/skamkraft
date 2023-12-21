@@ -10,7 +10,7 @@ export class TemplateEngine {
       $('body').html(reponse);
       this.get_template((reponse) => {
         $("#block-content").html(reponse);
-        if (this.after_render_callback) this.after_render_callback();
+        if (this.after_render_callback) this.after_render_callback(this);
       }, template)
     });
   }
