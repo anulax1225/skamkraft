@@ -31,7 +31,12 @@ export class TemplateEngine {
       }
     });
   }
+
   add_event(tag, action, callback) {
     $("body").on(action, tag, callback);
+  }
+
+  after_temp_load() {
+    
   }
 }

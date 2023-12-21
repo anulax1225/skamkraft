@@ -9,7 +9,7 @@ export class Modal {
         this.modal_class = "";
     }
 
-    render(template) {
+    load(template) {
         this.template_engine.get_template((reponse) => {
             $(this.tag).prepend(`
                 <dialog id="${this.name}" class="${this.modal_class} modal-disable">

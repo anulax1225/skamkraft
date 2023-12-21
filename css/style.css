@@ -104,10 +104,16 @@ footer {
     box-shadow: 3px 2px white;
 }
 
+.pseudo {
+    color: white;
+}
+
 /* General */
 .smooth {
     padding: 5px;
-    border-radius: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius: 5px;
 }
 
 .in-big {

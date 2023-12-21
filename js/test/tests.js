@@ -71,7 +71,7 @@ let tests = {
         let modal = new Modal("test-modal", template_engine);
         modal.add_class("ext-modal")
 
-        modal.render("templates/test_modal.html");
+        modal.load("templates/test_modal.html");
 
         template_engine.add_event("#valid", "click", () => {
             modal.show();
