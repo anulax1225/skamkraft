@@ -2,6 +2,10 @@
 'use strict';
 import { SpaceTraders } from "./config.js"
 
+export class My {
+  static agent = null;
+}
+
 export class Agent {
   constructor(agent, token = "") {
     this.token = token;
