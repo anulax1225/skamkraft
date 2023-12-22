@@ -22,7 +22,7 @@ export default function login(temp_engine) {
         home(temp_engine);
     });
 
-    temp_engine.add_event("#forget", "click", () => {
+    temp_engine.add_event("#forget_login", "click", () => {
         My.agent = null;
         auth.unload_token();
         modal.close();

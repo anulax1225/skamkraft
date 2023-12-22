@@ -23,7 +23,7 @@ export default function reg(temp_engine) {
         home(temp_engine);
     });
 
-    temp_engine.add_event("#forget", "click", () => {
+    temp_engine.add_event("#forget_reg", "click", () => {
         My.agent = null;
         auth.unload_token();
         modal.close();
