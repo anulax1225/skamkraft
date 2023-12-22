@@ -9,7 +9,7 @@ export class Agent {
     this.credits = agent.credits;
     this.faction = agent.startingFaction;
     this.hq = agent.headquarters;
-    this.shipsCpt = agent.shipCount;   
+    this.ships_cpt = agent.shipCount;   
   }
 
   get_agent_system() {

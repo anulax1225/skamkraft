@@ -22,10 +22,20 @@ function loged_links() {
     `);
 }
 
+function show_stats() {
+    $(".stats").html(`
+        <p>Agent name : ${my_agent.name}</p>
+        <p>Credits : ${my_agent.credits}</p>
+        <p>Ships : ${my_agent.ships_cpt}</p>
+        <p>Faction : ${my_agent.faction}</p>
+        <p>HQ : ${my_agent.hq}</p>
+    `);
+}
+
 function menu_mod(temp_engine) {
     init_menu(temp_engine);
     if(my_agent) {
-        $(".pseudo").text(`Agent name : ${my_agent.name}`);
+        show_stats();
         loged_links();
     }
 }
