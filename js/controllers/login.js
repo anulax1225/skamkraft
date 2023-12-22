@@ -4,54 +4,43 @@ import { My } from "../skama_code/api/agent.js";
 import home from "./home.js";
 import menu_mod from "./menu_mod.js";
 
-export default function reg(temp_engine) {
-    let active = false;
+export default function login(temp_engine) {
     let auth = new Auth(true);
-    let modal = new Modal("reg-modal", temp_engine);
+    let modal = new Modal("login-modal", temp_engine);
 
-    function render_reg() {
-        temp_engine.render(`templates/reg.html`);
-        modal.load("templates/reg_modal.html")
+    function render_login() {
+        temp_engine.render(`templates/auth/login.html`);
+        modal.load("templates/auth/login_modal.html")
     }
 
     modal.add_class("ext-modal");
     temp_engine.after_render(menu_mod);
 
-    render_reg();
+    render_login();
 
     temp_engine.add_event("#ok", "click", () => {
         home(temp_engine);
     });
 
-    temp_engine.add_event("#forget_reg", "click", () => {
+    temp_engine.add_event("#forget_login", "click", () => {
         My.agent = null;
         auth.unload_token();
         modal.close();
-        render_reg();
+        render_login();
     });
 
     temp_engine.add_event("#val", "click", () => {
-        if (!active) {
-            active = true;
-            let name = $("#in-name").val();
-            let faction = $("#in-faction").val();
-            auth.register({
-                name: name,
-                faction: faction
-            });
-        }
+        let token = $("#in-token").val();
+        auth.login(token);
     });
 
     temp_engine.add_event("#cancel", "click", () => {
-        $("#in-name").val("");
-        $("#in-faction").val("");
+        $("#in-token").val("");
     });
 
     auth.done((agent) => {
-        $(".show-token").text(agent.token);
         modal.show();
         My.agent = agent;
-        active = false;
     }).fail((errs) => {
         $(".errors").html("");
         errs.forEach(err => {
@@ -59,6 +48,7 @@ export default function reg(temp_engine) {
                 <p>${err}</p>
             `);
         });
-        active = false;
     });
+
+    auth.relog();
 }

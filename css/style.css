@@ -15,7 +15,7 @@
 }
 
 body {
-    background-color: var(--main-back-color);
+    background-image: url("/assets/img/background.jpg");
     font-family: 'M42';
     font-size: 7px;
     margin: 0px;
@@ -34,7 +34,18 @@ body {
     border: 4px solid rgba(68, 68, 68, 0.575);
 }
 
-.container .con-title {
+.max-container {
+    display: flex;
+    margin: 10px;
+    width: 95%;
+    margin: auto;
+    margin-top: 10px; margin-bottom: 10px;
+    flex-direction: column;
+    align-items: center;
+    border: 4px solid rgba(68, 68, 68, 0.575);
+}
+
+.con-title {
     font-size: 15px;
     border-bottom: 2px solid black;
 }
@@ -175,3 +186,8 @@ footer {
     margin-bottom: 10px;
 }
 
+#canvas {
+    width: 100%;
+    border-radius: 10px;
+    background-color: rgba(0, 0, 0, 0.753);
+}

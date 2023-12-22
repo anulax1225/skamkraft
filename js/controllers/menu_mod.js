@@ -2,6 +2,7 @@ import { My } from "../skama_code/api/agent.js";
 import login from "./login.js";
 import reg from "./reg.js";
 import home from "./home.js";
+import { system } from "./systems.js";
 
 function init_menu(temp_engine) {
     temp_engine.add_event("#reg-link", "click", () => {
@@ -10,6 +11,9 @@ function init_menu(temp_engine) {
     temp_engine.add_event("#login-link", "click", () => {
         login(temp_engine);
     });
+    temp_engine.add_event("#systems-link", "click", () => {
+        system("X1-TT23", temp_engine);
+    })
     temp_engine.add_event(".nav-brand", "click", () => {
         home(temp_engine);
     });
@@ -34,7 +38,6 @@ function show_stats() {
 
 export default function menu_mod(temp_engine) {
     init_menu(temp_engine);
-    console.log(My.agent)
     if(My.agent) {
         show_stats();
         loged_links();
