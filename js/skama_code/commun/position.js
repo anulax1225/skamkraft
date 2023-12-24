@@ -10,4 +10,9 @@ export class Position {
     get_canvas_pos(w, h) {
         return new Position(x - w/2, y - h/2)
     }
+
+    move(position) {
+        this.x += position.x;
+        this.y += position.y;
+    }
 }
