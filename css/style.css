@@ -25,6 +25,7 @@ body {
 /* Main */
 .container {
     color: white;
+    background-color: rgba(0, 0, 0, 0.726);
     display: flex;
     margin: 10px;
     width: fit-content;
@@ -36,6 +37,7 @@ body {
 }
 
 .max-container {
+    background-color: rgba(0, 0, 0, 0.726);
     color: white;
     display: flex;
     margin: 10px;

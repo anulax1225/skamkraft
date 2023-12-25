@@ -10,8 +10,8 @@ let offset = {
     y: 2
 };
 let max = 100;
-let w = 1200;
-let h = 600;
+let w = (window.innerWidth/10)*9;
+let h = (window.innerHeight/4)*3;
 
 function animate() {
     canvas.renderAll();
@@ -49,7 +49,7 @@ function offsetOrbit(planet) {
     }
 }
 
-export function system(system, temp_engine) {
+export default function system(system, temp_engine) {
     temp_engine.after_render((temp_engine) => {
         $("#sys-name").text(system);
         menu_mod(temp_engine);
@@ -89,9 +89,9 @@ export function system(system, temp_engine) {
         });
         canvas.on("mouse:wheel", (opt) => {
             let scale = 1.1;
-            if (opt.e.deltaY > 0) {
+            if (opt.e.deltaY < 0) {
                 canvas.zoomToPoint(new fabric.Point(canvas.width / 2, canvas.height / 2), canvas.getZoom() * scale);
-            } else if (opt.e.deltaY < 0) {
+            } else if (opt.e.deltaY > 0) {
                 canvas.zoomToPoint(new fabric.Point(canvas.width / 2, canvas.height / 2), canvas.getZoom() / scale);
             }
         });
