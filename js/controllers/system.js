@@ -1,14 +1,15 @@
-import { PlanetBuilder } from "../skama_code/api/planet.js";
+import { SystemBuilder } from "../skama_code/api/system.js";
 import { Position } from "../skama_code/commun/position.js";
 import menu_mod from "./menu_mod.js"
 
 let canvas; 
+let last_target;
 
 let offset = {
     x: 2,
     y: 2
 };
-let max = 40;
+let max = 100;
 let w = 1200;
 let h = 600;
 
@@ -57,15 +58,18 @@ export function system(system, temp_engine) {
             height: h,
             backgroundColor:"rgb(7, 18, 41)",
             renderOnAddRemove: false,
-            defaultCursor :'crosshair',
             hoverCursor :'pointer'
         });
-        PlanetBuilder.list_all(system, (planets) => {
-            planets.forEach(planet => {
-                offsetOrbit(planet);
-                draw_planet(planet);
+        SystemBuilder.get(system, (system) => {
+            system.list_all((planets) => {
+                planets.forEach(planet => {
+                    offsetOrbit(planet);
+                    draw_planet(planet);
+                });
+                animate();
+            }, (err) => {
+                console.log(err);
             });
-            animate();
         });
         canvas.on('mouse:up', (e) => {
             if(e.target.shadow.color == "red"){
@@ -74,7 +78,22 @@ export function system(system, temp_engine) {
             else{
                 e.target.shadow.color = "red"
             }
+            if (last_target) last_target.shadow.color = "white";
+            last_target = e.target;
             canvas.renderAll();
+        });
+        $(window).on("resize", () => {
+            canvas.setWidth((window.innerWidth/10)*9);
+            canvas.setHeight((window.innerHeight/4)*3);
+            canvas.renderAll();
+        });
+        canvas.on("mouse:wheel", (opt) => {
+            let scale = 1.1;
+            if (opt.e.deltaY > 0) {
+                canvas.zoomToPoint(new fabric.Point(canvas.width / 2, canvas.height / 2), canvas.getZoom() * scale);
+            } else if (opt.e.deltaY < 0) {
+                canvas.zoomToPoint(new fabric.Point(canvas.width / 2, canvas.height / 2), canvas.getZoom() / scale);
+            }
         });
     });
     temp_engine.render("templates/systems/system.html");
