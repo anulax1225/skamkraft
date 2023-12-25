@@ -94,19 +94,22 @@ export class AgentBuilder {
     });
   }
 
-  static list_all(callback) {
+  static list_all(callback, end = false) {
     this.list(20, 1, (agents, meta) => {
       let maxPage = meta.total / 20;
-      this.#r_listing(2, maxPage, agents, callback);
+      this.#r_listing(2, maxPage, agents, callback, end);
     });
   }
 
-  static #r_listing(page, maxPage, agents, callback) {
+  static #r_listing(page, maxPage, agents, callback, end) {
     if (page < maxPage) {
       this.list(20, page++,() => {
         setTimeout(() => {
-          callback(agents);
-          this.#r_listing(page++, maxPage, agents, callback); 
+          if (!end) {
+            callback(agents);
+            agents = [];
+          }
+          this.#r_listing(page++, maxPage, agents, callback, end); 
         }, 1000);
       }, agents);
     } else {

@@ -47,19 +47,22 @@ export class System {
         });
     }
 
-    list_all(callback) {
+    list_all(callback, end = false) {
         this.list(20, 1, (planets, meta) => {
             let maxPage = meta.total / 20;
-            this.#r_listing(2, maxPage, planets, callback);
+            this.#r_listing(2, maxPage, planets, callback, end);
         });
     }
 
-    #r_listing(page, maxPage, planets, callback) {
+    #r_listing(page, maxPage, planets, callback, end) {
         if (page < maxPage) {
             this.list(20, page++, () => {
                 setTimeout(() => {
-                    callback(planets);
-                    this.#r_listing(page++, maxPage, planets, callback); 
+                    if (!end) {
+                        callback(planets);
+                        planets = [];
+                    }
+                    this.#r_listing(page++, maxPage, planets, callback, end); 
                 }, 1000);
             }, planets);
         } else {
@@ -106,19 +109,23 @@ export class SystemBuilder {
         });
     }
 
-    static list_all(callback) {
+    static list_all(callback, end = false) {
         this.list(20, 1, (systems, meta) => {
             let maxPage = meta.total / 20;
-            this.#r_listing(2, maxPage, systems, callback);
+            this.#r_listing(2, maxPage, systems, callback, end);
         });
     }
 
-    static #r_listing(page, maxPage, systems, callback) {
+    static #r_listing(page, maxPage, systems, callback, end) {
         if (page < maxPage) {
             this.list(20, page++, () => {
                 setTimeout(() => {
-                    callback(systems);
-                    this.#r_listing(page++, maxPage, systems, callback); 
+                    if (!end) {
+                        console.log(systems);
+                        callback(systems);
+                        systems = [];
+                    }
+                    this.#r_listing(page++, maxPage, systems, callback, end); 
                 }, 1000);
             }, systems);
         } else {
