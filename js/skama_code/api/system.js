@@ -27,7 +27,7 @@ export class System {
                 error_handler("Planet not found");
             }
         });
-    } 
+    }
 
     list(limit, page, callback, planets = []) {
         const url = `${SpaceTraders.host}/systems/${this.name}/waypoints`
@@ -43,7 +43,7 @@ export class System {
                     planets.push(new Planet(planet));
                 });
                 callback(planets, reponse.meta);
-            } 
+            }
         });
     }
 
@@ -62,7 +62,7 @@ export class System {
                         callback(planets);
                         planets = [];
                     }
-                    this.#r_listing(page++, maxPage, planets, callback, end); 
+                    this.#r_listing(page++, maxPage, planets, callback, end);
                 }, 1000);
             }, planets);
         } else {
@@ -89,7 +89,7 @@ export class SystemBuilder {
                 error_handler("System not found");
             }
         });
-    } 
+    }
 
     static list(limit, page, callback, systems = []) {
         const url = `${SpaceTraders.host}/systems/`
@@ -105,7 +105,7 @@ export class SystemBuilder {
                     systems.push(new System(system));
                 });
                 callback(systems, reponse.meta);
-            } 
+            }
         });
     }
 
@@ -125,7 +125,7 @@ export class SystemBuilder {
                         callback(systems);
                         systems = [];
                     }
-                    this.#r_listing(page++, maxPage, systems, callback, end); 
+                    this.#r_listing(page++, maxPage, systems, callback, end);
                 }, 1000);
             }, systems);
         } else {

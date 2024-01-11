@@ -11,41 +11,43 @@ export default function reg(temp_engine) {
 
     function render_reg() {
         temp_engine.render(`templates/auth/reg.html`);
-        modal.load("templates/auth/reg_modal.html")
     }
 
-    modal.add_class("ext-modal");
-    temp_engine.after_render(menu_mod);
+    temp_engine.after_render((temp_engine) => {
+        menu_mod(temp_engine);
+        modal.load("templates/auth/reg_modal.html")
+        modal.add_class("ext-modal");
+
+        temp_engine.add_event("#ok", "click", () => {
+            home(temp_engine);
+        });
+
+        temp_engine.add_event("#forget_reg", "click", () => {
+            My.agent = null;
+            auth.unload_token();
+            modal.close();
+            render_reg();
+        });
+
+        temp_engine.add_event("#val", "click", () => {
+            if (!active) {
+                active = true;
+                let name = $("#in-name").val();
+                let faction = $("#in-faction").val();
+                auth.register({
+                    name: name,
+                    faction: faction
+                });
+            }
+        });
+
+        temp_engine.add_event("#cancel", "click", () => {
+            $("#in-name").val("");
+            $("#in-faction").val("");
+        });
+    });
 
     render_reg();
-
-    temp_engine.add_event("#ok", "click", () => {
-        home(temp_engine);
-    });
-
-    temp_engine.add_event("#forget_reg", "click", () => {
-        My.agent = null;
-        auth.unload_token();
-        modal.close();
-        render_reg();
-    });
-
-    temp_engine.add_event("#val", "click", () => {
-        if (!active) {
-            active = true;
-            let name = $("#in-name").val();
-            let faction = $("#in-faction").val();
-            auth.register({
-                name: name,
-                faction: faction
-            });
-        }
-    });
-
-    temp_engine.add_event("#cancel", "click", () => {
-        $("#in-name").val("");
-        $("#in-faction").val("");
-    });
 
     auth.done((agent) => {
         $(".show-token").text(agent.token);

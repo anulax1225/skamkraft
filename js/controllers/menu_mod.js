@@ -3,6 +3,7 @@ import login from "./login.js";
 import reg from "./reg.js";
 import home from "./home.js";
 import { systems } from "./systems.js";
+import contracts from "./contracts.js";
 
 function init_menu(temp_engine) {
     temp_engine.add_event("#reg-link", "click", () => {
@@ -17,6 +18,10 @@ function init_menu(temp_engine) {
     temp_engine.add_event(".nav-brand", "click", () => {
         home(temp_engine);
     });
+    //Contarcts
+    temp_engine.add_event("#contracts-link", "click", () => {
+        contracts(temp_engine);
+    })
 }
 
 function loged_links() {
@@ -38,7 +43,7 @@ function show_stats() {
 
 export default function menu_mod(temp_engine) {
     init_menu(temp_engine);
-    if(My.agent) {
+    if (My.agent) {
         show_stats();
         loged_links();
     }
