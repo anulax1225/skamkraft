@@ -1,7 +1,6 @@
 /* Copyright © 2023 Entreprise SpaceTarders */
 html{
     background-color: rgb(7, 18, 41);
-    cursor: crosshair;
 }
 main{
     display: flex;
@@ -16,7 +15,6 @@ main{
     display: flex;
     justify-content: left;
 }
-
 #menu {
     display: flex;
     justify-content: center;
@@ -28,9 +26,8 @@ main{
     color: white;
     font-size: 11px;
     background-color: rgb(20, 20, 32); 
-    cursor: pointer;
 }
-#canvas {
+canvas {
     border: 2px solid rgb(7, 18, 41);
     border-radius: 5px;
 }

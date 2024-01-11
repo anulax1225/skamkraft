@@ -1,4 +1,4 @@
-let token = "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZGVudGlmaWVyIjoiUEVVU0RPU0FDSEEiLCJ2ZXJzaW9uIjoidjIuMS40IiwicmVzZXRfZGF0ZSI6IjIwMjMtMTItMDIiLCJpYXQiOjE3MDI1Mzk4NjUsInN1YiI6ImFnZW50LXRva2VuIn0.QL4rSruHd8pjNczeZQ3S7gof7TRnwZKqQBvkojUXgmzRrWiDZVw65kt1UBns0zHAhZF-m-bvxfUBik01uIzc-_jSO63ZndquPFmv_UY3HBkVK7UKoSaxAp_NveJsE1TOpTotUChlMd1Sv7RuyeR9fso2eN3-mBEoE5ukWmGVDfnOYefuWORhisqIkh4ti3QpaV-obycZ4XGV2ukqkiNdHqR3MQJR99e2nCEZEsarNKTgm6mgn-qCCNv4xQUGwhNbD5_p-jPqQ088vuFCeZi8j6kf7-fmT5sysBxEA5nvNPDIEL1XMuzs7N66WpiP1uc7I1Ph164m2epV9vmEvzthCw";
+let token = "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZGVudGlmaWVyIjoiU0hBRE9XIiwidmVyc2lvbiI6InYyLjEuNCIsInJlc2V0X2RhdGUiOiIyMDIzLTEyLTMwIiwiaWF0IjoxNzA0OTYwMjc3LCJzdWIiOiJhZ2VudC10b2tlbiJ9.AOqLimBeSt8TAhvG0uPf_Jyjo6GJGCm8sOKXp5H4vfUpdeR-fk3UTZYzee8Y5dUKEXC7f7IlgDDtMRWIXOEOQXUem2-lQuPiSXPY1M0wWwpUoUV0uVOARvTTIQy_Zo9ZcnwOHCHErEDTeyLtPByW7zb5O7Q9WVuGB0YfG0f4DXHDqVCIszS-qH77t_5oMk8VNl7ZEuI1hP3D0Wh47VpxdBv3aCaNNoF-mPs7f4sfU-YmpIPvRXEKABnv0gOGngaRk73ozGCRMfrcBHKnw4TndxB-tBK0SfwJrKSCpNMvGM8PleDl__GLDaNHNGUSu9GD3lNqxKumbq3dDt4K-vNGBQ";
 //décalage
 let offset = {
     x: 2,
@@ -7,16 +7,14 @@ let offset = {
 let max = 40;
 let min = 35;
 let w = 1260;
-let h = 830;
-
+let h = 870;
 const canvas = new fabric.Canvas("canvas",{
     width: w,
     height: h,
     backgroundColor:"rgb(7, 18, 41)",
-    renderOnAddRemove: false,
-    defaultCursor :'crosshair',
-    hoverCursor :'pointer'
+    renderOnAddRemove: false 
 });
+
 canvas.renderAll();
 let planets = [];
 
@@ -66,31 +64,56 @@ function offsetOrbits(waypoints){
         }
     });
 }
+let ring = [];
+
 function drawSystem(wayPoints) {
     if(wayPoints) {
         wayPoints.forEach(wayPoint => {
             drawWaypoint(wayPoint);
-            //TestPlanetClicked(wayPoint);
         });
     }
+    drawRing();
 }
-function drawWaypoint(wayPoint) {
-    let shadow = new fabric.Shadow({
-        color: "white",
-        blur: 5,
-        offsetX: 0,
-        offsetY: 0,
-      });
 
+function drawRing()
+{
+    for(let i = 0; i < 4; i++){
+        let random = Math.random() * (250 - 100) + 100;
+        // create a circle
+        let circle = new fabric.Circle({
+            radius: random, fill: 'transparent', left: (canvas.width/2)-random, top: (canvas.height/2)-random
+        });
+        circle.set({ strokeWidth: 3, stroke: 'rgba(10,53,66,2)' });
+        
+        canvas.add(circle);
+    }
+    for(let i = 0; i < 4; i++){
+        let random = Math.random() * (400 - 250) + 250;
+        // create a circle
+        let circle = new fabric.Circle({
+            radius: random, fill: 'transparent', left: (canvas.width/2)-random, top: (canvas.height/2)-random
+        });
+        circle.set({ strokeWidth: 3, stroke: 'rgba(10,53,66,2)' });
+        
+        canvas.add(circle);
+    }
+    for(let i = 0; i < 4; i++){
+        let random = Math.random() * (550 - 400) + 400;
+        // create a circle
+        let circle = new fabric.Circle({
+            radius: random, fill: 'transparent', left: (canvas.width/2)-random, top: (canvas.height/2)-random
+        });
+        circle.set({ strokeWidth: 3, stroke: 'rgba(10,53,66,2)' });
+        
+        canvas.add(circle);
+    }
+}
+
+function drawWaypoint(wayPoint) {
     fabric.Image.fromURL('http://127.0.0.1:5500/img/planets/planetproto.png', function(planet) {
-        //FABRICJS
-        planet.set({selectable: false});
-        planet.set({shadow: shadow});
-        //AJOUT DES PROPRIÉTÉS DES WAYPOINT SUR LES PLANETES
         planet.set({left: wayPoint.x/offset.x + w/2});
         planet.set({top: wayPoint.y/offset.y+ h/2});
-        planet.set({name: wayPoint.symbol});
-        planet.set({type: wayPoint.type});
+        planet.set({selectable: false});
         canvas.add(planet);
       });
     planets.push(wayPoint);
@@ -107,12 +130,3 @@ setTimeout(function animate() {
     canvas.renderAll();
     setTimeout(animate, 1000);
 }, 10);
-
-canvas.on('mouse:up', function (e) {
-    if(e.target.shadow.color == "red"){
-        e.target.shadow.color = "white"
-    }
-    else{
-        e.target.shadow.color = "red"
-    }
-})
