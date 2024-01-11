@@ -61,3 +61,7 @@ $(document).ready(function() {
   state = true
   })
 });
+
+$('button').on('click', () => {
+  $('btn-test').css('width', '75%');
+})
