@@ -8,35 +8,32 @@ export default function login(temp_engine) {
     let auth = new Auth(true);
     let modal = new Modal("login-modal", temp_engine);
 
-    function render_login() {
-        temp_engine.render(`templates/auth/login.html`);
-        modal.load("templates/auth/login_modal.html")
-    }
-
     modal.add_class("ext-modal");
-    temp_engine.after_render(menu_mod);
-
-    render_login();
-
-    temp_engine.add_event("#ok", "click", () => {
-        home(temp_engine);
+    temp_engine.after_render((temp_engine) => {
+        modal.load("templates/auth/login_modal.html")
+        menu_mod(temp_engine);
+        temp_engine.add_event("#ok", "click", () => {
+            home(temp_engine);
+        });
+    
+        temp_engine.add_event("#forget_login", "click", () => {
+            My.agent = null;
+            auth.unload_token();
+            modal.close();
+            render_login();
+        });
+    
+        temp_engine.add_event("#val", "click", () => {
+            let token = $("#in-token").val();
+            auth.login(token);
+        });
+    
+        temp_engine.add_event("#cancel", "click", () => {
+            $("#in-token").val("");
+        });
     });
 
-    temp_engine.add_event("#forget_login", "click", () => {
-        My.agent = null;
-        auth.unload_token();
-        modal.close();
-        render_login();
-    });
-
-    temp_engine.add_event("#val", "click", () => {
-        let token = $("#in-token").val();
-        auth.login(token);
-    });
-
-    temp_engine.add_event("#cancel", "click", () => {
-        $("#in-token").val("");
-    });
+    temp_engine.render(`templates/auth/login.html`);
 
     auth.done((agent) => {
         modal.show();

@@ -13,7 +13,7 @@ function init_menu(temp_engine) {
     });
     temp_engine.add_event("#systems-link", "click", () => {
         systems(temp_engine);
-    })
+    });
     temp_engine.add_event(".nav-brand", "click", () => {
         home(temp_engine);
     });
