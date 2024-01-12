@@ -30,7 +30,7 @@ function drawAgents(agents, funcSort) {
   agents.reverse();
   let i = 1;
   agents.forEach((agent) => {
-    $(".leaderboard").append(`
+  $(".leaderboard").append(`
     <article>
       <p class="elem num">${i}.</p>
       <p class="elem symbol">${agent.symbol} : </p>
@@ -44,24 +44,38 @@ function drawAgents(agents, funcSort) {
   });
 }
 
-$(document).ready(function() {
-  let state = false;
-  $(".btn-test").on("click", () => {
-    if (!state) AgentBuilder.list_all((agents) => {
-        drawAgents(agents, sortAgentByCredits);
-        state = false;
+function leaderboard(temp_engine) {
+  temp_engine.after_render((temp_engine) => {
+    let state = false;
+    $(".btn-cred").on("click", () => {
+      if (!state) AgentBuilder.list_all((agents) => {
+          drawAgents(agents, sortAgentByCredits);
+          state = false;
+      });
+      state = true
     });
-    state = true
+  
+    $(".btn-ship").on("click", () => {
+        if (!state) AgentBuilder.list_all((agents) => {
+          drawAgents(agents, sortAgentByShips);
+          state = false;
+      });
+      state = true
+    });
+  
+    $('.container').hide()
+    $('.btn-deploy').on('click', () => {
+      $('.container').slideToggle()
+    })
+    $('.btn-ship').on('click', () => {
+      $('.leaderboard').empty()
+    })
+    $('.btn-cred').on('click', () => {
+      $('.leaderboard').empty()
+    });
   });
-  $(".btn-test2").on("click", () => {
-    if (!state) AgentBuilder.list_all((agents) => {
-      drawAgents(agents, sortAgentByShips);
-      state = false;
-  });
-  state = true
-  })
-});
 
-$('button').on('click', () => {
-  $('btn-test').css('width', '75%');
-})
+  temp_engine.render("templates/leaderboard.html");
+}
+  
+leaderboard();
