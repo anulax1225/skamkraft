@@ -69,10 +69,32 @@ let ring = [];
 function drawSystem(wayPoints) {
     if(wayPoints) {
         wayPoints.forEach(wayPoint => {
-            drawWaypoint(wayPoint);
+            drawRingWaypoint(wayPoint);
         });
+        wayPoints.forEach(wayPoint => {
+            drawWaypoint(wayPoint);
+        })
     }
-    drawRing();
+}
+
+function drawRingWaypoint(wayPoint)
+{
+    let distanceX = wayPoint.x / offset.x;
+    let distanceY = wayPoint.y / offset.y;
+    let pythagoreX = distanceX * distanceX;
+    let pythagoreY = Math.pow(distanceY, 2);
+    console.log(pythagoreX, pythagoreY)
+    //pythagoreX = pythagoreX/offset.x;
+    //pythagoreY = pythagoreY/offset.y;
+    let pythagorePlanet = Math.sqrt(pythagoreX + pythagoreY);
+    console.log(pythagorePlanet);
+
+    let circle = new fabric.Circle({
+        radius: pythagorePlanet, fill: 'transparent', left: (canvas.width/2) - pythagorePlanet, top: (canvas.height/2)-pythagorePlanet
+    });
+    circle.set({ strokeWidth: 0.5, stroke: 'rgba(10,53,66,2)' });
+    
+    canvas.add(circle);
 }
 
 function drawRing()
@@ -80,6 +102,7 @@ function drawRing()
     for(let i = 0; i < 4; i++){
         let random = Math.random() * (250 - 100) + 100;
         // create a circle
+        console.log(canvas.width)
         let circle = new fabric.Circle({
             radius: random, fill: 'transparent', left: (canvas.width/2)-random, top: (canvas.height/2)-random
         });
@@ -110,13 +133,12 @@ function drawRing()
 }
 
 function drawWaypoint(wayPoint) {
-    fabric.Image.fromURL('http://127.0.0.1:5500/img/planets/planetproto.png', function(planet) {
-        planet.set({left: wayPoint.x/offset.x + w/2});
-        planet.set({top: wayPoint.y/offset.y+ h/2});
-        planet.set({selectable: false});
-        canvas.add(planet);
-      });
-    planets.push(wayPoint);
+    let radius = 5;
+    let circle = new fabric.Circle({
+        radius: radius, fill: 'white', left: (wayPoint.x/2 + canvas.width/2) -radius, top: (wayPoint.y/2 + canvas.height/2)-radius
+    });
+    circle.set({ strokeWidth: 0.5, stroke: 'rgba(255,255,255,255)' });
+    canvas.add(circle);
 }
 function movePlanets() {
     planets.forEach(waypoint => {
