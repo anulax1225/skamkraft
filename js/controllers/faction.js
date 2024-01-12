@@ -17,7 +17,6 @@ export default (temp_engine) => {
       add_factions(factions);
 
       temp_engine.add_event("#btn-faction", "click", (e) => {
-        console.log(button);
         const faction_symbol = $(e.target).attr("data-symbol");
         const faction = factions.find((element) => {
           return element.symbol == faction_symbol;

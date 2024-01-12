@@ -13,8 +13,8 @@ export class Faction {
     this.traits = data.traits;
   }
 
-  get(callback, error_handler) {
-    const url = `${SpaceTraders.host}/factions/${this.name}`;
+  static get(name, callback, error_handler) {
+    const url = `${SpaceTraders.host}/factions/${name}`;
     $.ajax({
       url: url,
       method: "GET",
@@ -23,7 +23,7 @@ export class Faction {
         Authorization: `Bearer ${My.agent.token}`,
       },
       success: (response) => {
-        callback(response);
+        callback(new Faction(response.data));
       },
       error: (err) => {
         error_handler(err);
