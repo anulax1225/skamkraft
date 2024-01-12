@@ -14,6 +14,12 @@ export class Contract {
         this.expiration = data.expiration;
         this.deadline = data.deadlineToAccept;
         this.terms = data.terms;
+        this.paymentAccepted = data.terms.payment.onAccepted;
+        this.paymentFulfill = data.terms.payment.onFulfilled;
+        this.tradeSymbol = data.terms.deliver[0].tradeSymbol;
+        this.destination = data.terms.deliver[0].destinationSymbol;
+
+
     }
 
     static get(id, callback, error_handler) {

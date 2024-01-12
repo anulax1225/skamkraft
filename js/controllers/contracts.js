@@ -9,99 +9,114 @@ import { Contract } from "../skama_code/api/contract.js";
 import { Modal } from "../skama_code/ui/modal.js";
 
 
-export default function contracts(temp_engine) {
+export default (temp_engine) => {
 
   let modal = new Modal("contract-modal", temp_engine);
-  let contracts_list = [];
 
-  $('main').empty()
-
-  Contract.list(10, 1, (contracts) => {
-    contracts_list = contracts;
-    contracts.forEach(contract => {
-      console.log(contract)
-
-      let img
-      let status
-      let card
-
-      if (contract.type = "PROCUREMENT") {
-        img = "/assets/contracts/procurement.png"
-      }
-      else if (contract.type = "TRANSPORT") {
-        img = "/assets/contracts/transportation.png"
-      }
-      else {
-        img = "/assets/contracts/shuttle.png"
-      }
-
-
-
-      if (contract.accepted) {
-        status = "accepted"
-        card =
-          `                            
-                  <div class="card spacer" style="width: 20rem;">
-                    <img src="${img}" class="card-img-top" alt="">
-                      <div class="card-body">
-                        <h5 style="color:white" class="card-title">${contract.faction}</h5>
-                        <p style="color:white" class="card-text">${contract.deadline}</p>
-                        <p class="card-text status-accepted">Status : ${status}</p>
-                        <button class="btn-infos" contratID="${contract.id}" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Infos</button>                      
-                      </div>
-                  </div>
-                `
-      }
-      else {
-        status = "on hold"
-        card =
-          `                            
-                  <div class="card spacer" style="width: 20rem;">
-                    <img src="${img}" class="card-img-top" alt="">
-                      <div class="card-body">
-                        <h5 style="color:white" class="card-title">${contract.factionSymbol}</h5>
-                        <p style="color:white" class="card-text">${contract.deadlineToAccept}</p>
-                        <p class="card-text status-onhold">Status : ${status}</p>
-                        <p  class="card-text revenu">Revenu : ${contract.terms.payment.onAccepted} $</p>
-                        <button  type="button" class="btn btn-primary btn-infos" data-bs-toggle="modal" data-bs-target="#exampleModal">Infos</button>
-                        <button  data-id="${contract.id}" class="btn-modify btn btn-primary btn-accept" data-toggle="modal" data-target="#Modify" >Accepter</button>                       
-                      </div>
-                  </div>
-                `
-      }
-
-      $('main').append(card)
-
-
-
-    })
-  })
-
-  //Evenements
   temp_engine.after_render((temp_engine) => {
     modal.load("templates/contracts/contracts_modal.html");
 
-    temp_engine.add_event(".btn-accept", "click", (e) => {
-      console.log("test");
-      contracts_list.forEach((contract) => {
-        if ($(e.target).attr("data-id") == contract.id) {
-          contract.accept(() => {
-            $(e.target).parent().children(".status-onhold").html("Status : accepté");
-            $(e.target).remove();
-          });
-        }
-      });
-    });
+    Contract.list(10, 1, (contracts) => {
 
-    temp_engine.add_event(".btn-infos", "click", () => {
-      modal.show();
+      //Evenements
+      temp_engine.add_event(".btn-accept", "click", (e) => {
+        contracts.forEach((contract) => {
+          if ($(e.target).attr("data-id") == contract.id) {
+            contract.accept(() => {
+              $(e.target).parent().children(".status-onhold").html("Status : accepté");
+              $(e.target).parent().children(".status-onhold").attr("class", 'status-accepted');
+              $(e.target).remove();
+
+            });
+          }
+        });
+      });
+
+      contracts.forEach(contract => {
+        let img
+        let status
+        let card
+
+        if (contract.type = "PROCUREMENT") {
+          img = "/assets/contracts/procurement.png"
+        }
+        else if (contract.type = "TRANSPORT") {
+          img = "/assets/contracts/transportation.png"
+        }
+        else {
+          img = "/assets/contracts/shuttle.png"
+        }
+
+
+
+        if (contract.accepted) {
+          status = "accepted"
+          card =
+            `                            
+                    <div class="card spacer" style="width: 20rem;">
+                      <img src="${img}" class="card-img-top" alt="">
+                        <div class="card-body">
+                          <h5 style="color:white" class="card-title">${contract.faction}</h5>
+                          <p style="color:white" class="card-text">${contract.deadline}</p>
+                          <p class="card-text status-accepted">Status : ${status}</p>
+                          <button data-id="${contract.id}" class="btn-infos" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Infos</button>                      
+                        </div>
+                    </div>
+                  `
+        }
+        else {
+          status = "on hold"
+          card =
+            `                            
+                    <div class="card spacer" style="width: 20rem;">
+                      <img src="${img}" class="card-img-top" alt="">
+                        <div class="card-body">
+                          <h5 style="color:white" class="card-title">${contract.faction}</h5>
+                          <p style="color:white" class="card-text">${contract.deadline}</p>
+                          <p class="card-text status-onhold">Status : ${status}</p>
+                          <p style="color:white" class="card-text revenu">Revenu : ${contract.paymentAccepted} $</p>
+                          <button type="button" class="btn btn-primary btn-infos" data-bs-toggle="modal" data-bs-target="#exampleModal">Infos</button>
+                          <button data-id="${contract.id}" class="btn-modify btn btn-primary btn-accept" data-toggle="modal" data-target="#Modify" >Accepter</button>                       
+                        </div>
+                    </div>
+                  `
+        }
+        $('.contracts').append(card);
+      });
+
+      temp_engine.add_event(".btn-infos", "click", (e) => {
+        console.log(e)
+        const id_contract = $(e.target).attr("data-id");
+        console.log(id_contract);
+        const contract = contracts.find((element) => {
+          console.log(element);
+          return element.id == id_contract;
+        });
+
+        // const date = new Date(contract.expiration);
+        // console.log(date)
+        // let expiration = (date.getHours() + "h" + date.getMinutes() + ", " + date.getUTCMonth() + "." + date.getMonth() + "." +date.getFullYear());
+
+        $(".contract-id").text("ID : " + contract.id);
+        $(".contract-faction").text("Faction : " + contract.faction);
+        $(".contract-type").text("Type : " + contract.type);
+        $(".contract-expiration").text("Expiration : " + contract.expiration);
+        $(".contract-payment-accepted").text("Payment : " + contract.paymentAccepted + " $");
+        $(".contract-payment-fulfill").text("Payment fulfill : " + contract.paymentFulfill + " $");
+        $(".contract-tradeSymbol").text("Trade Symbol : " + contract.tradeSymbol);
+        $(".contract-destinationSymbol").text("Destination : " + contract.destination);
+
+        modal.show();
+      });
+
     })
 
     temp_engine.add_event(".btn-close", "click", () => {
       modal.close();
-    })
+    });
 
     menu_mod(temp_engine);
   });
+
   temp_engine.render("templates/contracts/contracts.html")
 }
