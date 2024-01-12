@@ -92,7 +92,7 @@ function drawRingWaypoint(wayPoint)
     let circle = new fabric.Circle({
         radius: pythagorePlanet, fill: 'transparent', left: (canvas.width/2) - pythagorePlanet, top: (canvas.height/2)-pythagorePlanet
     });
-    circle.set({ strokeWidth: 0.5, stroke: 'rgba(10,53,66,2)' });
+    circle.set({ strokeWidth: 0.5, stroke: 'rgba(10,53,66,2)', selectable: false });
     
     canvas.add(circle);
 }
@@ -137,7 +137,7 @@ function drawWaypoint(wayPoint) {
     let circle = new fabric.Circle({
         radius: radius, fill: 'white', left: (wayPoint.x/2 + canvas.width/2) -radius, top: (wayPoint.y/2 + canvas.height/2)-radius
     });
-    circle.set({ strokeWidth: 0.5, stroke: 'rgba(255,255,255,255)' });
+    circle.set({ strokeWidth: 0.5, stroke: 'rgba(255,255,255,255)', selectable: false});
     canvas.add(circle);
 }
 function movePlanets() {
