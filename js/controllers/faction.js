@@ -16,16 +16,18 @@ export default (temp_engine) => {
     Faction.list_all((factions) => {
       add_factions(factions);
 
-      temp_engine.add_event("#btn-faction", "click", (button) => {
-        const attributes = button.target.attributes;
-        const faction_symbol = attributes["data-symbol"].value;
+      temp_engine.add_event("#btn-faction", "click", (e) => {
+        console.log(button);
+        const faction_symbol = $(e.target).attr("data-symbol");
         const faction = factions.find((element) => {
-          element.symbol == faction_symbol;
+          return element.symbol == faction_symbol;
         });
 
-        console.log(faction);
-
-        $("#faction-title").html("");
+        $("#faction-title").html(faction.symbol);
+        $("#faction-description").html(`Description: ${faction.description}`);
+        $("#faction-headquarters").html(
+          `Headquarters: ${faction.headquarters}`
+        );
 
         modal.show();
       });
