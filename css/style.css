@@ -15,7 +15,7 @@
 }
 
 body {
-    background-image: url("/assets/img/background.jpg");
+    background-image: url("/assets/img/background.png");
     font-family: 'M42';
     font-size: 7px;
     margin: 0px;
@@ -102,9 +102,9 @@ footer {
 }
 
 .nav-nav .nav-links {
-    --links-color: rgb(0,0,0);
-    --links-backcolor: rgb(255, 123, 71);
-    --links-border-color: rgb(255, 173, 118);
+    --links-color: rgb(255, 255, 255);
+    --links-backcolor: rgb(0, 0, 0);
+    --links-border-color: rgb(255, 255, 255);
     height: 70%;
     display: flex;
     justify-content: space-between;
