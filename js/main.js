@@ -44,23 +44,17 @@ function drawAgents(agents, funcSort) {
   });
 }
 
-function leaderboard(temp_engine) {
-  temp_engine.after_render((temp_engine) => {
-    let state = false;
+$(document).ready( () => {
     $(".btn-cred").on("click", () => {
-      if (!state) AgentBuilder.list_all((agents) => {
+      AgentBuilder.list_all((agents) => {
           drawAgents(agents, sortAgentByCredits);
-          state = false;
       });
-      state = true
     });
   
     $(".btn-ship").on("click", () => {
-        if (!state) AgentBuilder.list_all((agents) => {
+      AgentBuilder.list_all((agents) => {
           drawAgents(agents, sortAgentByShips);
-          state = false;
       });
-      state = true
     });
   
     $('.container').hide()
@@ -73,9 +67,5 @@ function leaderboard(temp_engine) {
     $('.btn-cred').on('click', () => {
       $('.leaderboard').empty()
     });
-  });
-
-  temp_engine.render("templates/leaderboard.html");
-}
-  
-leaderboard();
+  }
+  )
