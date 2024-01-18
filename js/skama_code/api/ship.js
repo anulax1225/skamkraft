@@ -5,11 +5,17 @@ import { My } from "./agent.js";
 
 export class Ship {
   constructor(data) {
-    this.name = data.symbol;
-    this.AgentName = data.registration;
-    this.Nav = data.nav;
+    this.symbol = data.symbol;
+    this.registration = data.registration;
+    this.nav = data.nav;
     this.crew = data.crew;
+    this.frame = data.frame;
+    this.reactor = data.reactor;
     this.engine = data.engine;
+    this.cooldown = data.cooldown;
+    this.modules = data.modules;
+    this.mounts = data.mounts;
+    this.cargo = data.cargo;
     this.fuel = data.fuel;
   }
 
@@ -23,27 +29,32 @@ export class Ship {
         Authorization: `Bearer ${My.agent.token}`,
       },
       success: (response) => {
-        callback(response);
+        let listShips = [];
+        response.data.forEach(ship => {
+          listShips.push(new Ship(ship))
+          
+        });
+        callback(listShips);
       },
       error: (err) => {
         error_handler(["Token invalide."]);
       },
     });
   }
-  static get(callback) {
-    const url = `${SpaceTraders.host}/my/ships/${this.name}`;
+  static get(shipSymbol, callback, error_handler) {
+    const url = `${SpaceTraders.host}/my/ships/${shipSymbol}`;
     $.ajax({
       url: url,
       method: "GET",
       headers: {
         Accept: "application/json",
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${My.agent.token}`,
       },
       success: (response) => {
-        callback(response);
+        callback(new Ship(response.data));
       },
       error: (err) => {
-        error_handler(["Token invalide."]);
+        error_handler(err);
       },
     });
   }

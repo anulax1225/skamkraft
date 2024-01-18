@@ -9,27 +9,44 @@ export default (temp_engine) => {
     menu_mod(temp_engine);
     modal.load("templates/ship/ship_modal.html");
 
-    Ship.list((ship) => {
-      ship.data.forEach(data => {
-          console.log(data)
-          $(".ships").html(
+    Ship.list((ships) => {
+      ships.forEach(ship => {
+        $(".ships").append(
           `
             <div>
-              <h5>${data.symbol}</h5>
-                <p>fuel capacity: ${data.fuel.capacity}</p>
-              <button id="FT">FICHE Technique<button>
+              <h5>${ship.symbol}</h5>
+                <p>fuel capacity: ${ship.fuel.capacity}</p>
+              <button id="FT" data-symbol="${ship.symbol}">FICHE Technique<button>
             </div>
           `
           )
+          temp_engine.add_event("#FT", "click", (e) => {
+            const id_ship = $(e.target).attr("data-symbol");
+            if(ship.symbol=id_ship)
+            {
+            $(".Ship-id").text("ID : " + ship.symbol);
+            $(".Ship-registration").text("Registration : " + ship.registration);
+            $(".Ship-nav").text("Nav : " + ship.nav);
+            $(".Ship-crew").text("Crew : " + ship.crew);
+            $(".Ship-frame").text("Frame : " + ship.frame );
+            $(".Ship-reactor").text("Reactor : " + ship.reactor );
+            $(".Ship-engine").text("Engine : " + ship.engine);
+            $(".Ship-cooldown").text("Cooldown : " + ship.cooldown);
+            $(".Ship-modules").text("Modules : " + ship.modules );
+            $(".Ship-mounts").text("Mounts : " + ship.mounts );
+            $(".Ship-cargo").text("Cargo : " + ship.cargo);
+            $(".Ship-fuel").text("Fuel : " + ship.fuel);
+            }
+            modal.show();
+          });
       });
+      
     });
 
-    temp_engine.add_event("#btn-close", "click", () => {
+    temp_engine.add_event(".btn-close", "click", () => {
       modal.close();
     });
-    temp_engine.add_event("#FT", "click", () => {
-      modal.show();
-    });
+    
 
     
   });
