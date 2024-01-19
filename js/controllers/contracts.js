@@ -32,6 +32,34 @@ export default (temp_engine) => {
         });
       });
 
+      temp_engine.add_event(".btn-infos", "click", (e) => {
+        contracts.forEach((contract) => {
+          // console.log(e)
+          const id_contract = $(e.target).attr("data-id");
+          // const contract = contracts.find((element) => {
+          //   console.log(element);
+          //   return element.id == id_contract;
+          // });
+    
+          // const date = new Date(contract.expiration);
+          // console.log(date)
+          // let expiration = (date.getHours() + "h" + date.getMinutes() + ", " + date.getUTCMonth() + "." + date.getMonth() + "." +date.getFullYear());
+    
+          $(".contract-id").text("ID : " + contract.id);
+          $(".contract-faction").text("Faction : " + contract.faction);
+          $(".contract-type").text("Type : " + contract.type);
+          $(".contract-expiration").text("Expiration : " + contract.expiration);
+          $(".contract-payment-accepted").text("Payment : " + contract.paymentAccepted + " $");
+          $(".contract-payment-fulfill").text("Payment fulfill : " + contract.paymentFulfill + " $");
+          $(".contract-tradeSymbol").text("Trade Symbol : " + contract.tradeSymbol);
+          $(".contract-destinationSymbol").text("Destination : " + contract.destination);
+    
+          modal.show();
+            
+        });
+        
+      });
+
       contracts.forEach(contract => {
         let img
         let status
@@ -82,34 +110,23 @@ export default (temp_engine) => {
                   `
         }
         $('.contracts').append(card);
+        
+        
+        
+
+
+
+
+        
       });
+      
+     
 
-      temp_engine.add_event(".btn-infos", "click", (e) => {
-        console.log(e)
-        const id_contract = $(e.target).attr("data-id");
-        console.log(id_contract);
-        const contract = contracts.find((element) => {
-          console.log(element);
-          return element.id == id_contract;
-        });
-
-        // const date = new Date(contract.expiration);
-        // console.log(date)
-        // let expiration = (date.getHours() + "h" + date.getMinutes() + ", " + date.getUTCMonth() + "." + date.getMonth() + "." +date.getFullYear());
-
-        $(".contract-id").text("ID : " + contract.id);
-        $(".contract-faction").text("Faction : " + contract.faction);
-        $(".contract-type").text("Type : " + contract.type);
-        $(".contract-expiration").text("Expiration : " + contract.expiration);
-        $(".contract-payment-accepted").text("Payment : " + contract.paymentAccepted + " $");
-        $(".contract-payment-fulfill").text("Payment fulfill : " + contract.paymentFulfill + " $");
-        $(".contract-tradeSymbol").text("Trade Symbol : " + contract.tradeSymbol);
-        $(".contract-destinationSymbol").text("Destination : " + contract.destination);
-
-        modal.show();
-      });
+      
 
     })
+
+    
 
     temp_engine.add_event(".btn-close", "click", () => {
       modal.close();
