@@ -84,11 +84,12 @@ footer {
 
 /*nav bar*/
 .nav-nav {
-    --nav-img-width: 100px;
+    --nav-img-width: 75px;
     background-color: var(--second-back-color);
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 10px 10px 10px 10px;
 }
 
 .nav-nav .nav-brand {

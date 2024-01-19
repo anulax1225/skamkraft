@@ -2,7 +2,7 @@
 
 
 .ext-modal[open] {
-    animation: myFadeIn 2.0s ease normal;
+    animation: myFadeIn 0.5s ease normal;
 }
   
 @keyframes myFadeIn{
