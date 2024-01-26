@@ -34,17 +34,9 @@ export default (temp_engine) => {
 
       temp_engine.add_event(".btn-infos", "click", (e) => {
         contracts.forEach((contract) => {
-          // console.log(e)
+
           const id_contract = $(e.target).attr("data-id");
-          // const contract = contracts.find((element) => {
-          //   console.log(element);
-          //   return element.id == id_contract;
-          // });
-    
-          // const date = new Date(contract.expiration);
-          // console.log(date)
-          // let expiration = (date.getHours() + "h" + date.getMinutes() + ", " + date.getUTCMonth() + "." + date.getMonth() + "." +date.getFullYear());
-    
+
           $(".contract-id").text("ID : " + contract.id);
           $(".contract-faction").text("Faction : " + contract.faction);
           $(".contract-type").text("Type : " + contract.type);
@@ -53,11 +45,11 @@ export default (temp_engine) => {
           $(".contract-payment-fulfill").text("Payment fulfill : " + contract.paymentFulfill + " $");
           $(".contract-tradeSymbol").text("Trade Symbol : " + contract.tradeSymbol);
           $(".contract-destinationSymbol").text("Destination : " + contract.destination);
-    
+
           modal.show();
-            
+
         });
-        
+
       });
 
       contracts.forEach(contract => {
@@ -75,8 +67,6 @@ export default (temp_engine) => {
           img = "/assets/contracts/shuttle.png"
         }
 
-
-
         if (contract.accepted) {
           status = "accepted"
           card =
@@ -92,6 +82,7 @@ export default (temp_engine) => {
                     </div>
                   `
         }
+
         else {
           status = "on hold"
           card =
@@ -109,24 +100,12 @@ export default (temp_engine) => {
                     </div>
                   `
         }
+
         $('.contracts').append(card);
-        
-        
-        
 
-
-
-
-        
       });
-      
-     
-
-      
 
     })
-
-    
 
     temp_engine.add_event(".btn-close", "click", () => {
       modal.close();
