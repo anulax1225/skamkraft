@@ -1,7 +1,7 @@
 # Skamcraft
 
 ## Start 
-* Start with live server in VsCode to get full functionnality.
+* Start with Live Server in VSCode to get full functionnality.
 * Start with php : 
 ``` bash
     cd /.../Skamcraft
@@ -10,6 +10,6 @@
 
 ## Norm
 * ``` ; ``` at the end of each line.
-* snack_case for functions and variables.
+* snake_case for functions and variables.
 * UpperCamelCase for Classes.
-* all in english.
+* Whole project in English.

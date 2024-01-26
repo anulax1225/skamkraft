@@ -1,10 +1,14 @@
 import { My } from "../skama_code/api/agent.js";
 import login from "./login.js";
+import ldb from "./leaderboard.js";
 import reg from "./reg.js";
 import home from "./home.js";
 import { systems } from "./systems.js";
 
 function init_menu(temp_engine) {
+    temp_engine.add_event("#ldb-link", "click", () => {
+        ldb(temp_engine);
+    });
     temp_engine.add_event("#reg-link", "click", () => {
         reg(temp_engine);
     });
@@ -38,7 +42,7 @@ function show_stats() {
 
 export default function menu_mod(temp_engine) {
     init_menu(temp_engine);
-    if(My.agent) {
+    if (My.agent) {
         show_stats();
         loged_links();
     }
