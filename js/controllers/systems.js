@@ -26,12 +26,12 @@ function draw_system(system) {
         offsetY: 0,
     });
 
-    fabric.Image.fromURL('/assets/systems/galaxie1.png', function(img_planet) {
+    fabric.Image.fromURL('/assets/systems/bluesystem.png', function(img_planet) {
 
         img_planet.set({
             selectable: false,
-            scaleX: 0.05,
-            scaleY: 0.05,
+            scaleX: 0.20,
+            scaleY: 0.20,
             shadow: shadow,
             left: system.position.x/offset.x + w/2,
             top: system.position.y/offset.y+ h/2,

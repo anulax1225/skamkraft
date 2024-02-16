@@ -101,7 +101,7 @@ export class Ship {
   }
 
   orbit(callback, error_handler) {
-    if (this.nav.status == "ORBIT")
+    if (this.nav.status == "IN_ORBIT")
       return error_handler("Ship already in orbit.");
 
     const url = `${SpaceTraders.host}/my/ships/${this.symbol}/orbit`;
@@ -115,78 +115,6 @@ export class Ship {
       },
       success: (response) => {
         callback(response.data);
-      },
-      error: (err) => {
-        error_handler(err);
-      },
-    });
-  }
-
-  dock(callback, error_handler) {
-    if (this.nav.status == "DOCKED")
-      return error_handler("Ship already docked");
-
-    const url = `${SpaceTraders.host}/my/ships/${this.symbol}/dock`;
-    $.ajax({
-      url: url,
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-        Authorization: `Bearer ${My.agent.token}`,
-      },
-      success: (response) => {
-        callback(response.data);
-      },
-      error: (err) => {
-        error_handler(err);
-      },
-    });
-  }
-
-  navigate(waypoint, callback, error_handler) {
-    if (this.nav.status != "ORBIT")
-      return error_handler("Ship must be in orbit.");
-
-    const url = `${SpaceTraders.host}/my/ships/${this.symbol}/navigate`;
-
-    $.ajax({
-      url: url,
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-        Authorization: `Bearer ${My.agent.token}`,
-      },
-      processData: false,
-      data: `{\n  "waypointSymbol": "${waypoint}"\n}`,
-      success: (response) => {
-        callback(response);
-      },
-      error: (err) => {
-        error_handler(err);
-      },
-    });
-  }
-
-  refuel(callback, error_handler) {
-    if (this.nav.status != "ORBIT")
-      return error_handler("Ship must be in orbit.");
-
-    const url = `${SpaceTraders.host}/my/ships/${this.symbol}/refuel`;
-
-    $.ajax({
-      url: url,
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-        Authorization: "Bearer 123",
-      },
-      processData: false,
-      data: '{\n  "units": "100",\n  "fromCargo": false\n}',
-      success: (response) => {
-        callback(response);
       },
       error: (err) => {
         error_handler(err);

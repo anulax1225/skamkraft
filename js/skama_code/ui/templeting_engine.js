@@ -1,18 +1,17 @@
 // Copyright © 2023 Entreprise SkamKraft
-"use strict";
+'use strict';
 export class TemplateEngine {
   constructor(path) {
     this.templatePath = path;
   }
-
+  
   render(template) {
     this.get_template((reponse) => {
-      $("body").html(reponse);
+      $('body').html(reponse);
       this.get_template((reponse) => {
         $("#block-content").html(reponse);
-        if (this.after_render_callback)
-          this.#flush_events().after_render_callback(this);
-      }, template);
+        if (this.after_render_callback)  this.#flush_events().after_render_callback(this);
+      }, template)
     });
   }
 
@@ -23,16 +22,13 @@ export class TemplateEngine {
   }
 
   get_template(callback, template = "") {
-    let url =
-      template === ""
-        ? `${this.templatePath}/template.html`
-        : `${this.templatePath}/${template}`;
-    $.ajax(url, {
+    let url = template === "" ? `${this.templatePath}/template.html`: `${this.templatePath}/${template}`;
+    $.ajax(url,{
       method: "GET",
       success: callback,
       error: (err) => {
         console.log(err);
-      },
+      }
     });
   }
 
@@ -46,6 +42,6 @@ export class TemplateEngine {
   }
 
   after_render(callback) {
-    this.after_render_callback = callback;
+    this.after_render_callback  = callback;
   }
 }

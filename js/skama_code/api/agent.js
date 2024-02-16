@@ -4,6 +4,8 @@ import { SpaceTraders } from "./config.js"
 
 export class My {
   static agent = null;
+  static temp_engine = null;
+  static canvas_renderer = null;
 }
 
 export class Agent {
@@ -23,6 +25,11 @@ export class Agent {
 }
 
 export class AgentBuilder {
+  constructor(end = false) {
+    this.stopped = false;
+    this.end = end;
+  }
+
   static create(symbol, faction, callback, error_handler) {
       const url = `${SpaceTraders.host}/register`;
       $.ajax({
@@ -94,22 +101,22 @@ export class AgentBuilder {
     });
   }
 
-  static list_all(callback, end = false) {
+  static list_all(callback) {
     this.list(20, 1, (agents, meta) => {
       let maxPage = meta.total / 20;
-      this.#r_listing(2, maxPage, agents, callback, end);
+      this.#r_listing(2, maxPage, agents, callback);
     });
   }
 
-  static #r_listing(page, maxPage, agents, callback, end) {
+  static #r_listing(page, maxPage, agents, callback) {
     if (page < maxPage) {
       this.list(20, page++,() => {
         setTimeout(() => {
-          if (!end) {
+          if (!this.end) {
             callback(agents);
             agents = [];
           }
-          this.#r_listing(page++, maxPage, agents, callback, end); 
+          if (!this.stopped) this.#r_listing(page++, maxPage, agents, callback, end); 
         }, 1000);
       }, agents);
     } else {
