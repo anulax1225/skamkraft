@@ -9,15 +9,15 @@ export default function login(temp_engine) {
     temp_engine.after_render((temp_engine) => {
         menu_mod(temp_engine);
     
-        temp_engine.add_event("#val", "click", () => {
+        temp_engine.add_event("#btn-login", "click", () => {
             const is_checked = $("#box-remember").is(":checked");
             const token = $("#in-token").val();
             auth.store = is_checked;
             auth.login(token)
         });
     
-        temp_engine.add_event("#cancel", "click", () => {
-            $("#in-token").val("");
+        temp_engine.add_event("#btn-cancel", "click", () => {
+            $("#input-token").val("");
             $("#box-remember").prop("checked", false);
         });
     });
