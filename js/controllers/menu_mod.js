@@ -3,6 +3,7 @@ import login from "./login.js";
 import reg from "./reg.js";
 import home from "./home.js";
 import { systems } from "./systems.js";
+import ships from "./ships.js";
 
 function init_menu(temp_engine) {
     temp_engine.add_event("#reg-link", "click", () => {
@@ -13,6 +14,9 @@ function init_menu(temp_engine) {
     });
     temp_engine.add_event("#systems-link", "click", () => {
         systems(temp_engine);
+    });
+    temp_engine.add_event("#ships-link", "click", () => {
+        ships(temp_engine);
     });
     temp_engine.add_event(".nav-brand", "click", () => {
         home(temp_engine);
