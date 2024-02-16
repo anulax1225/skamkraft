@@ -27,7 +27,8 @@ export default (temp_engine) => {
             contract.accept(() => {
               $(e.target).parent().children(".status-onhold").html("Status : accepté");
               $(e.target).parent().children(".status-onhold").attr("class", 'status-accepted');
-              $(e.target).remove();
+              $(e.target).html("Contract accepted")
+              // $(e.target).remove();
 
             });
           }
@@ -105,6 +106,7 @@ export default (temp_engine) => {
                         <p style="color:white" class="card-text">${contract.deadline}</p>
                         <p class="card-text status-onhold">Status : ${status}</p>
                         <p style="color:white" class="card-text revenu">Revenu : ${contract.paymentAccepted} $</p>
+                        <p></p>
                         <button type="button" class="btn btn-primary btn-infos" data-bs-toggle="modal" data-bs-target="#exampleModal">Infos</button>
                         <button data-id="${contract.id}" class="btn-modify btn btn-primary btn-accept" data-toggle="modal" data-target="#Modify" >Accepter</button>                       
                       </div>
@@ -113,7 +115,8 @@ export default (temp_engine) => {
         }
 
         $('.contracts').append(card);
-        console.log(contract)
+        $('.contracts').append(card);
+
 
       });
 

@@ -8,30 +8,36 @@ html {
 }
 
 
+
 .btn-infos {
   margin: 2px;
   /* color: black; */
-  background-color: royalblue;
-  border: 2px solid royalblue;
+  background-color: transparent;
+  border: 5px solid #0018e8;
   border-radius: 10px;
 }
 
 .btn-infos:hover {
-  border-color: rgb(45, 73, 156);
-  background-color: rgb(45, 73, 156);
+  border-color: #0018e8;
+  background-color: #0018e8;
+  ;
 }
 
 .btn-accept {
   margin: 2px;
   /* color: black; */
-  background-color: royalblue;
-  border: 2px solid royalblue;
+  background-color: transparent;
+  border: 5px solid #0018e8;
   border-radius: 10px;
 }
 
 .btn-accept:hover {
-  border-color: rgb(45, 73, 156);
-  background-color: rgb(45, 73, 156);
+  border-color: rgb(33, 196, 0);
+  background-color: rgb(33, 196, 0);
+}
+
+.card {
+  margin-bottom: 30px;
 }
 
 .contract-screen {
@@ -45,15 +51,18 @@ html {
 }
 
 .card-body {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   margin-left: 200px;
   margin-top: -160px;
-  width: 400px;
+  width: 100%;
 }
 
 .card-body button {
-  margin-top: 15px;
-  margin-left: -10px;
-  width: 250px;
+  margin-top: 50px;
+  margin-right: 29px;
+  margin-left: -11px;
+  width: 240px;
 }
 
 .contracts {
