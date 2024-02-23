@@ -5,6 +5,7 @@
 body,
 html {
   height: 100%;
+  background-image: url("/assets/contracts/contractscreen.png");
 }
 
 
@@ -43,10 +44,11 @@ html {
 .contract-screen {
   display: flex;
   justify-content: center;
-  background-image: url("/assets/contracts/contractscreen.png");
+  background-image: url("/assets/contracts/screen.png");
   background-repeat: no-repeat;
   background-position: center;
   height: 100vh;
+  width: 100%;
 
 }
 
@@ -56,10 +58,10 @@ html {
   margin-left: 200px;
   margin-top: -160px;
   width: 100%;
+  border-width: 100px;
 }
 
 .card-body button {
-  margin-top: 50px;
   margin-right: 29px;
   margin-left: -11px;
   width: 240px;
@@ -69,7 +71,6 @@ html {
   margin-left: 240px;
   margin-top: 225px;
   height: 100vh;
-  width: 100vh;
 }
 
 /* Modal */
