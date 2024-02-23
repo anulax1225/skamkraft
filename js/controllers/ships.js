@@ -1,6 +1,7 @@
 import menu_mod from "./menu_mod.js";
 import { Modal } from "../skama_code/ui/modal.js";
 import { Ship } from "../skama_code/api/ship.js";
+import system from "./system.js";
 
 export default (temp_engine) => {
   let modal = new Modal("ship-modal", temp_engine);
@@ -10,11 +11,10 @@ export default (temp_engine) => {
     modal.load("templates/ship/ship_modal.html");
 
     Ship.list((ships) => {
-      console.log(ships)
       ships.forEach(ship => {
         $(".ships").append(
           `
-            <div>
+            <div class="ships-list" data-id="${ship.symbol}">
               <h5>${ship.symbol}</h5>
                 <p>fuel capacity: ${ship.fuel.capacity}</p>
               <button class="reg" data-symbol="${ship.symbol}">Name</button>
@@ -130,6 +130,16 @@ export default (temp_engine) => {
         })
         modal.show();
       });
+      $(".ships-list").on("click", (e) => {
+        const id_ship = $(e.target).attr("data-id");
+        ships.forEach(ship =>{
+          if(ship.symbol==id_ship)
+          {
+            console.log("ok")
+          }
+        })
+
+      });
     });
 
     temp_engine.add_event(".btn-close", "click", () => {
@@ -138,4 +148,5 @@ export default (temp_engine) => {
   });
 
   temp_engine.render("templates/ship/ship.html");
+
 };
