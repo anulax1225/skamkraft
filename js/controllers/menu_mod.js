@@ -21,8 +21,16 @@ function init_menu(temp_engine) {
 
 function loged_links() {
     $(".nav-links").prepend(`
+        <li class="nav-link smooth" id="systems-link">Systems</li>
         <li class="nav-link smooth" id="contracts-link">Contracts</li>
         <li class="nav-link smooth" id="ships-link">Ships</li>
+    `);
+}
+
+function unloged_links() {
+    $(".nav-links").prepend(`
+        <li class="nav-link smooth" id="login-link">Log in</li>
+        <li class="nav-link smooth" id="reg-link">New Agent</li>
     `);
 }
 
@@ -41,5 +49,7 @@ export default function menu_mod(temp_engine) {
     if(My.agent) {
         show_stats();
         loged_links();
+    } else {
+        unloged_links();
     }
 }

@@ -24,7 +24,6 @@ export default function login(temp_engine) {
 
     auth.done((agent) => {
         My.agent = agent;
-        if(auth.store) localStorage.setItem("token", agent.token)
         home(temp_engine);
     })
 
