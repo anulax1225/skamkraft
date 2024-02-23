@@ -17,6 +17,11 @@ function init_menu(temp_engine) {
     temp_engine.add_event(".nav-brand", "click", () => {
         home(temp_engine);
     });
+    temp_engine.add_event("#logout-link", "click", () => {
+        My.agent = null;
+        localStorage.removeItem("token");
+        home(temp_engine);
+    });
 }
 
 function loged_links() {
@@ -24,6 +29,7 @@ function loged_links() {
         <li class="nav-link smooth" id="systems-link">Systems</li>
         <li class="nav-link smooth" id="contracts-link">Contracts</li>
         <li class="nav-link smooth" id="ships-link">Ships</li>
+        <li class="nav-link smooth" id="logout-link">logout</li>
     `);
 }
 
@@ -46,7 +52,7 @@ function show_stats() {
 
 export default function menu_mod(temp_engine) {
     init_menu(temp_engine);
-    if(My.agent) {
+    if (My.agent) {
         show_stats();
         loged_links();
     } else {
