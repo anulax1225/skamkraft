@@ -40,3 +40,7 @@ button:hover{
 .my-modal{
     font-size:small;
 }
+body{
+    background-image: url("/assets/spaceships/hangar.png");
+    background-size: cover;
+}
