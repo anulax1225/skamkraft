@@ -2,11 +2,15 @@
 
 <div class="container smooth"> 
     <p class="con-title">New Agent</p>
-    <input type="text" placeholder="Name" id="in-name" class="in-big">
-    <input type="text" placeholder="Faction" id="in-faction" class="in-big">
+    <input type="text" placeholder="Name" id="input-name" class="in-big">
+    <select id="input-faction" class="in-big">
+        <option value="" disabled selected>Factions</option>
+        <optgroup id="group-faction" label="---------"></optgroup>
+      </select>
+      <input type="checkbox" id="box-remember">Remember me ?</input>
     <div class="grp-btn">
-        <button class="btn btn-val" id="val">Validate</button>
-        <button class="btn btn-cancel" id="cancel">Cancel</button>
+        <button class="btn btn-val" id="btn-register">Validate</button>
+        <button class="btn btn-cancel" id="btn-cancel">Cancel</button>
     </div>
     <div class="errors"></div>
 </div>
