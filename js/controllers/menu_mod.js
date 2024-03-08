@@ -25,7 +25,7 @@ function init_menu(temp_engine) {
 }
 
 function loged_links() {
-    $(".nav-links").prepend(`
+    $(".nav-links").html(`
         <li class="nav-link smooth" id="systems-link">Systems</li>
         <li class="nav-link smooth" id="contracts-link">Contracts</li>
         <li class="nav-link smooth" id="ships-link">Ships</li>
@@ -34,7 +34,7 @@ function loged_links() {
 }
 
 function unloged_links() {
-    $(".nav-links").prepend(`
+    $(".nav-links").html(`
         <li class="nav-link smooth" id="login-link">Log in</li>
         <li class="nav-link smooth" id="reg-link">New Agent</li>
     `);
