@@ -2,7 +2,7 @@ import { My } from "../skama_code/api/agent.js";
 import login from "./login.js";
 import reg from "./reg.js";
 import home from "./home.js";
-import { systems } from "./systems.js";
+import system from "./system.js";
 
 function init_menu(temp_engine) {
     temp_engine.add_event("#reg-link", "click", () => {
@@ -12,7 +12,7 @@ function init_menu(temp_engine) {
         login(temp_engine);
     });
     temp_engine.add_event("#systems-link", "click", () => {
-        systems(temp_engine);
+        system(temp_engine);
     });
     temp_engine.add_event(".nav-brand", "click", () => {
         home(temp_engine);
