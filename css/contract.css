@@ -4,15 +4,14 @@
 
 body,
 html {
-  height: 100%;
-  background-image: url("/assets/contracts/contractscreen.png");
+  background-image: url("/assets/contracts/background.png");
+  background-repeat: no-repeat;
+  background-size: 100%;
 }
 
-
-
+/* Button for more informations about the contact */
 .btn-infos {
   margin: 2px;
-  /* color: black; */
   background-color: transparent;
   border: 5px solid #0018e8;
   border-radius: 10px;
@@ -21,12 +20,11 @@ html {
 .btn-infos:hover {
   border-color: #0018e8;
   background-color: #0018e8;
-  ;
+
 }
 
 .btn-accept {
   margin: 2px;
-  /* color: black; */
   background-color: transparent;
   border: 5px solid #0018e8;
   border-radius: 10px;
@@ -37,41 +35,15 @@ html {
   background-color: rgb(33, 196, 0);
 }
 
-.card {
-  margin-bottom: 30px;
-}
 
-.contract-screen {
-  display: flex;
-  justify-content: center;
-  background-image: url("/assets/contracts/screen.png");
-  background-repeat: no-repeat;
-  background-position: center;
-  height: 100vh;
-  width: 100%;
-
-}
-
-.card-body {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  margin-left: 200px;
-  margin-top: -160px;
-  width: 100%;
-  border-width: 100px;
-}
-
-.card-body button {
-  margin-right: 29px;
-  margin-left: -11px;
-  width: 240px;
-}
+/* Ecran contenant les contrats */
 
 .contracts {
-  margin-left: 240px;
-  margin-top: 225px;
-  height: 100vh;
+  display: flex;
+  justify-content: center;
 }
+
+.card {}
 
 /* Modal */
 
@@ -83,6 +55,7 @@ html {
   color: greenyellow;
 }
 
+/* Flèche changer de page */
 #leftarrow {
   width: 50px;
   height: 50px;
@@ -95,6 +68,4 @@ html {
 
 .arrows {
   text-align: center;
-
-
 }
