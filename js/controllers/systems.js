@@ -15,6 +15,15 @@ export default (temp_engine) => {
       const size = getSize();
       canvas.resize(size.width, size.height);
     });
+
+    //display planets
+    SystemBuilder.get(getAgentSystem(), (system) => {
+      system.list_all_planets((planets) => {
+        planets.forEach(planet => {
+          canvas.obj_from_img('../../assets/planets/planetproto.png', planet.position);
+        });
+      });
+    });
   });
 
   temp_engine.render("templates/systems/systems.html");
@@ -25,4 +34,10 @@ function getSize() {
     width: $("#canvas-container").width(),
     height: window.innerHeight,
   };
+}
+
+function getAgentSystem(){
+  const hq = My.agent.hq;
+  const systemName = hq.split('-');
+  return systemName[0] + '-' + systemName[1];
 }
