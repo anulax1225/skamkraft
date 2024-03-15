@@ -1,12 +1,20 @@
 <!-- Copyright © 2023 Entreprise SkamKraft -->
 
-<div class="container smooth"> 
-    <p class="con-title">Login</p>
-    <input type="text" placeholder="Agent token" id="in-token" class="in-big">
-    <input type="checkbox" id="box-remember">Remember me ?</input>
-    <div class="grp-btn">
-        <button class="btn btn-val" id="btn-login">Validate</button>
-        <button class="btn btn-cancel" id="btn-cancel">Cancel</button>
+<div class="container">
+    <div class="auth-container">
+        <p class="title">Login</p>
+        <input type="text" placeholder="Agent token" class="auth-input" id="in-token">
+        <div class="auth-grp-label">
+            <p>Remember me ?</p>
+            <input type="checkbox" class="auth-input" id="in-remember">
+        </div>
+        <div>
+            <button class="auth-btn auth-btn-val" id="btn-login">Validate</button>
+            <button class="auth-btn auth-btn-can" id="btn-cancel">Cancel</button>
+        </div>
+        <div>
+            <button class="auth-btn auth-btn-other" id="btn-reg">New agent</button>
+        </div>
+        <div class="errors"></div>
     </div>
-    <div class="errors"></div>
 </div>

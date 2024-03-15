@@ -1,83 +1,47 @@
 /* Copyright © 2023 Entreprise SkamCraft */
 
+:root {
+  --text-color: white;
+}
 
+@font-face {
+  font-family: pixellari;
+  src: url("../assets/fonts/Pixellari.ttf");
+}
 
-body,
-html {
-  height: 100%;
+body {
+  margin: 0;
+  background-image: url("../assets/img/background.png");
+  font-family: pixellari;
+  color: var(--text-color);
+}
+
+input {
+  border: none;
+  font-family: pixellari;
 }
 
 
-
-.btn-infos {
-  margin: 2px;
-  /* color: black; */
-  background-color: transparent;
-  border: 5px solid #0018e8;
-  border-radius: 10px;
+button {
+  border: none;
+  font-family: pixellari;
 }
 
-.btn-infos:hover {
-  border-color: #0018e8;
-  background-color: #0018e8;
-  ;
+select {
+  border: none;
+  font-family: pixellari;
 }
 
-.btn-accept {
-  margin: 2px;
-  /* color: black; */
-  background-color: transparent;
-  border: 5px solid #0018e8;
-  border-radius: 10px;
-}
 
-.btn-accept:hover {
-  border-color: rgb(33, 196, 0);
-  background-color: rgb(33, 196, 0);
-}
-
-.card {
-  margin-bottom: 30px;
-}
-
-.contract-screen {
-  display: flex;
-  justify-content: center;
-  background-image: url("/assets/contracts/contractscreen.png");
-  background-repeat: no-repeat;
-  background-position: center;
-  height: 100vh;
-
-}
-
-.card-body {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  margin-left: 200px;
-  margin-top: -160px;
+.container {
   width: 100%;
+  height: inherit;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
-.card-body button {
-  margin-top: 50px;
-  margin-right: 29px;
-  margin-left: -11px;
-  width: 240px;
-}
-
-.contracts {
-  margin-left: 240px;
-  margin-top: 250px;
-  height: 100vh;
-  width: 100vh;
-}
-
-/* Modal */
-
-.status-onhold {
-  color: orange;
-}
-
-.status-accepted {
-  color: greenyellow;
+.title {
+  font-size: 40px;
 }

@@ -3,6 +3,7 @@ import home from "./home.js";
 import login from "./login.js";
 import reg from "./reg.js";
 import systems from "./systems.js";
+import contract from "./contracts.js";
 
 function init_menu(temp_engine) {
   temp_engine.add_event("#reg-link", "click", () => {
@@ -22,6 +23,9 @@ function init_menu(temp_engine) {
     localStorage.removeItem("token");
     home(temp_engine);
   });
+  temp_engine.add_event("#contracts-link", "click", () => {
+    contract(temp_engine);
+  })
 }
 
 function loged_links() {
