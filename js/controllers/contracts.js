@@ -11,7 +11,6 @@ import { Modal } from "../skama_code/ui/modal.js";
 
 export default (temp_engine) => {
 
-
   let modal = new Modal("contract-modal", temp_engine);
 
   temp_engine.after_render((temp_engine) => {
@@ -20,7 +19,7 @@ export default (temp_engine) => {
 
     Contract.list(10, 1, (contracts) => {
 
-      //Evenements
+      //Evenements accepter
       temp_engine.add_event(".btn-accept", "click", (e) => {
         contracts.forEach((contract) => {
           if ($(e.target).attr("data-id") == contract.id) {
@@ -32,12 +31,10 @@ export default (temp_engine) => {
           }
         });
       });
-
+      //Evenement infos
       temp_engine.add_event(".btn-infos", "click", (e) => {
         contracts.forEach((contract) => {
-
           const id_contract = $(e.target).attr("data-id");
-
           $(".contract-id").text("ID : " + contract.id);
           $(".contract-faction").text("Faction : " + contract.faction);
           $(".contract-type").text("Type : " + contract.type);
@@ -46,19 +43,46 @@ export default (temp_engine) => {
           $(".contract-payment-fulfill").text("Payment fulfill : " + contract.paymentFulfill + " $");
           $(".contract-tradeSymbol").text("Trade Symbol : " + contract.tradeSymbol);
           $(".contract-destinationSymbol").text("Destination : " + contract.destination);
-
           modal.show();
-
         });
+      });
+      //Evenement flèche droite
+      temp_engine.add_event("#rightarrow", "click", (e) => {
+        if (contracts.lenght > 2) {
+          console.log("arrah")
+        }
+        else {
+          console.log("1 seul")
+        }
 
+
+        let slideIndex = 1;
+        showSlides(slideIndex);
+
+        function plusSlides(n) {
+          showSlides(slideIndex += n);
+        }
+
+        function currentSlide(n) {
+          showSlides(slideIndex = n);
+        }
+
+        function showSlides(n) {
+          let i;
+          let slides = document.getElementsByClassName("contracts");
+          if (n > slides.length) { slideIndex = 1 }
+          if (n < 1) { slideIndex = slides.length }
+          for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
+          }
+          slides[slideIndex - 1].style.display = "block";
+        }
       });
 
       contracts.forEach(contract => {
         let img
         let status
         let card
-
-
 
         if (contract.type = "PROCUREMENT") {
           img = "/assets/contracts/procurement.png"
@@ -82,9 +106,10 @@ export default (temp_engine) => {
                         <p style="color:white" class="card-text">${contract.deadline}</p>
                         <p style="color:white" class="card-text">${contract.deadline}</p>
                         <p style="color:white" class="card-text">${contract.deadline}</p>
-                        <p style="color:white" class="card-text">${contract.deadline}</p>
                         <p class="card-text status-accepted">Status : ${status}</p>
-                        <p></p>
+                        <p></p>                     
+                      </div>
+                      <div class="card-button">
                         <button data-id="${contract.id}" type="button" class="btn btn-primary btn-infos" data-bs-toggle="modal" data-bs-target="#exampleModal">Infos</button> 
                         <button data-id="${contract.id}" class="btn-modify btn btn-primary btn-accept" data-toggle="modal" data-target="#Modify" >Contract accepted</button>  
                       </div>
@@ -98,34 +123,33 @@ export default (temp_engine) => {
             `                            
                     <div class="card" style="width: 20rem;">
                       <img src="${img}" class="card-img-top" alt="">
-                      <div class="card-body">
-                        <h5 style="color:white" class="card-title">${contract.faction}</h5>
-                        <p style="color:white" class="card-text">${contract.deadline}</p>
-                        <p style="color:white" class="card-text">${contract.deadline}</p>
-                        <p style="color:white" class="card-text">${contract.deadline}</p>
-                        <p style="color:white" class="card-text">${contract.deadline}</p>
-                        <p class="card-text status-onhold">Status : ${status}</p>
-                        <p style="color:white" class="card-text revenu">Revenu : ${contract.paymentAccepted} $</p>
-                        <p></p>
+                      <div class="card-body">                  
+                          <h5 style="color:white" class="card-title">${contract.faction}</h5>
+                          <p style="color:white" class="card-text">${contract.deadline}</p>
+                          <p style="color:white" class="card-text">${contract.deadline}</p>
+                          <p style="color:white" class="card-text">${contract.deadline}</p>
+                          <p style="color:white" class="card-text">${contract.deadline}</p>
+                          <p style="color:white" class="card-text">${contract.deadline}</p>
+                          <p style="color:white" class="card-text">${contract.deadline}</p>
+                          <p class="card-text status-onhold">Status : ${status}</p>                                        
+                          <p></p>                        
+                      </div>
+                      <div class="card-button">
                         <button type="button" class="btn btn-primary btn-infos" data-bs-toggle="modal" data-bs-target="#exampleModal">Infos</button>
                         <button data-id="${contract.id}" class="btn-modify btn btn-primary btn-accept" data-toggle="modal" data-target="#Modify" >Accepter</button>                       
                       </div>
                     </div>
             `
         }
-
         $('.contracts').append(card);
-
+        $('.contracts').append(card);
       });
 
     })
-
     temp_engine.add_event(".btn-close", "click", () => {
       modal.close();
     });
-
     menu_mod(temp_engine);
   });
-
   temp_engine.render("templates/contracts/contracts.html")
 }

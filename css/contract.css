@@ -37,13 +37,41 @@ html {
 
 
 /* Ecran contenant les contrats */
-
-.contracts {
-  display: flex;
-  justify-content: center;
+.nav-nav {
+  margin-bottom: 100px;
 }
 
-.card {}
+.contracts {
+  display: grid;
+  justify-content: center;
+  grid-template-rows: 1fr 1fr;
+}
+
+.card img {
+  margin-right: 50px;
+}
+
+.card-body {
+  margin-right: 50px;
+}
+
+.card {
+  margin-bottom: 100px;
+  margin-left: -400px;
+  display: flex;
+}
+
+.card-button {
+  display: flex;
+  flex-direction: row;
+  height: 30%;
+}
+
+.arrows {
+  display: flex;
+  justify-content: center;
+
+}
 
 /* Modal */
 
