@@ -29,19 +29,20 @@ function init_menu(temp_engine) {
 }
 
 function loged_links() {
-  $(".nav-links").html(`
-        <li class="nav-link smooth" id="systems-link">Systems</li>
-        <li class="nav-link smooth" id="contracts-link">Contracts</li>
-        <li class="nav-link smooth" id="ships-link">Ships</li>
-        <li class="nav-link smooth" id="logout-link">logout</li>
+  $("#links").html(`
+        <input type="image" alt="home" id="systems-link" src="/assets/menu/home.png"/>
+        <input type="image" alt="contracts" id="contracts-link" src="/assets/menu/contracts.png"/>
+        <input type="image" alt="ships" id="ships-link" src="/assets/menu/ships.png"/>
+        <input type="image" alt="info" src="/assets/menu/info.png"/>
+        <input type="image" alt="leaderboard" src="/assets/menu/leaderboard.png"/>
     `);
 }
 
 function unloged_links() {
-  $(".nav-links").html(`
-        <li class="nav-link smooth" id="login-link">Log in</li>
-        <li class="nav-link smooth" id="reg-link">New Agent</li>
-    `);
+  // $(".menu-links").html(`
+  //       <li class="nav-link smooth" id="login-link">Log in</li>
+  //       <li class="nav-link smooth" id="reg-link">New Agent</li>
+  //   `);
 }
 
 function show_stats() {

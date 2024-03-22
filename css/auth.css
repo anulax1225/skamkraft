@@ -38,4 +38,11 @@
     background-color: darkgreen;
 }
 
-.auth-select {}
+.auth-select {
+    margin-top: 1vh;
+    border-radius: 3px;
+}
+
+.errors {
+    color: red;
+}
