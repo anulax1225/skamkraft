@@ -140,7 +140,6 @@ export default (temp_engine) => {
         ships.forEach(ship =>{
           if(ship.symbol==id_ship)
           {
-            console.log("ok")
           }
         })
 
@@ -150,6 +149,28 @@ export default (temp_engine) => {
     temp_engine.add_event(".btn-close", "click", () => {
       modal.close();
     });
+    let slideIndex = 1;
+      function plusSlides(n) {
+        showSlides(slideIndex += n);
+      }
+
+      temp_engine.add_event(".prev", "click", () => {
+        plusSlides(-1);      
+      });
+      temp_engine.add_event(".next", "click", () => {
+        plusSlides(1);     
+      });
+      
+      function showSlides(n) {
+        let i;
+        let slides = document.getElementsByClassName("ships-list");
+        if (n > slides.length) {slideIndex = 1}    
+        if (n < 1) {slideIndex = slides.length}
+        for (i = 0; i < slides.length; i++) {
+          slides[i].style.display = "none";  
+        }
+        slides[slideIndex-1].style.display = "block";  
+      }
   });
   
   temp_engine.render("templates/ship/ship.html");

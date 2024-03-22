@@ -33,9 +33,7 @@ button:hover{
     transition: 1s;
 }
 
-.ships>*{
-    flex: 100px;
-}
+
 .my-modal{
     font-size:small;
 }
