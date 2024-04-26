@@ -1,11 +1,68 @@
 <!-- Copyright © 2023 Entreprise SkamKraft -->
 <main>
-    <audio id="audio" controls loop style="display:none" crossorigin="anonymous">
+    <audio id="audio1" controls loop style="display:none" crossorigin="anonymous">
         <source src="/assets/sounds/skamkraft_main_theme.mp3" type="audio/mpeg">
     </audio>
-    <script>
-        document.getElementById('audio').play();
-    </script>
+    <audio id="audio2" controls loop style="display:none" crossorigin="anonymous">
+        <source src="/assets/sounds/goofy ahh song.mp3" type="audio/mpeg">
+    </audio>
+    <body>
+        <audio id="audio1" src="1o.mp3"></audio>
+        <audio id="audio2" src="2o.mp3"></audio>
+        <div>Track one: <span id="playStatus1">stopped</span></div>
+        <div>Track two: <span id="playStatus2">stopped</span></div>
+        <div>Listening to: <span id="currTrack">nothing</span></div>
+        <button id="start">Start the tracks rolling</button>
+        <button id="toggle" disabled>Toggle</button>
+    
+       <script>
+         var startButton = document.getElementById("start");
+         var toggleButton = document.getElementById("toggle");
+         var track1 = document.getElementById("audio1");
+         var track2 = document.getElementById("audio2");
+         var status1 = document.getElementById("playStatus1");
+         var status2 = document.getElementById("playStatus2");
+         var currTrack = document.getElementById("currTrack");
+    
+         function updatePlayStatus(track, status, t){
+           if (track.paused == true){
+             status.innerHTML = "stopped";
+             clearInterval(t);
+             startButton.disabled = false;
+             toggleButton.disabled = true;
+             currTrack.innerHTML = "nothing";
+           }
+         }
+    
+         startButton.onclick = function(){
+           this.disabled = true;
+           track1.play();
+           track2.play();
+           track2.muted = true;
+           status1.innerHTML = "playing";
+           status2.innerHTML = "playing";
+           currTrack.innerHTML = "Track 1";
+           toggleButton.disabled = false;
+    
+           var t1 = window.setInterval(function() { updatePlayStatus(track1, status1, t1) }, 500);
+           var t2 = window.setInterval(function() { updatePlayStatus(track2, status2, t2) }, 500);
+         }
+    
+         toggleButton.onclick = function(){
+            track1.currentTime = 0;
+            track2.currentTime = 0;
+           if (track1.muted == true){
+             track1.muted = false;
+             track2.muted = true;
+             currTrack.innerHTML = "Track 1";
+           } else {
+             track2.muted = false;
+             track1.muted = true;
+             currTrack.innerHTML = "Track 2";
+           }
+         }
+       </script>
+      </body>
     <main id="block-content"></main>
     <div class="languettes" id="links"></div>
 </main>
