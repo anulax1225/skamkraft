@@ -1,10 +1,10 @@
-# Skamcraft
+# Skamkraft
 
 ## Start 
 * Start with live server in VsCode to get full functionnality.
 * Start with php : 
 ``` bash
-    cd /.../Skamcraft
+    cd /.../Skamkraft
     php -S 127.0.0.1:80
 ```
 
