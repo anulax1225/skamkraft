@@ -1,10 +1,11 @@
 import menu_mod from "./menu_mod.js";
 import { Modal } from "../skama_code/ui/modal.js";
 import { Ship } from "../skama_code/api/ship.js";
-import system from "./system.js";
+
 
 export default (temp_engine) => {
   let modal = new Modal("ship-modal", temp_engine);
+  let slideIndex = 1;
 
   temp_engine.after_render((temp_engine) => {
     menu_mod(temp_engine);
@@ -12,21 +13,28 @@ export default (temp_engine) => {
 
     Ship.list((ships) => {
       ships.forEach(ship => {
-        $(".ships").append(
+        $(".block-ships").append(
           `
-            <div class="ships-list" data-id="${ship.symbol}">
+            <div class="ships-list fade" data-id="${ship.symbol}">
               <h5>${ship.symbol}</h5>
-                <p>fuel capacity: ${ship.fuel.capacity}</p>
+              <img 
+                id="imgShip" 
+                src="/assets/spaceships/spaceship.png" 
+                alt="" />
+                <div class="buttonShip">
               <button class="reg" data-symbol="${ship.symbol}">Name</button>
               <button class="nav" data-symbol="${ship.symbol}">Navigation</button>
               <button class="crew" data-symbol="${ship.symbol}">Crew</button>
               <button class="frame" data-symbol="${ship.symbol}">Frame</button>
               <button class="react" data-symbol="${ship.symbol}">Reactor</button>
               <button class="fuel" data-symbol="${ship.symbol}">Fuel</button>
+              </div>
             </div>
           `
           )
       });
+      showSlides(1)
+
       temp_engine.add_event(".reg", "click", (e) => {
         const id_ship = $(e.target).attr("data-symbol");
         ships.forEach(ship =>{
@@ -135,7 +143,6 @@ export default (temp_engine) => {
         ships.forEach(ship =>{
           if(ship.symbol==id_ship)
           {
-            console.log("ok")
           }
         })
 
@@ -145,8 +152,30 @@ export default (temp_engine) => {
     temp_engine.add_event(".btn-close", "click", () => {
       modal.close();
     });
-  });
+      function plusSlides(n) {
+        showSlides(slideIndex += n);
+      }
 
+      temp_engine.add_event(".prev", "click", () => {
+        plusSlides(-1);      
+      });
+      temp_engine.add_event(".next", "click", () => {
+        plusSlides(1);     
+      });
+      
+      function showSlides(n) {
+        let i;
+        let slides = document.getElementsByClassName("ships-list");
+        if (n > slides.length) {slideIndex = 1}    
+        if (n < 1) {slideIndex = slides.length}
+        for (i = 0; i < slides.length; i++) {
+          slides[i].style.display = "none";  
+        }
+        slides[slideIndex-1].style.display = "block";  
+      }
+
+  });
+  
   temp_engine.render("templates/ship/ship.html");
 
 };
