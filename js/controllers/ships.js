@@ -5,6 +5,7 @@ import { Ship } from "../skama_code/api/ship.js";
 
 export default (temp_engine) => {
   let modal = new Modal("ship-modal", temp_engine);
+  let slideIndex = 1;
 
   temp_engine.after_render((temp_engine) => {
     menu_mod(temp_engine);
@@ -32,6 +33,8 @@ export default (temp_engine) => {
           `
           )
       });
+      showSlides(1)
+
       temp_engine.add_event(".reg", "click", (e) => {
         const id_ship = $(e.target).attr("data-symbol");
         ships.forEach(ship =>{
@@ -149,7 +152,6 @@ export default (temp_engine) => {
     temp_engine.add_event(".btn-close", "click", () => {
       modal.close();
     });
-    let slideIndex = 1;
       function plusSlides(n) {
         showSlides(slideIndex += n);
       }
@@ -171,7 +173,9 @@ export default (temp_engine) => {
         }
         slides[slideIndex-1].style.display = "block";  
       }
+
   });
   
   temp_engine.render("templates/ship/ship.html");
+
 };
