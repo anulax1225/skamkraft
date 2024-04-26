@@ -1,4 +1,4 @@
-import { CanvasRenderer } from "../skama_code/rendering/canvas_render.js";
+import { CanvasRenderer } from "../skama_code/ui/canvas_render.js";
 import menu_mod from "./menu_mod.js";
 import { My } from "../skama_code/api/agent.js";
 import { SystemBuilder } from "../skama_code/api/system.js";

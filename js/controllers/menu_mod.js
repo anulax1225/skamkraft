@@ -15,13 +15,13 @@ function init_menu(temp_engine) {
   temp_engine.add_event("#systems-link", "click", () => {
     systems(temp_engine);
   });
-  temp_engine.add_event(".nav-brand", "click", () => {
+  temp_engine.add_event("#home-link", "click", () => {
     home(temp_engine);
   });
   temp_engine.add_event("#logout-link", "click", () => {
     My.agent = null;
     localStorage.removeItem("token");
-    home(temp_engine);
+    login(temp_engine);
   });
   temp_engine.add_event("#contracts-link", "click", () => {
     contract(temp_engine);
@@ -43,16 +43,6 @@ function unloged_links() {
   //       <li class="nav-link smooth" id="login-link">Log in</li>
   //       <li class="nav-link smooth" id="reg-link">New Agent</li>
   //   `);
-}
-
-function show_stats() {
-  $(".stats").html(`
-        <p>Agent name : ${My.agent.name}</p>
-        <p>Credits : ${My.agent.credits}</p>
-        <p>Ships : ${My.agent.ships_cpt}</p>
-        <p>Faction : ${My.agent.faction}</p>
-        <p>HQ : ${My.agent.hq}</p>
-    `);
 }
 
 export default function menu_mod(temp_engine) {

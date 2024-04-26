@@ -10,12 +10,10 @@
 }
 
 body {
-  margin: 0;
-  background-image: url("../assets/img/background.png");
+  background-image: url(/assets/img/backgroundfinal.png); 
   background-repeat: no-repeat;
+  background-size: 100%;
   overflow-x: hidden;
-  font-family: pixellari;
-  color: var(--text-color);
 }
 
 input {
@@ -34,20 +32,6 @@ select {
   font-family: pixellari;
 }
 
-
-.container {
-  width: 100%;
-  height: inherit;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
-.title {
-  font-size: 40px;
-}
-
 .languettes {
   display: flex;
   flex-direction: column;
@@ -59,15 +43,3 @@ select {
   width: 5%;
 }
 
-.languettes input:hover{
-  animation: slide-left;
-  position: relative;
-  animation-timing-function: ease;
-  animation-fill-mode: forwards;
-  animation-duration: 1s;
-}
-
-@keyframes slide-left {
-  0%   {right: 0px; top: 0px;}
-100%  {right: 25px; top: 0px;}
-}

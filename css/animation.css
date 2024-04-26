@@ -1,8 +1,25 @@
 /* Copyright © 2023 Entreprise SkamKraft */
 
+.languettes input:hover{
+  animation: slide-left;
+  position: relative;
+  animation-timing-function: ease;
+  animation-fill-mode: forwards;
+  animation-duration: 1s;
+}
+@keyframes slide-left {
+  0%   {
+    right: 0px;
+    top: 0px;
+  }
+  100%  {
+    right: 25px; 
+    top: 0px;
+  }
+}
 
 .ext-modal[open] {
-    animation: myFadeIn 0.5s ease normal;
+  animation: myFadeIn 0.5s ease normal;
 }
   
 @keyframes myFadeIn{
