@@ -1,27 +1,20 @@
-import { My } from "../skama_code/api/agent.js";
+import { My } from "../skama_code/commun/my.js";
 import login from "./login.js";
+import profile from "./profile.js";
 
-function init_menu(temp_engine) {
-  temp_engine.add_event("#login-link", "click", () => {
-    login(temp_engine);
-  });
-}
-
-function loged_links() {
+function loged_links(temp_engine) {
   $("#links").html(`
         <input type="image" alt="home" id="systems-link" src="/assets/menu/home.png"/>
         <input type="image" alt="contracts" id="contracts-link" src="/assets/menu/contracts.png"/>
         <input type="image" alt="ships" id="ships-link" src="/assets/menu/ships.png"/>
-        <input type="image" alt="info" src="/assets/menu/info.png"/>
-        <input type="image" alt="leaderboard" src="/assets/menu/leaderboard.png"/>
-    `);
+        <input type="image" alt="profile" id="profile-link" src="/assets/menu/info.png"/>
+        <input type="image" alt="leaderboard" id="leaderboard-link" src="/assets/menu/leaderboard.png"/>
+  `);
+  temp_engine.add_event("#profile-link", "click", () => {
+    profile(temp_engine);
+  });
 }
 
-export default function menu_mod(temp_engine) {
-  init_menu(temp_engine);
-  if (My.agent) {
-    loged_links();
-  } else {
-    unloged_links();
-  }
+export default (temp_engine) => {
+  if(My.agent) loged_links(temp_engine);
 }

@@ -1,0 +1,129 @@
+@font-face {
+    font-family: pixellari;
+    src: url("/assets/fonts/Pixellari.ttf");
+}
+
+:root {
+    --text-color: white;
+    --text-familly: pixellari;
+    --main-color: black;
+    --sec-color: rgba(69, 128, 255, 0.842);
+}
+
+body{
+    background-image: url("/assets/img/background.png"); 
+    background-repeat: no-repeat;
+    background-size: 100%;
+    overflow-x: hidden;
+    font-family: var(--text-familly);
+    color: var(--text-color);
+    margin: 0;
+    padding: 0;
+}
+
+button{
+    font-family: var(--text-familly);
+    color: var(--text-color);
+}
+
+input{
+    font-family: var(--text-familly);
+    color: var(--text-color);
+}
+
+select {
+    font-family: var(--text-familly);
+    color: var(--text-color);
+}
+
+#block-content{
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100vh;
+}
+
+.modal-disable::backdrop {
+    background-color: rgba(0, 0, 0, 0.493);
+}
+
+.ext-modal[open] {
+    animation: myFadeIn 0.5s ease normal;
+  }
+    
+  @keyframes myFadeIn{
+    from {
+        bottom: 100%;
+    }
+    to {
+        bottom: 0%;
+    }
+}
+
+.languettes {
+    right: -30px;
+    top: 25%;
+    width: 80px;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items:flex-end;
+}
+.languettes input{
+    width: 100%;
+}
+.languettes input:hover{
+    animation: slide-left;
+    position: relative;
+    animation-timing-function: ease;
+    animation-fill-mode: forwards;
+    animation-duration: 1s;
+}
+
+@keyframes slide-left {
+    0%   {right: 0px; top: 0px;}
+  100%  {right: 25px; top: 0px;}
+}
+
+.title{
+    font-size: 50px;
+}
+
+::placeholder {
+    color: var(--text-color);
+  }
+
+.base-input{
+    margin: 5px;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: var(--sec-color);
+    font-size: 20px;
+}
+.base-input:active{
+    background-color: var(--sec-color);
+    font-size: 20px;
+}
+
+.base-btn{
+    margin: 2px;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: var(--sec-color);
+    font-size: 20px;
+}
+
+.base-btn:hover{
+    box-shadow: 1px 1px 1px 0px rgba(88, 88, 252, 0.842);
+}
+
+.base-select {
+    margin: 5px;
+    padding: 10px;
+    border: none;
+    border-radius: 3px;
+    background-color: var(--sec-color);
+    font-size: 15px;
+}
