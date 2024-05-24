@@ -1,5 +1,4 @@
 import { My } from "../skama_code/commun/my.js";
-import login from "./login.js";
 import profile from "./profile.js";
 
 function loged_links(temp_engine) {

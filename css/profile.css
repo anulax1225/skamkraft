@@ -1,0 +1,19 @@
+#modal_profile
+{
+    padding: 0;
+    color: rgb(0, 17, 255);
+    background-color: rgb(0, 17, 255);
+}
+
+.profile-modal
+{
+    margin: 20px;
+    color: white;
+    display: flex;
+    flex-direction: column;
+}
+
+.profile-footer button
+{
+    background-color: red;
+}
