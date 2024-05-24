@@ -1,0 +1,17 @@
+.contracts
+{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.img
+{
+  position: absolute;
+  top: 10%;
+  left: 25%;
+  z-index: -1;
+  background-repeat: no-repeat;
+  display: flex;
+  justify-content: center;
+  
+}
