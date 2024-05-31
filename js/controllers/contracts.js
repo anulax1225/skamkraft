@@ -90,17 +90,12 @@ export default function contracts(temp_engine) {
                       <div class="card-body">                  
                           <h5 style="color:white" class="card-title">${contract.faction}</h5>
                           <p style="color:white" class="card-text">${contract.deadline}</p>
-                          <p style="color:white" class="card-text">${contract.deadline}</p>
-                          <p style="color:white" class="card-text">${contract.deadline}</p>
-                          <p style="color:white" class="card-text">${contract.deadline}</p>
-                          <p style="color:white" class="card-text">${contract.deadline}</p>
-                          <p style="color:white" class="card-text">${contract.deadline}</p>
                           <p class="card-text status-onhold">Status : ${status}</p>                                        
                           <p></p>                        
                       </div>
                       <div class="card-button">
-                        <button type="button" class="btn btn-primary btn-infos" data-bs-toggle="modal" data-bs-target="#exampleModal">Infos</button>
-                        <button data-id="${contract.id}" class="btn-modify btn btn-primary btn-accept" data-toggle="modal" data-target="#Modify" >Accepter</button>                       
+                        <button type="button" class="btn-infos" data-bs-toggle="modal" data-bs-target="#exampleModal">Infos</button>
+                        <button data-id="${contract.id}" class="btn-accept" data-toggle="modal" data-target="#Modify" >Accepter</button>                       
                       </div>
                     </div>
             `
