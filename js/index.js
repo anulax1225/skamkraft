@@ -5,7 +5,7 @@ import login from "./controllers/login.js";
 import { Auth } from "./skama_code/auth/auth.js";
 import { AgentBuilder } from "./skama_code/api/agent.js";
 import { My } from "./skama_code/commun/my.js";
-import home from "./controllers/home.js";
+import home  from "./controllers/home.js";
 
 let temp_engine = new TemplateEngine("html");
 
