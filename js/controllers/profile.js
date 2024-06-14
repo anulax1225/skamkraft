@@ -9,7 +9,7 @@ export default function profile(temp_engine) {
         modal.show();
         $('#name').append(My.agent.name);
         $('#faction').append(My.agent.faction);
-        $('#credit').append(My.agent.credit);
+        $('#credit').append(My.agent.credits);
         $('#hq').append(My.agent.hq);
         $('#shipcount').append(My.agent.ships_cpt);
 
@@ -23,6 +23,11 @@ export default function profile(temp_engine) {
             auth.unload_token();
             login(temp_engine);
         })
+
+        $('#btn-close').on('click', () =>
+        {
+            modal.close();
+        });
     });
 
     modal.load("templates/modal_profile.html");
