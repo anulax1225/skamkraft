@@ -9,6 +9,7 @@ export default function register(temp_engine) {
   let auth = new Auth();
 
   temp_engine.after_render((temp_engine) => {
+    $("body").css("background-image", "url('/assets/img/background.png')")
     menu_mod(temp_engine);
 
     Faction.list_all((factions) => {

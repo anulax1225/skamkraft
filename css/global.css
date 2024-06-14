@@ -85,8 +85,13 @@ select {
   100%  {right: 25px; top: 0px;}
 }
 
-.title{
+.Title{
     position: absolute;
+    font-size: 50px;
+    margin-left: 50px;
+}
+
+.title{
     font-size: 50px;
     margin-left: 50px;
 }

@@ -9,26 +9,19 @@ export default (temp_engine) => {
 
   temp_engine.after_render((temp_engine) => {
     menu_mod(temp_engine);
+    $("body").css("background-image", "url('/assets/spaceships/hangar.png')")
     modal.load("templates/ships/ships_modal.html");
 
     Ship.list((ships) => {
       ships.forEach(ship => {
         $(".block-ships").append(
           `
-            <div class="ships-list fade" data-id="${ship.symbol}">
+            <div class="ships-list" data-id="${ship.symbol}">
               <h5>${ship.symbol}</h5>
               <img 
-                id="imgShip" 
+                class="imgShip" 
                 src="/assets/spaceships/spaceship.png" 
                 alt="" />
-                <div class="buttonShip">
-              <button class="reg" data-symbol="${ship.symbol}">Name</button>
-              <button class="nav" data-symbol="${ship.symbol}">Navigation</button>
-              <button class="crew" data-symbol="${ship.symbol}">Crew</button>
-              <button class="frame" data-symbol="${ship.symbol}">Frame</button>
-              <button class="react" data-symbol="${ship.symbol}">Reactor</button>
-              <button class="fuel" data-symbol="${ship.symbol}">Fuel</button>
-              </div>
             </div>
           `
           )
@@ -149,31 +142,37 @@ export default (temp_engine) => {
       });
     });
 
+    function showSlides(n) {
+      let i;
+      slideIndex += n;
+      let slides = $(".ships-list");
+      if (slideIndex > slides.length) slideIndex = 1;    
+      if (slideIndex < 1) {slideIndex = slides.length}
+      for (i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";  
+      }
+      slides[slideIndex-1].style.display = "block";
+      let img = slideIndex[slideIndex - 1].children(".imgShip");
+      if (n > 0)
+      {
+        img.animate({left: '250px'})
+      }
+      else
+      {
+
+      }
+        
+    }
+
     temp_engine.add_event(".btn-close", "click", () => {
       modal.close();
     });
-      function plusSlides(n) {
-        showSlides(slideIndex += n);
-      }
-
-      temp_engine.add_event(".prev", "click", () => {
-        plusSlides(-1);      
-      });
-      temp_engine.add_event(".next", "click", () => {
-        plusSlides(1);     
-      });
-      
-      function showSlides(n) {
-        let i;
-        let slides = document.getElementsByClassName("ships-list");
-        if (n > slides.length) {slideIndex = 1}    
-        if (n < 1) {slideIndex = slides.length}
-        for (i = 0; i < slides.length; i++) {
-          slides[i].style.display = "none";  
-        }
-        slides[slideIndex-1].style.display = "block";  
-      }
-
+    temp_engine.add_event(".prev", "click", () => {
+      showSlides(-1);      
+    });
+    temp_engine.add_event(".next", "click", () => {
+      showSlides(1);     
+    });
   });
   
   temp_engine.render("templates/ships/ships.html");

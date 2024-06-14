@@ -8,6 +8,7 @@ export default function login(temp_engine) {
   const auth = new Auth();
 
   temp_engine.after_render((temp_engine) => {
+    $("body").css("background-image", "url('/assets/img/background.png')")
     menu_mod(temp_engine);
 
     temp_engine.add_event("#btn-login", "click", () => {
@@ -36,7 +37,7 @@ export default function login(temp_engine) {
     $(".errors").html("");
     errors.forEach((error) => {
       $(".errors").append(`<p>${error}</p>`);
-    });
+    }); 
   });
 
   temp_engine.render("templates/auth/login.html");
