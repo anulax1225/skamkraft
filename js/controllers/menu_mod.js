@@ -1,6 +1,7 @@
 import { My } from "../skama_code/commun/my.js";
 import profile from "./profile.js";
 import contracts from "./contracts.js";
+import ships from "./ships.js";
 
 function loged_links(temp_engine) {
   $("#links").html(`
@@ -15,6 +16,9 @@ function loged_links(temp_engine) {
   });
   temp_engine.add_event("#contracts-link", "click", () => {
     contracts(temp_engine);
+  })
+  temp_engine.add_event("#ships-link", "click", () => {
+    ships(temp_engine);
   })
 }
 
