@@ -14,13 +14,13 @@ export default (temp_engine) => {
 
     Ship.list((ships) => {
       ships.forEach(ship => {
-        $(".block-ships").append(
+        $(".block-ships").prepend(
           `
             <div class="ships-list" data-id="${ship.symbol}">
               <h5>${ship.symbol}</h5>
               <img 
                 class="imgShip" 
-                src="/assets/spaceships/spaceship.png" 
+                src="/assets/spaceships/b_spaceships.png" 
                 alt="" />
             </div>
           `
