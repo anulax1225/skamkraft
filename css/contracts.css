@@ -23,8 +23,6 @@
   flex-direction: column;
   align-items: center;
 }
-
-
 .screen-img {
   z-index: -1;
   position: absolute;

@@ -86,7 +86,9 @@ select {
 }
 
 .title{
+    position: absolute;
     font-size: 50px;
+    margin-left: 50px;
 }
 
 ::placeholder {
