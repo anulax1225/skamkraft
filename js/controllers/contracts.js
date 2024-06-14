@@ -10,7 +10,6 @@ export default function contracts(temp_engine) {
   let modal = new Modal("contract-modal", temp_engine);
 
   temp_engine.after_render((temp_engine) => {
-    $("#block-content").css("background-image", "url('/assets/contracts/screen.png')");
     modal.load("templates/contracts/contracts_modal.html");
 
     Contract.list(10, 1, (contracts) => {

@@ -5,9 +5,35 @@
 }
 .contracts
 {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  height: 50%;
+  width: 50%;
+  overflow-y: scroll;
+}
+
+.contract-screen
+{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+
+.screen-img {
+  z-index: -1;
   position: absolute;
-  top: 25%;
-  left: 30%;
+  top: 10%;
+  height: 80%;
+  bottom: 1%;
+  right: 20%;
+  left: 20%;
+  width: 60%;
 }
 .card-body{
   margin-left: 50px;
