@@ -4,7 +4,7 @@ import contracts from "./contracts.js";
 import ships from "./ships.js";
 import leaderboard from "./leaderboard.js";
 
-function loged_links(temp_engine) {
+function loged_links(temp_engine, lister) {
   $("#links").html(`
         <input type="image" alt="home" id="systems-link" src="/assets/menu/home.png"/>
         <input type="image" alt="contracts" id="contracts-link" src="/assets/menu/contracts.png"/>
@@ -16,16 +16,19 @@ function loged_links(temp_engine) {
     profile(temp_engine);
   });
   temp_engine.add_event("#contracts-link", "click", () => {
+    if(lister) lister.stop();
     contracts(temp_engine);
   })
   temp_engine.add_event("#ships-link", "click", () => {
+    if(lister) lister.stop();
     ships(temp_engine);
   })
   temp_engine.add_event("#leaderboard-link", "click", () => {
+    if(lister) lister.stop();
     leaderboard(temp_engine);
   })
 }
 
-export default (temp_engine) => {
-  if(My.agent) loged_links(temp_engine);
+export default (temp_engine, lister) => {
+  if(My.agent) loged_links(temp_engine, lister);
 }

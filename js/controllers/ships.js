@@ -8,7 +8,7 @@ export default (temp_engine) => {
   let slideIndex = 1;
 
   temp_engine.after_render((temp_engine) => {
-    menu_mod(temp_engine);
+    menu_mod(temp_engine, null);
     $("body").css("background-image", "url('/assets/spaceships/hangar.png')")
     modal.load("templates/ships/ships_modal.html");
 

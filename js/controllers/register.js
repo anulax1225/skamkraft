@@ -10,7 +10,7 @@ export default function register(temp_engine) {
 
   temp_engine.after_render((temp_engine) => {
     $("body").css("background-image", "url('/assets/img/background.png')")
-    menu_mod(temp_engine);
+    menu_mod(temp_engine, null);
 
     Faction.list_all((factions) => {
         factions.forEach((faction) => {

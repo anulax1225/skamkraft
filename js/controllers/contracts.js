@@ -107,7 +107,7 @@ export default function contracts(temp_engine) {
     temp_engine.add_event(".btn-close", "click", () => {
       modal.close();
     });
-    menu_mod(temp_engine);
+    menu_mod(temp_engine, null);
   });
   temp_engine.render("templates/contracts/contracts.html")
 }

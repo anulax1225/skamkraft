@@ -9,7 +9,7 @@ export default function login(temp_engine) {
 
   temp_engine.after_render((temp_engine) => {
     $("body").css("background-image", "url('/assets/img/background.png')")
-    menu_mod(temp_engine);
+    menu_mod(temp_engine, null);
 
     temp_engine.add_event("#btn-login", "click", () => {
       const is_checked = $("#in-remember").is(":checked");

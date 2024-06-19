@@ -4,8 +4,8 @@ import { AgentBuilder } from "../skama_code/api/agent.js";
 export default function ldb(temp_engine) {
     temp_engine.after_render((temp_engine) => {
         $("body").css("background-image", "url('/assets/img/background.png')")
-        menu_mod(temp_engine);
         let bagents = new AgentBuilder();
+        menu_mod(temp_engine, bagents);
         bagents.list_all((agents) => {
             drawAgents(agents, sortAgentByCredits);
         });
