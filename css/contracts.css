@@ -39,7 +39,7 @@
 .card-button{
   margin-top: 10px;
 }
-.btn-infos{
+/* .btn-infos{
   background-color: transparent;
   border-color: rgb(0,255,0);
   font-size: 15pt;
@@ -60,7 +60,7 @@
   transition: 0.2s;
   color: rgb(208, 255, 0);
   border-color: rgb(208, 255, 0);
-}
+} */
 .img
 {
   position: absolute;

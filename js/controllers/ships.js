@@ -22,7 +22,16 @@ export default (temp_engine) => {
                 class="imgShip" 
                 src="/assets/spaceships/b_spaceships.png" 
                 alt="" />
+                <div class="buttonShip">
+                  <button id="" class="reg base-btn" data-symbol="${ship.symbol}">Name</button>
+                  <button id="" class="nav base-btn" data-symbol="${ship.symbol}">Navigation</button>
+                  <button id="" class="crew base-btn" data-symbol="${ship.symbol}">Crew</button>
+                  <button id="" class="frame base-btn" data-symbol="${ship.symbol}">Frame</button>
+                  <button id="" class="react base-btn" data-symbol="${ship.symbol}">Reactor</button>
+                  <button id="" class="fuel base-btn" data-symbol="${ship.symbol}">Fuel</button>
+              </div> 
             </div>
+            
           `
           )
       });
@@ -30,6 +39,7 @@ export default (temp_engine) => {
 
       temp_engine.add_event(".reg", "click", (e) => {
         const id_ship = $(e.target).attr("data-symbol");
+        console.log("test ")
         ships.forEach(ship =>{
           if(ship.symbol==id_ship)
           {
@@ -152,15 +162,15 @@ export default (temp_engine) => {
         slides[i].style.display = "none";  
       }
       slides[slideIndex-1].style.display = "block";
-      let img = slideIndex[slideIndex - 1].children(".imgShip");
-      if (n > 0)
-      {
-        img.animate({left: '250px'})
-      }
-      else
-      {
+      // let img = slideIndex[slideIndex - 1].children(".imgShip");
+      // if (n > 0)
+      // {
+      //   img.animate({left: '250px'})
+      // }
+      // else
+      // {
 
-      }
+      // }
         
     }
 
