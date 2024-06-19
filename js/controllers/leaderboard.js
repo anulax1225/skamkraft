@@ -23,7 +23,7 @@ function drawAgents(agents, funcSort) {
         $(".leaderboard").append(`
       <article class="player">
         <p class="elem num">${i}.</p>
-        <p class="elem symbol">${agent.name} : </p>
+        <p class="elem symbol">${agent.name}</p>
         <p class="elem credits">${agent.credits}</p>
         <p class="elem headquarters">${agent.hq}</p>
         <p class="elem faction">${agent.faction}</p>
