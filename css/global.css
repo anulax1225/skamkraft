@@ -122,6 +122,7 @@ select {
     font-size: 20px;
 } */
 button, .button {
+    font-family: var(--text-familly);
     background-color: #1a1a1a; 
     color: #ffffff; 
     border: 2px solid #ffffff;

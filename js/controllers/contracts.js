@@ -61,7 +61,7 @@ export default function contracts(temp_engine) {
           status = "accepted"
           card =
             `                            
-                    <div class="card" style="width: 20rem;">
+                    <div class="card">
                       <img src="${img}" class="card-img-top" alt="">
                       <div class="card-body">
                         <h5 style="color:white" class="card-title">${contract.faction}</h5>
@@ -84,7 +84,7 @@ export default function contracts(temp_engine) {
           status = "on hold"
           card =
             `                            
-                    <div class="card" style="width: 20rem;">
+                    <div class="card">
                       <img src="${img}" class="card-img-top" alt="">
                       <div class="card-body">                  
                           <h5 style="color:white" class="card-title">${contract.faction}</h5>

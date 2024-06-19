@@ -23,12 +23,12 @@ export default (temp_engine) => {
                 src="/assets/spaceships/b_spaceships.png" 
                 alt="" />
                 <div class="buttonShip">
-                  <button id="" class="reg base-btn" data-symbol="${ship.symbol}">Name</button>
-                  <button id="" class="nav base-btn" data-symbol="${ship.symbol}">Navigation</button>
-                  <button id="" class="crew base-btn" data-symbol="${ship.symbol}">Crew</button>
-                  <button id="" class="frame base-btn" data-symbol="${ship.symbol}">Frame</button>
-                  <button id="" class="react base-btn" data-symbol="${ship.symbol}">Reactor</button>
-                  <button id="" class="fuel base-btn" data-symbol="${ship.symbol}">Fuel</button>
+                  <button id="" class="reg btn-ships" data-symbol="${ship.symbol}">Name</button>
+                  <button id="" class="nav btn-ships" data-symbol="${ship.symbol}">Navigation</button>
+                  <button id="" class="crew btn-ships" data-symbol="${ship.symbol}">Crew</button>
+                  <button id="" class="frame btn-ships" data-symbol="${ship.symbol}">Frame</button>
+                  <button id="" class="react btn-ships" data-symbol="${ship.symbol}">Reactor</button>
+                  <button id="" class="fuel btn-ships" data-symbol="${ship.symbol}">Fuel</button>
               </div> 
             </div>
             
@@ -39,14 +39,13 @@ export default (temp_engine) => {
 
       temp_engine.add_event(".reg", "click", (e) => {
         const id_ship = $(e.target).attr("data-symbol");
-        console.log("test ")
         ships.forEach(ship =>{
           if(ship.symbol==id_ship)
           {
-            $(".infos").html("");
-            $(".infos").append(`<p>Name : ${ship.registration.name}</p>`);
-            $(".infos").append(`<p>Faction : ${ship.registration.factionSymbol}</p>`);
-            $(".infos").append(`<p>Role : ${ship.registration.role}</p>`);
+            $(".infos-ships").html("");
+            $(".infos-ships").append(`<p>Name : ${ship.registration.name}</p>`);
+            $(".infos-ships").append(`<p>Faction : ${ship.registration.factionSymbol}</p>`);
+            $(".infos-ships").append(`<p>Role : ${ship.registration.role}</p>`);
           }
         })
         modal.show();
@@ -56,11 +55,11 @@ export default (temp_engine) => {
         ships.forEach(ship =>{
           if(ship.symbol==id_ship)
           {
-            $(".infos").html("");
-            $(".infos").append(`<p>Current system : ${ship.nav.systemSymbol}</p>`);
-            $(".infos").append(`<p>Current waypoint : ${ship.nav.waypointSymbol}</p>`);
-            $(".infos").append(`<p>Current status : ${ship.nav.status}</p>`);
-            $(".infos").append(`<p>Flight mode : ${ship.nav.flightMode}</p>`);
+            $(".infos-ships").html("");
+            $(".infos-ships").append(`<p>Current system : ${ship.nav.systemSymbol}</p>`);
+            $(".infos-ships").append(`<p>Current waypoint : ${ship.nav.waypointSymbol}</p>`);
+            $(".infos-ships").append(`<p>Current status : ${ship.nav.status}</p>`);
+            $(".infos-ships").append(`<p>Flight mode : ${ship.nav.flightMode}</p>`);
           }
         })
         modal.show();
@@ -70,11 +69,11 @@ export default (temp_engine) => {
         ships.forEach(ship =>{
           if(ship.symbol==id_ship)
           {
-            $(".infos").html("");
-            $(".infos").append(`<p>Current member : ${ship.crew.current}</p>`);
-            $(".infos").append(`<p>Capacity : ${ship.crew.capacity}</p>`);
-            $(".infos").append(`<p>required member : ${ship.crew.required}</p>`);
-            $(".infos").append(`<p>Moral : ${ship.crew.morale}</p>`);
+            $(".infos-ships").html("");
+            $(".infos-ships").append(`<p>Current member : ${ship.crew.current}</p>`);
+            $(".infos-ships").append(`<p>Capacity : ${ship.crew.capacity}</p>`);
+            $(".infos-ships").append(`<p>required member : ${ship.crew.required}</p>`);
+            $(".infos-ships").append(`<p>Moral : ${ship.crew.morale}</p>`);
           }
         })
         modal.show();
@@ -84,13 +83,13 @@ export default (temp_engine) => {
         ships.forEach(ship =>{
           if(ship.symbol==id_ship)
           {
-            $(".infos").html("");
-            $(".infos").append(`<p>Name : ${ship.frame.name}</p>`);
-            $(".infos").append(`<p>Description : ${ship.frame.description}</p>`);
-            $(".infos").append(`<p>Fuel capacity : ${ship.frame.fuelCapacity}</p>`);
-            $(".infos").append(`<p>Condition : ${ship.frame.condition}</p>`);
-            $(".infos").append(`<p>Power : ${ship.frame.requirements.power}</p>`);
-            $(".infos").append(`<p>Crew : ${ship.frame.requirements.crew}</p>`);
+            $(".infos-ships").html("");
+            $(".infos-ships").append(`<p>Name : ${ship.frame.name}</p>`);
+            $(".infos-ships").append(`<p>Description : ${ship.frame.description}</p>`);
+            $(".infos-ships").append(`<p>Fuel capacity : ${ship.frame.fuelCapacity}</p>`);
+            $(".infos-ships").append(`<p>Condition : ${ship.frame.condition}</p>`);
+            $(".infos-ships").append(`<p>Power : ${ship.frame.requirements.power}</p>`);
+            $(".infos-ships").append(`<p>Crew : ${ship.frame.requirements.crew}</p>`);
 
           }
         })
@@ -101,12 +100,12 @@ export default (temp_engine) => {
         ships.forEach(ship =>{
           if(ship.symbol==id_ship)
           {
-            $(".infos").html("");
-            $(".infos").append(`<p>Name : ${ship.reactor.name}</p>`);
-            $(".infos").append(`<p>Description : ${ship.reactor.description}</p>`);
-            $(".infos").append(`<p>Condition : ${ship.reactor.condition}</p>`);
-            $(".infos").append(`<p>Power : ${ship.reactor.powerOutput}</p>`);
-            $(".infos").append(`<p>Crew : ${ship.reactor.requirements.crew}</p>`);
+            $(".infos-ships").html("");
+            $(".infos-ships").append(`<p>Name : ${ship.reactor.name}</p>`);
+            $(".infos-ships").append(`<p>Description : ${ship.reactor.description}</p>`);
+            $(".infos-ships").append(`<p>Condition : ${ship.reactor.condition}</p>`);
+            $(".infos-ships").append(`<p>Power : ${ship.reactor.powerOutput}</p>`);
+            $(".infos-ships").append(`<p>Crew : ${ship.reactor.requirements.crew}</p>`);
           }
         })
         modal.show();
@@ -116,13 +115,13 @@ export default (temp_engine) => {
         ships.forEach(ship =>{
           if(ship.symbol==id_ship)
           {
-            $(".infos").html("");
-            $(".infos").append(`<p>Name : ${ship.engine.name}</p>`);
-            $(".infos").append(`<p>Description : ${ship.engine.description}</p>`);
-            $(".infos").append(`<p>Condition : ${ship.engine.condition}</p>`);
-            $(".infos").append(`<p>Speed : ${ship.engine.speed}</p>`);
-            $(".infos").append(`<p>Crew : ${ship.engine.requirements.crew}</p>`);
-            $(".infos").append(`<p>Power : ${ship.engine.requirements.power}</p>`);
+            $(".infos-ships").html("");
+            $(".infos-ships").append(`<p>Name : ${ship.engine.name}</p>`);
+            $(".infos-ships").append(`<p>Description : ${ship.engine.description}</p>`);
+            $(".infos-ships").append(`<p>Condition : ${ship.engine.condition}</p>`);
+            $(".infos-ships").append(`<p>Speed : ${ship.engine.speed}</p>`);
+            $(".infos-ships").append(`<p>Crew : ${ship.engine.requirements.crew}</p>`);
+            $(".infos-ships").append(`<p>Power : ${ship.engine.requirements.power}</p>`);
           }
         })
         modal.show();
@@ -132,24 +131,16 @@ export default (temp_engine) => {
         ships.forEach(ship =>{
           if(ship.symbol==id_ship)
           {
-            $(".infos").html("");
-            $(".infos").append(`<p>current fuel : ${ship.fuel.current}</p>`);
-            $(".infos").append(`<p>Description : ${ship.fuel.capacity}</p>`);
-            $(".infos").append(`<p>Condition : ${ship.fuel.consumed.amount}</p>`);
-            $(".infos").append(`<p>Speed : ${ship.fuel.consumed.timestamp}</p>`);
+            $(".infos-ships").html("");
+            $(".infos-ships").append(`<p>current fuel : ${ship.fuel.current}</p>`);
+            $(".infos-ships").append(`<p>Description : ${ship.fuel.capacity}</p>`);
+            $(".infos-ships").append(`<p>Condition : ${ship.fuel.consumed.amount}</p>`);
+            $(".infos-ships").append(`<p>Speed : ${ship.fuel.consumed.timestamp}</p>`);
           }
         })
         modal.show();
       });
-      $(".ships-list").on("click", (e) => {
-        const id_ship = $(e.target).attr("data-id");
-        ships.forEach(ship =>{
-          if(ship.symbol==id_ship)
-          {
-          }
-        })
-
-      });
+      
     });
 
     function showSlides(n) {
@@ -162,19 +153,9 @@ export default (temp_engine) => {
         slides[i].style.display = "none";  
       }
       slides[slideIndex-1].style.display = "block";
-      // let img = slideIndex[slideIndex - 1].children(".imgShip");
-      // if (n > 0)
-      // {
-      //   img.animate({left: '250px'})
-      // }
-      // else
-      // {
-
-      // }
-        
     }
 
-    temp_engine.add_event(".btn-close", "click", () => {
+    temp_engine.add_event(".btn-close-ships", "click", () => {
       modal.close();
     });
     temp_engine.add_event(".prev", "click", () => {
