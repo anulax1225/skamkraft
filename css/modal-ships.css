@@ -7,12 +7,19 @@
     position: relative;
     margin: auto;
     padding: 40px;
-    color: yellow;
+    color: rgb(255, 255, 255);
 }
 
 .infos-ships {
     padding: 20px;
     margin-bottom: 20px; /* Space below the info box */
+}
+
+.ship-info {
+    background-color: rgba(0, 0, 0, 0.363);
+    border-radius: 5px;
+    width: fit-content;
+    padding: 5px;
 }
 
 .btn-close-ships {
@@ -22,7 +29,7 @@
     left: 20px;
     background-color: rgba(255, 255, 255, 0.8); 
     border: none;
-    color: yellow;
+    color: rgb(252, 252, 252);
     padding: 10px 20px;
     cursor: pointer;
     border-radius: 5px;

@@ -2,6 +2,7 @@ import { My } from "../skama_code/commun/my.js";
 import profile from "./profile.js";
 import contracts from "./contracts.js";
 import ships from "./ships.js";
+import leaderboard from "./leaderboard.js";
 
 function loged_links(temp_engine) {
   $("#links").html(`
@@ -19,6 +20,9 @@ function loged_links(temp_engine) {
   })
   temp_engine.add_event("#ships-link", "click", () => {
     ships(temp_engine);
+  })
+  temp_engine.add_event("#leaderboard-link", "click", () => {
+    leaderboard(temp_engine);
   })
 }
 

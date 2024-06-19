@@ -43,9 +43,9 @@ export default (temp_engine) => {
           if(ship.symbol==id_ship)
           {
             $(".infos-ships").html("");
-            $(".infos-ships").append(`<p>Name : ${ship.registration.name}</p>`);
-            $(".infos-ships").append(`<p>Faction : ${ship.registration.factionSymbol}</p>`);
-            $(".infos-ships").append(`<p>Role : ${ship.registration.role}</p>`);
+            $(".infos-ships").append(`<p class="ship-info">Name : ${ship.registration.name}</p>`);
+            $(".infos-ships").append(`<p class="ship-info">Faction : ${ship.registration.factionSymbol}</p>`);
+            $(".infos-ships").append(`<p class="ship-info">Role : ${ship.registration.role}</p>`);
           }
         })
         modal.show();
@@ -56,10 +56,10 @@ export default (temp_engine) => {
           if(ship.symbol==id_ship)
           {
             $(".infos-ships").html("");
-            $(".infos-ships").append(`<p>Current system : ${ship.nav.systemSymbol}</p>`);
-            $(".infos-ships").append(`<p>Current waypoint : ${ship.nav.waypointSymbol}</p>`);
-            $(".infos-ships").append(`<p>Current status : ${ship.nav.status}</p>`);
-            $(".infos-ships").append(`<p>Flight mode : ${ship.nav.flightMode}</p>`);
+            $(".infos-ships").append(`<p class="ship-info">Current system : ${ship.nav.systemSymbol}</p>`);
+            $(".infos-ships").append(`<p class="ship-info">Current waypoint : ${ship.nav.waypointSymbol}</p>`);
+            $(".infos-ships").append(`<p class="ship-info">Current status : ${ship.nav.status}</p>`);
+            $(".infos-ships").append(`<p class="ship-info">Flight mode : ${ship.nav.flightMode}</p>`);
           }
         })
         modal.show();
@@ -70,10 +70,10 @@ export default (temp_engine) => {
           if(ship.symbol==id_ship)
           {
             $(".infos-ships").html("");
-            $(".infos-ships").append(`<p>Current member : ${ship.crew.current}</p>`);
-            $(".infos-ships").append(`<p>Capacity : ${ship.crew.capacity}</p>`);
-            $(".infos-ships").append(`<p>required member : ${ship.crew.required}</p>`);
-            $(".infos-ships").append(`<p>Moral : ${ship.crew.morale}</p>`);
+            $(".infos-ships").append(`<p class="ship-info">Current member : ${ship.crew.current}</p>`);
+            $(".infos-ships").append(`<p class="ship-info">Capacity : ${ship.crew.capacity}</p>`);
+            $(".infos-ships").append(`<p class="ship-info">required member : ${ship.crew.required}</p>`);
+            $(".infos-ships").append(`<p class="ship-info">Moral : ${ship.crew.morale}</p>`);
           }
         })
         modal.show();
@@ -84,12 +84,12 @@ export default (temp_engine) => {
           if(ship.symbol==id_ship)
           {
             $(".infos-ships").html("");
-            $(".infos-ships").append(`<p>Name : ${ship.frame.name}</p>`);
-            $(".infos-ships").append(`<p>Description : ${ship.frame.description}</p>`);
-            $(".infos-ships").append(`<p>Fuel capacity : ${ship.frame.fuelCapacity}</p>`);
-            $(".infos-ships").append(`<p>Condition : ${ship.frame.condition}</p>`);
-            $(".infos-ships").append(`<p>Power : ${ship.frame.requirements.power}</p>`);
-            $(".infos-ships").append(`<p>Crew : ${ship.frame.requirements.crew}</p>`);
+            $(".infos-ships").append(`<p class="ship-info">Name : ${ship.frame.name}</p>`);
+            $(".infos-ships").append(`<p class="ship-info">Description : ${ship.frame.description}</p>`);
+            $(".infos-ships").append(`<p class="ship-info">Fuel capacity : ${ship.frame.fuelCapacity}</p>`);
+            $(".infos-ships").append(`<p class="ship-info">Condition : ${ship.frame.condition}</p>`);
+            $(".infos-ships").append(`<p class="ship-info">Power : ${ship.frame.requirements.power}</p>`);
+            $(".infos-ships").append(`<p class="ship-info">Crew : ${ship.frame.requirements.crew}</p>`);
 
           }
         })
@@ -101,27 +101,11 @@ export default (temp_engine) => {
           if(ship.symbol==id_ship)
           {
             $(".infos-ships").html("");
-            $(".infos-ships").append(`<p>Name : ${ship.reactor.name}</p>`);
-            $(".infos-ships").append(`<p>Description : ${ship.reactor.description}</p>`);
-            $(".infos-ships").append(`<p>Condition : ${ship.reactor.condition}</p>`);
-            $(".infos-ships").append(`<p>Power : ${ship.reactor.powerOutput}</p>`);
-            $(".infos-ships").append(`<p>Crew : ${ship.reactor.requirements.crew}</p>`);
-          }
-        })
-        modal.show();
-      });
-      temp_engine.add_event(".engine", "click", (e) => {
-        const id_ship = $(e.target).attr("data-symbol");
-        ships.forEach(ship =>{
-          if(ship.symbol==id_ship)
-          {
-            $(".infos-ships").html("");
-            $(".infos-ships").append(`<p>Name : ${ship.engine.name}</p>`);
-            $(".infos-ships").append(`<p>Description : ${ship.engine.description}</p>`);
-            $(".infos-ships").append(`<p>Condition : ${ship.engine.condition}</p>`);
-            $(".infos-ships").append(`<p>Speed : ${ship.engine.speed}</p>`);
-            $(".infos-ships").append(`<p>Crew : ${ship.engine.requirements.crew}</p>`);
-            $(".infos-ships").append(`<p>Power : ${ship.engine.requirements.power}</p>`);
+            $(".infos-ships").append(`<p class="ship-info">Name : ${ship.reactor.name}</p>`);
+            $(".infos-ships").append(`<p class="ship-info">Description : ${ship.reactor.description}</p>`);
+            $(".infos-ships").append(`<p class="ship-info">Condition : ${ship.reactor.condition}</p>`);
+            $(".infos-ships").append(`<p class="ship-info">Power : ${ship.reactor.powerOutput}</p>`);
+            $(".infos-ships").append(`<p class="ship-info">Crew : ${ship.reactor.requirements.crew}</p>`);
           }
         })
         modal.show();
@@ -132,10 +116,10 @@ export default (temp_engine) => {
           if(ship.symbol==id_ship)
           {
             $(".infos-ships").html("");
-            $(".infos-ships").append(`<p>current fuel : ${ship.fuel.current}</p>`);
-            $(".infos-ships").append(`<p>Description : ${ship.fuel.capacity}</p>`);
-            $(".infos-ships").append(`<p>Condition : ${ship.fuel.consumed.amount}</p>`);
-            $(".infos-ships").append(`<p>Speed : ${ship.fuel.consumed.timestamp}</p>`);
+            $(".infos-ships").append(`<p class="ship-info">current fuel : ${ship.fuel.current}</p>`);
+            $(".infos-ships").append(`<p class="ship-info">Description : ${ship.fuel.capacity}</p>`);
+            $(".infos-ships").append(`<p class="ship-info">Condition : ${ship.fuel.consumed.amount}</p>`);
+            $(".infos-ships").append(`<p class="ship-info">Speed : ${ship.fuel.consumed.timestamp}</p>`);
           }
         })
         modal.show();

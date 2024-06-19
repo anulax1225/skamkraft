@@ -1,0 +1,53 @@
+.container-ldb {
+    width: 100%;
+}
+
+.head-board {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    margin: auto;
+    width: 60%;
+    padding: 20px;
+    font-size:x-large;
+    border: 0px solid black;
+    border-top-color: white;
+    border-bottom-color: white;
+    border-bottom-width: 1px;
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.leaderboard {
+    display: flex;
+    margin: auto;
+    align-items: center;
+    flex-direction: column;
+    width: 60%;
+    height: 50vh;
+    overflow-y: scroll;
+    overflow-x: visible;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 20px;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    scrollbar-width: none;
+}
+
+.leaderboard::-webkit-scrollbar {
+    width: 0 !important
+}
+
+.player {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    border-bottom: 1px solid rgb(255, 255, 255);
+}
+
+.player p {
+    padding: 5px;
+    color: white;
+    font-size: large;
+    text-align: start;
+}
