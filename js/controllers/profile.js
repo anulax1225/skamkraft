@@ -20,10 +20,11 @@ export default function profile(temp_engine) {
         temp_engine.add_event('#btn-logout', 'click', () => {
             const auth = new Auth();
             auth.unload_token();
+            My.agent = null;
             login(temp_engine);
         });
 
-        menu_mod(temp_engine);
+        menu_mod(temp_engine, null);
     });
     temp_engine.render("/templates/profile/profile.html");
 }
