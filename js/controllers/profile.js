@@ -4,7 +4,8 @@ import { My } from "../skama_code/commun/my.js"
 import login from "./login.js";
 
 export default function profile(temp_engine) {
-    let modal = new Modal("modal_profile", temp_engine);
+    let modal = new Modal("modal-profile", temp_engine);
+    modal.load("templates/modal_profile.html");
     modal.after_load(() => {
         modal.show();
         $('#name').append(My.agent.name);
@@ -13,22 +14,20 @@ export default function profile(temp_engine) {
         $('#hq').append(My.agent.hq);
         $('#shipcount').append(My.agent.ships_cpt);
 
-        $('#btn-token').on('click', () => {
+        temp_engine.add_event('#btn-token', 'click', () => {
             navigator.clipboard.writeText(My.agent.token);
             alert('Token copied !');
         })
 
-        $('#btn-logout').on('click', () => {
+        temp_engine.add_event('#btn-logout', 'click', () => {
             const auth = new Auth();
             auth.unload_token();
             login(temp_engine);
         })
 
-        $('#btn-close').on('click', () =>
-        {
+        temp_engine.add_event('#btn-close', 'click', () => {
+            console.log("CLOSINF")
             modal.close();
         });
     });
-
-    modal.load("templates/modal_profile.html");
 }

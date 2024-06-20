@@ -24,7 +24,7 @@
     flex-direction: column;
     border : 1px solid white;
     width: 60%;
-    height: 50vh;
+    height: 350px;
     overflow-y: scroll;
     overflow-x: visible;
     background-color: rgba(0, 0, 0, 0.5);
@@ -32,10 +32,6 @@
     border-bottom-right-radius: 5px;
     border-bottom-left-radius: 5px;
     scrollbar-width: none;
-}
-
-.leaderboard::-webkit-scrollbar {
-    width: 0 !important
 }
 
 .player {

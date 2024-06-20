@@ -5,6 +5,11 @@
     align-items: center;
 }
 
+.auth-title 
+{
+    font-size: 50px;
+}
+
 .auth{
     width: 300px;
     display: flex;

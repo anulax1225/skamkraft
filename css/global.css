@@ -10,6 +10,10 @@
     --sec-color: rgba(69, 128, 255, 0.842);
 }
 
+::-webkit-scrollbar {
+    width: 0 !important
+}
+
 body{
     background-image: url("/assets/img/background.png"); 
     background-repeat: no-repeat;
@@ -134,8 +138,9 @@ select {
     font-size: 20px;
 } */
 button, .button {
+    margin: 2px;
     font-family: var(--text-familly);
-    background-color: #1a1a1a; 
+    background-color: #0000008f; 
     color: #ffffff; 
     border: 2px solid #ffffff;
     padding: 10px; 
