@@ -66,9 +66,6 @@ export default function contracts(temp_engine) {
                       <div class="card-body">
                         <h5 style="color:white" class="card-title">${contract.faction}</h5>
                         <p style="color:white" class="card-text">${contract.deadline}</p>
-                        <p style="color:white" class="card-text">${contract.deadline}</p>
-                        <p style="color:white" class="card-text">${contract.deadline}</p>
-                        <p style="color:white" class="card-text">${contract.deadline}</p>
                         <p class="card-text status-accepted">Status : ${status}</p>
                         <p></p>                     
                       </div>
@@ -100,7 +97,7 @@ export default function contracts(temp_engine) {
             `
         }
         $('.contracts').append(card);
-        $('.contracts').append(card);
+        
       });
 
     })
