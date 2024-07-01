@@ -33,7 +33,8 @@
 
 .imgShip {
   left: 0;
-  width: 50%;
+  margin-top: 50px;
+  width: 70%;
 }
 .ships-list h5 {
   font-size:xx-large;
