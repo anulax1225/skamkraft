@@ -67,6 +67,15 @@ export default function system(temp_engine, sys_name) {
                     canvas.zoom(new Position(0, 0), 0.5);
                 }, true);
 
+                canvas.on("mouse:wheel", (opt) => {
+                    if (opt.e.deltaY < 0)
+                    {
+                        canvas.zoom(canvas.rel_pos(new Position(opt.e.clientX, opt.e.clientY)), 1.1)
+                    } else {
+                        canvas.zoom(canvas.rel_pos(new Position(opt.e.clientX, opt.e.clientY)), 0.9090)
+                    }
+                });
+
                 $(window).on("resize", () => {
                     canvas.resize((window.innerWidth/10)*9, (window.innerHeight/5)*4);
                 });

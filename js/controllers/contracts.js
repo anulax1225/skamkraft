@@ -7,7 +7,7 @@ import { Modal } from "../skama_code/ui/modal.js";
 export default function contracts(temp_engine) {
   temp_engine.after_render(menu_mod);
 
-  let modal = new Modal("contract-modal", temp_engine);
+  let modal = new Modal("contracts-modal", temp_engine);
 
   temp_engine.after_render((temp_engine) => {
     $("body").css("background-image", "url('/assets/contracts/screen_background.png')")

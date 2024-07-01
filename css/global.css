@@ -35,11 +35,6 @@ input{
     color: var(--text-color);
 }
 
-select {
-    font-family: var(--text-familly);
-    color: var(--text-color);
-}
-
 #block-content{
     margin: 0;
     padding: 0;
@@ -181,4 +176,6 @@ button:disabled, .button:disabled {
     border-radius: 3px;
     background-color: var(--sec-color);
     font-size: 15px;
+    font-family: var(--text-familly);
+    color: var(--text-color);
 }
