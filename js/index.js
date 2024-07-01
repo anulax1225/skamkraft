@@ -1,7 +1,7 @@
 // Copyright © 2023 Entreprise SkamKraft
 "use strict";
 import { TemplateEngine } from "./skama_code/ui/templeting_engine.js";
-import login from "./controllers/login.js";
+import register from "./controllers/register.js";
 import { Auth } from "./skama_code/auth/auth.js";
 import { AgentBuilder } from "./skama_code/api/agent.js";
 import { My } from "./skama_code/commun/my.js";
@@ -20,5 +20,5 @@ if(auth.relog())
 }
 else 
 {
-    login(temp_engine);
+    register(temp_engine);
 }

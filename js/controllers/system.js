@@ -2,6 +2,7 @@ import menu_mod from "./menu_mod.js";
 import home from "./home.js";
 import { CanvasRenderer } from "../skama_code/ui/canvas_render.js";
 import { SystemBuilder } from "../skama_code/api/system.js"
+import { Position } from "../skama_code/commun/position.js";
 
 
 function get_img_from_type(planet)
@@ -42,35 +43,39 @@ function get_img_from_type(planet)
 }
 
 export default function system(temp_engine, sys_name) {
-  temp_engine.after_render(() => {
-    $("body").css("background-image", "url('/assets/img/background.png')")
-
-    let canvas = new CanvasRenderer("sys-canvas", 1200, 700);
-    SystemBuilder.get(sys_name, (system) => {
-        system.list_all_planets((planets) => {
-            canvas.clean();
-            planets.forEach((planet) => {
-                let urls = get_img_from_type(planet);
-                if(urls.length)
-                {
-                    canvas.obj_from_img("assets/planets/" + urls[Math.floor(Math.random() * urls.length)], canvas.rel_pos(planet.position), {
-                        selectable: true,
-                        name: planet.name,
-                        update: null,
-                    });
-                }
-            });
-        });
-
-        $(window).on("resize", () => {
+    temp_engine.after_render(() => {
+            $("body").css("background-image", "url('/assets/img/background.png')")
+            let canvas = new CanvasRenderer("sys-canvas", 1200, 700);
             canvas.resize((window.innerWidth/10)*9, (window.innerHeight/5)*4);
-        });
+            SystemBuilder.get(sys_name, (system) => {
+                system.list_all_planets((planets) => {
+                    canvas.clean();
+                    console.log(planets)
+                    planets.forEach((planet) => {
+                        let urls = get_img_from_type(planet);
+                        if(urls.length)
+                        {
+                            let url = urls[Math.floor(Math.random() * urls.length)];
+                            console.log(url)
+                            canvas.obj_from_img("assets/planets/" + url, canvas.canvas_pos(planet.position), {
+                                selectable: false,
+                                name: planet.name,
+                                update: null,
+                            });
+                        }
+                    });
+                    canvas.zoom(new Position(0, 0), 0.5);
+                }, true);
 
-        canvas.start();
-        menu_mod(temp_engine, system);
-    }, (err) => {
-        home(temp_engine);
+                $(window).on("resize", () => {
+                    canvas.resize((window.innerWidth/10)*9, (window.innerHeight/5)*4);
+                });
+
+                canvas.start();
+                menu_mod(temp_engine, system);
+            }, (err) => {
+                home(temp_engine);
+            });
     });
-  });
-  temp_engine.render("templates/system/system.html");
+    temp_engine.render("templates/system/system.html");
 }
