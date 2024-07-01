@@ -14,13 +14,14 @@ export default (temp_engine) => {
 
     Ship.list((ships) => {
       ships.forEach(ship => {
+        console.log(ship)
         $(".block-ships").prepend(
           `
             <div class="ships-list" data-id="${ship.symbol}">
               <h5>${ship.symbol}</h5>
               <img 
                 class="imgShip" 
-                src="/assets/spaceships/b_spaceships.png" 
+                src="/assets/spaceships/${ship.registration.role}.png" 
                 alt="" />
                 <div class="buttonShip">
                   <button id="" class="reg btn-ships" data-symbol="${ship.symbol}">Name</button>
