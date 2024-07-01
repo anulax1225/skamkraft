@@ -10,33 +10,33 @@ function get_img_from_type(planet)
     switch(planet.type)
     {
         case "PLANET":
-            return ["planetproto.png"];
+            return ["PLANET.png"];
         case "GAS_GIANT": 
-            return [];
+            return ["GAS_GIANT.png"];
         case "MOON":
-            return [];
+            return ["MOON.png"];
         case "ORBITAL_STATION":
-            return [];
+            return ["ORBITAL_STATION.png"];
         case "JUMP_GATE":
             return ["jumpgate.png"];
         case "ASTEROID_FIELD":
-            return [];
+            return ["ASTEROID_FIELD.png"];
         case "ASTEROID":
             return ["asteroid1.png", "asteroid2.png", "asteroid3.png", "asteroid4.png"];
         case "ENGINEERED_ASTEROID":
-            return [];
+            return ["ENGINEERED_ASTEROID.png"];
         case "ASTEROID_BASE":
-            return [];
+            return ["ASTEROID_BASE.png"];
         case "NEBULA":
             return [];
         case "DEBRIS_FIELD":
             return [];
         case "GRAVITY_WELL":
-            return [];
+            return ["GRAVITY_WELL.png"];
         case "ARTIFICIAL_GRAVITY_WELL":
-            return [];
+            return ["ARTIFICAL_GRAVITY_WELL.png"];
         case "FUEL_STATION":
-            return [];
+            return ["FUEL_STATION.png"];
         case _:
             return [];
     }
@@ -44,7 +44,7 @@ function get_img_from_type(planet)
 
 export default function system(temp_engine, sys_name) {
     temp_engine.after_render(() => {
-            $("body").css("background-image", "url('/assets/img/background.png')")
+            $("body").css("background-image", "url('/assets/planets/backgroundcanvas.png')")
             let canvas = new CanvasRenderer("sys-canvas", 1200, 700);
             canvas.resize((window.innerWidth/10)*9, (window.innerHeight/5)*4);
             SystemBuilder.get(sys_name, (system) => {
