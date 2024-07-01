@@ -46,7 +46,7 @@ export default function system(temp_engine, sys_name) {
     temp_engine.after_render(() => {
             $("body").css("background-image", "url('/assets/planets/backgroundcanvas.png')")
             let canvas = new CanvasRenderer("sys-canvas", 1200, 700);
-            canvas.resize((window.innerWidth/10)*9, (window.innerHeight/5)*4);
+            canvas.resize((window.innerWidth/13)*12, (window.innerHeight/13)*12);
             SystemBuilder.get(sys_name, (system) => {
                 system.list_all_planets((planets) => {
                     canvas.clean();
