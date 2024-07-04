@@ -16,7 +16,9 @@ if(auth.relog())
   AgentBuilder.get(localStorage.getItem('token'), (agent) => {
     My.agent = agent;
     home(temp_engine);
-  })
+  }, (err) => {
+    register(temp_engine);
+  });
 }
 else 
 {

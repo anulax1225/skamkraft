@@ -46,7 +46,7 @@ export default function system(temp_engine, sys_name) {
     temp_engine.after_render(() => {
             $("body").css("background-image", "url('/assets/planets/backgroundcanvas.png')")
             let canvas = new CanvasRenderer("sys-canvas", 1200, 700);
-            canvas.resize((window.innerWidth/13)*12, (window.innerHeight/13)*12);
+            canvas.resize(window.innerWidth, window.innerHeight);
             SystemBuilder.get(sys_name, (system) => {
                 system.list_all_planets((planets) => {
                     canvas.clean();
@@ -64,20 +64,33 @@ export default function system(temp_engine, sys_name) {
                             });
                         }
                     });
-                    canvas.zoom(new Position(0, 0), 0.5);
-                }, true);
-
+                });
+                canvas.zoom(new Position(0, 0), 0.5);
+                let zoom = 0;
                 canvas.on("mouse:wheel", (opt) => {
-                    if (opt.e.deltaY < 0)
+                    if (opt.e.deltaY < 0 && zoom < 30)
                     {
+                        zoom += 1;
                         canvas.zoom(canvas.rel_pos(new Position(opt.e.clientX, opt.e.clientY)), 1.1)
-                    } else {
+                        canvas.offset(new Position(2, 2))
+                    } else if (opt.e.deltaY > 0 && zoom > -5) {
+                        zoom -= 1;
                         canvas.zoom(canvas.rel_pos(new Position(opt.e.clientX, opt.e.clientY)), 0.9090)
+                        canvas.offset(new Position(0.5, 0.5))
                     }
                 });
 
+                canvas.on("mouse:over", (e) => {
+                    e.target.shadow.blur = 100;
+                });
+
+                
+                canvas.on("mouse:out", (e) => {
+                    e.target.shadow.blur = 1;
+                });
+
                 $(window).on("resize", () => {
-                    canvas.resize((window.innerWidth/10)*9, (window.innerHeight/5)*4);
+                    canvas.resize(window.innerWidth, window.innerHeight);
                 });
 
                 canvas.start();

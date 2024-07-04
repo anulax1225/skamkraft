@@ -1,4 +1,5 @@
 import { My } from "../skama_code/commun/my.js";
+import home from "./home.js";
 import profile from "./profile.js";
 import contracts from "./contracts.js";
 import ships from "./ships.js";
@@ -7,6 +8,7 @@ import system from "./system.js";
 
 function loged_links(temp_engine, lister) {
   $("#links").html(`
+        <input type="image" alt="home" id="home-link" src="/assets/menu/home.png"/>
         <input type="image" alt="systems" id="systems-link" src="/assets/menu/systems.png"/>
         <input type="image" alt="contracts" id="contracts-link" src="/assets/menu/contracts.png"/>
         <input type="image" alt="ships" id="ships-link" src="/assets/menu/ships.png"/>
@@ -14,7 +16,13 @@ function loged_links(temp_engine, lister) {
         <input type="image" alt="leaderboard" id="leaderboard-link" src="/assets/menu/leaderboard.png"/>
   `);
 
+  temp_engine.add_event("#home-link", "click", () => {
+    if(lister) lister.stop();
+    home(temp_engine);
+  });
+
   temp_engine.add_event("#profile-link", "click", () => {
+    if(lister) lister.stop();
     profile(temp_engine);
   });
 

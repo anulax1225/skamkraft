@@ -5,10 +5,12 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    z-index: -1;
 }
 
 #sys-canvas
 {
+    z-index: -1;
     border: 1px solid black;
     border-radius: 10px;
     background-color: rgba(11, 1, 37, 0.842);

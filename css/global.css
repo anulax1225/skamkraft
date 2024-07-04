@@ -59,7 +59,18 @@ input{
     }
 }
 
+.home-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-shadow: 4px 2px black;
+}
+
 .languettes {
+    z-index: 1;
     right: -30px;
     top: 25%;
     width: 80px;
